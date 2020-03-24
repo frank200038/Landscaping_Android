@@ -13,12 +13,13 @@
         android:layout_width="77dp"
         android:layout_height="70dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="96dp"
         android:background="@drawable/shadow"
         android:foreground="@drawable/caluculate"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/scrollView2"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView2" tools:targetApi="m"/>
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2"
+        tools:targetApi="m" />
 
     <Button
         android:id="@+id/save"
