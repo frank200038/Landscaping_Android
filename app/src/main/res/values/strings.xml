@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">History</string>
+    <string name="inc">1</string>
+    <string name="sqf">2</string>
+    <string name="total">total</string>
+</resources>
