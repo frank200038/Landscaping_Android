@@ -18,7 +18,7 @@
         android:foreground="@drawable/caluculate"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/scrollView2"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView2" tools:targetApi="m" />
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2" tools:targetApi="m"/>
 
     <Button
         android:id="@+id/save"
