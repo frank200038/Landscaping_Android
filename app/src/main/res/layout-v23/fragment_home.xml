@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg3"
+    android:background="#E6E6E6"
     tools:context=".ui.home.HomeFragment">
 
 
@@ -536,14 +536,15 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginStart="8dp"
+                    android:background="@drawable/rounded_darkgray"
                     android:cursorVisible="false"
                     android:focusable="false"
-                    android:background="@drawable/rounded_darkgray"
                     android:gravity="center_horizontal|center_vertical"
                     android:hint="@string/sqft"
                     android:importantForAutofill="no"
 
                     android:inputType="numberDecimal"
+                    android:textColor="#000000"
                     android:textSize="14sp" />
 
                 <EditText
