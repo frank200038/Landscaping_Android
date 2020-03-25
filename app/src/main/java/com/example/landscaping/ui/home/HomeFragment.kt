@@ -15,7 +15,9 @@ import androidx.lifecycle.Observer
 import com.example.landscaping.R
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
+
 import java.security.cert.CertPathValidatorException
+import kotlin.math.round
 
 class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
@@ -50,6 +52,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private lateinit var costTotal : EditText
     private lateinit var sqftTotal : EditText
     private lateinit var clear : Button
+    private lateinit var calculate : Button
     private var serviceArray:ArrayList<Spinner> = arrayListOf()
     private var ftArray1 : ArrayList<EditText> = arrayListOf()
     private var ftArray2 : ArrayList<EditText> = arrayListOf()
@@ -121,6 +124,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         costTotal = view.totalcost as EditText
         sqftTotal = view.totalsqft as EditText
         clear = view.clear as Button
+        calculate = view.calculate as Button
         addAllArrays()
         processRetrievedPrefsArray(serviceArrayToSave,serviceArray as ArrayList<Any>,true)
         processRetrievedPrefsArray(ftArrayToSave1,ftArray1 as ArrayList<Any>,false)
@@ -143,6 +147,9 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
             phone.setText("")
             sqftTotal.setText("")
             costTotal.setText("")
+        }
+        calculate.setOnClickListener {
+            calculate()
         }
     }
 
@@ -296,6 +303,33 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
             {
                 array[i].setText("")
             }
+        }
+    }
+
+    fun calculate()
+    {   var sqftTotalVal = 0.0
+        var costTotalVal = 0.0
+        for (i in 0..serviceArray.count()-1)
+        {
+            if(ftArray1[i].text.toString()!="" && ftArray2[i].text.toString()!="")
+            {
+                val ft_1 = ftArray1[i].text.toString().toDouble()
+                val ft_2 = ftArray2[i].text.toString().toDouble()
+                val sqft = round(ft_1*ft_2)*1.0
+                sqftArray[i].setText(sqft.toString())
+                sqftTotalVal += sqft
+                if(serviceArray[i].selectedItemPosition!=0)
+                {   var cost = 0.0
+                    when(serviceArray[i].selectedItemPosition)
+                    {
+                        1-> cost = round(sqft*5.0)
+                        2-> cost = round(sqft*8.0)
+                    }
+                    costTotalVal += cost
+                }
+            }
+            sqftTotal.setText(sqftTotalVal.toString())
+            costTotal.setText(costTotalVal.toString())
         }
     }
 
