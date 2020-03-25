@@ -26,7 +26,7 @@
         android:layout_width="77dp"
         android:layout_height="77dp"
         android:layout_marginEnd="52dp"
-        android:background=""
+
         android:foreground="@drawable/ic_save"
         android:text="@string/save"
         app:layout_constraintEnd_toEndOf="@+id/scrollView2"
@@ -37,7 +37,7 @@
         android:layout_width="40dp"
         android:layout_height="56dp"
         android:layout_marginTop="136dp"
-        android:background=""
+
 
         android:foreground="@drawable/ic_delete"
         android:textSize="18sp"
