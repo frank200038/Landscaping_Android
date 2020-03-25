@@ -143,6 +143,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
             clearAllData(ftArray1 as ArrayList<Any>,false)
             clearAllData(ftArray2 as ArrayList<Any>,false)
             clearAllData(sqftArray as ArrayList<Any>,false)
+            clearAllData(costArray as ArrayList<Any>,false)
             name.setText("")
             phone.setText("")
             sqftTotal.setText("")
