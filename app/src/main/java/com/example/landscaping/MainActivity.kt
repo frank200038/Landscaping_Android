@@ -1,10 +1,12 @@
 package com.example.landscaping
 
 import android.os.Bundle
+import android.util.Log
 import android.view.WindowManager
 import android.widget.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -30,6 +32,10 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
         val actionbar = supportActionBar
         actionbar?.hide()
+        estimationViewModel = ViewModelProvider(this).get(EstimationViewModel::class.java)
+        estimationViewModel.allEstimation.observe(this, Observer {
+            estimation -> estimation.map { Log.d("Observe","${it.name}") }
+        })
 
 
     }
