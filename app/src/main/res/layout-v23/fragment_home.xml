@@ -13,7 +13,7 @@
     <Button
         android:elevation="40dp"
         android:id="@+id/calculate"
-        android:layout_width="87dp"
+        android:layout_width="83dp"
         android:layout_height="83dp"
         android:background="@drawable/rounded_white"
         android:foreground="@drawable/ic_calculate"
@@ -27,7 +27,7 @@
     <Button
         android:id="@+id/save"
         android:elevation="30dp"
-        android:layout_width="46dp"
+        android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginStart="20dp"
         android:background="@drawable/rounded_white"
@@ -39,8 +39,8 @@
     <Button
         android:id="@+id/clear"
         android:elevation="30dp"
-        android:layout_width="50dp"
-        android:layout_height="47dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_below="@id/totalsqft"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="210dp"
