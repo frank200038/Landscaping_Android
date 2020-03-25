@@ -9,8 +9,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import com.example.landscaping.Estimation
+import com.example.landscaping.EstimationRepository
 
 import com.example.landscaping.R
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -134,6 +137,8 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         phone.setText(userDataAndTotalToSave[1])
         sqftTotal.setText(userDataAndTotalToSave[2])
         costTotal.setText(userDataAndTotalToSave[3])
+        var estimation = Estimation()
+        estimation.cost
         //setSpinnerListener()
         view.setOnClickListener {
             it.hideKeyboard()
@@ -334,7 +339,10 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
             costTotal.setText(costTotalVal.toString())
         }
     }
+    fun processSave()
+    {
 
+    }
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         TODO()
     }
@@ -342,5 +350,6 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
     override fun onNothingSelected(parent: AdapterView<*>?) {
 
     }
+
 
 }
