@@ -29,9 +29,5 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val toast = view.calculate as Button
-        toast.setOnClickListener {
-            Toast.makeText(activity,"ffff",Toast.LENGTH_SHORT).show()
-        }
     }
 }
