@@ -12,12 +12,15 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.landscaping.Estimation
 import com.example.landscaping.EstimationRepository
+import com.example.landscaping.EstimationViewModel
 
 import com.example.landscaping.R
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
+import kotlinx.coroutines.InternalCoroutinesApi
 
 import java.security.cert.CertPathValidatorException
 import kotlin.math.round
@@ -68,7 +71,8 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private lateinit var sqftArrayToSave : ArrayList<Any>
     private lateinit var costArrayToSave : ArrayList<Any>
     private var userDataAndTotalToSave : ArrayList<String> = arrayListOf()
-
+    @InternalCoroutinesApi
+    private lateinit var estimationViewModel : EstimationViewModel
     override fun onAttach(context: Context) {
         super.onAttach(context)
         prefs = context.getSharedPreferences("Data", Context.MODE_PRIVATE)
@@ -95,6 +99,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         userDataAndTotalToSave.add(retrieveUserDataAndTotal(prefs,"costTotal"))
         userDataAndTotalToSave.add(retrieveUserDataAndTotal(prefs,"sqftTotal"))
     }
+    @InternalCoroutinesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         name = view.name as EditText
@@ -128,6 +133,11 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         sqftTotal = view.totalsqft as EditText
         clear = view.clear as Button
         calculate = view.calculate as Button
+        estimationViewModel = ViewModelProvider(this).get(EstimationViewModel::class.java)
+        val save = view.save as Button
+        save.setOnClickListener {
+                processSave()
+        }
         addAllArrays()
         processRetrievedPrefsArray(serviceArrayToSave,serviceArray as ArrayList<Any>,true)
         processRetrievedPrefsArray(ftArrayToSave1,ftArray1 as ArrayList<Any>,false)
@@ -137,8 +147,6 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         phone.setText(userDataAndTotalToSave[1])
         sqftTotal.setText(userDataAndTotalToSave[2])
         costTotal.setText(userDataAndTotalToSave[3])
-        var estimation = Estimation()
-        estimation.cost
         //setSpinnerListener()
         view.setOnClickListener {
             it.hideKeyboard()
@@ -339,10 +347,69 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
             costTotal.setText(costTotalVal.toString())
         }
     }
+
+    @InternalCoroutinesApi
     fun processSave()
     {
+        if(name.text.toString() == "" && phone.text.toString() == "")
+        {
+            Toast.makeText(
+                context,
+                "Empty Phone and Name",
+                Toast.LENGTH_LONG
+            ).show()
+        }
+        else
+        {
+            val serviceStringArray = serviceArray.asString(true)
+            val ftStringArray1 = ftArray1.asString(false)
+            val ftStringArray2 = ftArray2.asString(false)
+            val sqftStringArray = sqftArray.asString(false)
+            val costStringArray = costArray.asString(false)
+            val estimation = Estimation(0,name.text.toString(),phone.text.toString(),serviceStringArray,ftStringArray1,ftStringArray2,sqftStringArray,costStringArray,sqftTotal.text.toString(),costTotal.text.toString())
+            estimationViewModel.insert(estimation)
+            Toast.makeText(
+                context,
+                "Saved",
+                Toast.LENGTH_LONG
+            ).show()
+            clearAllData(serviceArray as ArrayList<Any>,true)
+            clearAllData(ftArray1 as ArrayList<Any>,false)
+            clearAllData(ftArray2 as ArrayList<Any>,false)
+            clearAllData(sqftArray as ArrayList<Any>,false)
+            clearAllData(costArray as ArrayList<Any>,false)
+            name.setText("")
+            phone.setText("")
+            sqftTotal.setText("")
+            costTotal.setText("")
+        }
 
     }
+
+    fun <T> ArrayList<T>.asString(Spinner: Boolean) : ArrayList<String>
+    {
+        val array = arrayListOf<String>()
+        if(Spinner)
+        {
+            val arrayToProcess = this as ArrayList<Spinner>
+            arrayToProcess.map {
+                array.add(it.selectedItemPosition.toString())
+
+            }
+
+        }
+        else
+        {
+            val arrayToProcess = this as ArrayList<EditText>
+            arrayToProcess.map {
+                array.add(it.text.toString())
+
+            }
+        }
+        return array
+    }
+
+
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         TODO()
     }

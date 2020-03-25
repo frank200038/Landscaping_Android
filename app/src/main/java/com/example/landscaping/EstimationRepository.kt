@@ -6,7 +6,7 @@ import androidx.room.*
 
 class EstimationRepository(private val estimationDao:EstimationDao)
 {
-    val allEstimation: LiveData<ArrayList<Estimation>> = estimationDao.getOrderedEstimation()
+    val allEstimation: LiveData<List<Estimation>> = estimationDao.getOrderedEstimation()
     suspend fun insert(estimation:Estimation)
     {
         estimationDao.insert(estimation)

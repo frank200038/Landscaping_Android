@@ -6,6 +6,7 @@ import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.internal.synchronized
 
 @Database(entities = arrayOf(Estimation::class), version = 1, exportSchema = false)
+@TypeConverters(Converters::class)
 public abstract class EstimationDatabase: RoomDatabase()
 {
     abstract fun estimationDao():EstimationDao

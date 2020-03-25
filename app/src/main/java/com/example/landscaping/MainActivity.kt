@@ -2,7 +2,7 @@ package com.example.landscaping
 
 import android.os.Bundle
 import android.view.WindowManager
-import android.widget.Button
+import android.widget.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -30,9 +30,7 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
         val actionbar = supportActionBar
         actionbar?.hide()
-        estimationViewModel = ViewModelProvider(this).get(EstimationViewModel::class.java)
 
-        val save = findViewById<Button>(R.id.save)
 
     }
 }

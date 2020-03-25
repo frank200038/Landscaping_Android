@@ -12,7 +12,7 @@ class EstimationViewModel(application: Application):AndroidViewModel(application
 {
     private val repository: EstimationRepository
 
-    val allEstimation: LiveData<ArrayList<Estimation>>
+    val allEstimation: LiveData<List<Estimation>>
 
     init {
         val estimationDao = EstimationDatabase.getDatabase(application).estimationDao()
