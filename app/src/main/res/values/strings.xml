@@ -18,6 +18,7 @@
     <string name="Clear">Clear</string>
 
     <string-array name="Services">
+        <item>Choose a Service</item>
         <item>Trimming</item>
         <item>Planting</item>
     </string-array>
