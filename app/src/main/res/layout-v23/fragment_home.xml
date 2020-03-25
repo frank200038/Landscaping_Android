@@ -4,18 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg2"
+    android:background="@drawable/bg"
     tools:context=".ui.home.HomeFragment">
 
 
     <Button
         android:id="@+id/calculate"
         android:layout_width="77dp"
-        android:layout_height="70dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="116dp"
+        android:layout_height="77dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="72dp"
         android:background="@drawable/shadow"
-        android:foreground="@drawable/caluculate"
+        android:foreground="@drawable/ic_caluculate"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/scrollView2"
         app:layout_constraintTop_toBottomOf="@+id/scrollView2"
@@ -23,27 +23,28 @@
 
     <Button
         android:id="@+id/save"
-        android:layout_width="150dp"
-        android:layout_height="40dp"
-        android:background="@drawable/shadow"
+        android:layout_width="77dp"
+        android:layout_height="77dp"
+        android:layout_marginEnd="52dp"
+        android:background=""
+        android:foreground="@drawable/ic_save"
         android:text="@string/save"
-        android:textSize="18sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/scrollView2"
         app:layout_constraintTop_toTopOf="@+id/calculate" />
 
     <Button
         android:id="@+id/clear"
-        android:layout_width="150dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="196dp"
-        android:background="@drawable/shadow"
-        android:text="@string/Clear"
+        android:layout_width="40dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="156dp"
+        android:background=""
+
+        android:foreground="@drawable/ic_delete"
         android:textSize="18sp"
         android:textStyle="bold"
         android:windowSoftInputMode="adjustPan|adjustResize"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.53"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
 
