@@ -325,6 +325,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                         1-> cost = round(sqft*5.0)
                         2-> cost = round(sqft*8.0)
                     }
+                    costArray[i].setText(cost.toString())
                     costTotalVal += cost
                 }
             }
