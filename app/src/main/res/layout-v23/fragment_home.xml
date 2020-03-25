@@ -4,15 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E6E6E6"
+    android:background="#72E6E6E6"
     tools:context=".ui.home.HomeFragment">
 
 
     <Button
+        android:elevation="40dp"
         android:id="@+id/calculate"
         android:layout_width="87dp"
         android:layout_height="83dp"
-        android:background="#00FFFFFF"
+        android:background="@drawable/rounded_white"
         android:foreground="@drawable/ic_calculate"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/clear"
@@ -23,10 +24,11 @@
 
     <Button
         android:id="@+id/save"
+        android:elevation="30dp"
         android:layout_width="46dp"
         android:layout_height="48dp"
         android:layout_marginStart="20dp"
-        android:background="#00FFFFFF"
+        android:background="@drawable/rounded_white"
         android:foreground="@drawable/ic_save"
         app:layout_constraintBottom_toBottomOf="@+id/calculate"
         app:layout_constraintStart_toEndOf="@+id/calculate"
@@ -34,12 +36,13 @@
 
     <Button
         android:id="@+id/clear"
+        android:elevation="30dp"
         android:layout_width="50dp"
         android:layout_height="47dp"
         android:layout_below="@id/totalsqft"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="210dp"
-        android:background="#00FFFFFF"
+        android:background="@drawable/rounded_white"
         android:foreground="@drawable/ic_delete"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -120,6 +123,7 @@
 
     <EditText
         android:id="@+id/name"
+        android:elevation="2dp"
         android:layout_width="300dp"
         android:layout_height="35dp"
         android:layout_below="@id/relativeLayout"
@@ -136,6 +140,7 @@
 
     <EditText
         android:id="@+id/phone"
+        android:elevation="2dp"
         android:layout_width="300dp"
         android:layout_height="35dp"
         android:layout_below="@id/relativeLayout"
@@ -233,6 +238,7 @@
     <ScrollView
 
         android:id="@+id/scrollView2"
+        android:elevation="3dp"
         android:layout_width="wrap_content"
         android:layout_height="200dp"
         android:layout_marginStart="25dp"
