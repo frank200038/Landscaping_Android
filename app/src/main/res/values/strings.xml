@@ -16,6 +16,8 @@
     <string name="calculate">CALCULATE</string>
     <string name="save">SAVE</string>
     <string name="Clear">Clear</string>
+    <string name="contact">contact</string>
+
 
     <string-array name="Services">
         <item>Choose a Service</item>
