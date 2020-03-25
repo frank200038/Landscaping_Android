@@ -1,6 +1,9 @@
 package com.example.landscaping.ui.home
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -50,7 +53,12 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private var ftArray2 : ArrayList<EditText> = arrayListOf()
     private var sqftArray : ArrayList<EditText> = arrayListOf()
     private var costArray : ArrayList<EditText> = arrayListOf()
+    private lateinit var prefs : SharedPreferences
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        prefs = context.getSharedPreferences("Data", Context.MODE_PRIVATE)
+    }
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -61,6 +69,10 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         return root
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         name = view.name as EditText
@@ -100,9 +112,23 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     }
 
+    override fun onPause() {
+        super.onPause()
+        savePrefs(prefs,serviceArray as ArrayList<Any>,"Service",true)
+        savePrefs(prefs,ftArray1 as ArrayList<Any>,"ft1",false)
+        savePrefs(prefs,ftArray2 as ArrayList<Any>, "ft2",false)
+        savePrefs(prefs,sqftArray as ArrayList<Any>,"sqft",false)
+        savePrefs(prefs,costArray as ArrayList<Any>,"cost",false)
+        val editor = prefs.edit()
+        editor.putString("costTotal",costTotal.text.toString())
+        editor.putString("sqftTotal",sqftTotal.text.toString())
+        editor.putString("name",name.text.toString())
+        editor.putString("phone",phone.text.toString())
+        editor.commit()
+    }
     fun View.hideKeyboard()
     {
-        val inputMethodManager = context!!.getSystemService(android.content.Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val inputMethodManager = context!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(this.windowToken,0)
     }
 
@@ -129,6 +155,31 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         service5.onItemSelectedListener = this
     }
 
+    fun savePrefs (prefs: SharedPreferences, array: ArrayList<Any>,name: String, Spinner: Boolean) : Boolean
+    {
+        val editor = prefs.edit()
+        editor.putInt("${name}_size",array.count())
+        if(Spinner)
+        {
+            val arrayToSaveSpinner = array as ArrayList<Spinner>
+            for(i in 0..array.count()-1)
+            {
+                editor.putString("${name}_${i}",arrayToSaveSpinner[i].selectedItem.toString())
+            }
+        }
+        else
+        {
+           val arrayToSaveEditText = array as ArrayList<EditText>
+            for(i in 0..array.count()-1)
+            {
+                editor.putString("${name}_${i}",arrayToSaveEditText[i].text.toString())
+            }
+        }
+        val result = editor.commit()
+        Log.d("Saved","${result}")
+        return result
+    }
+
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         if(position == 0)
         {
@@ -139,4 +190,5 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
     override fun onNothingSelected(parent: AdapterView<*>?) {
         TODO("Not yet implemented")
     }
+
 }
