@@ -15,6 +15,7 @@ import androidx.lifecycle.Observer
 import com.example.landscaping.R
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
+import java.security.cert.CertPathValidatorException
 
 class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
@@ -299,7 +300,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-
+        TODO()
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
