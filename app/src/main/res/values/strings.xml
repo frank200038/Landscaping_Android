@@ -1,9 +1,24 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">Landscaping</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">History</string>
-    <string name="inc">1</string>
-    <string name="sqf">2</string>
-    <string name="total">total</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="Service">Service</string>
+    <string name="ft0">Ft</string>
+    <string name="ft01">Ft</string>
+    <string name="sqft">SqFt</string>
+    <string name="cost">Cost</string>
+    <string name="estimator">ESTIMATOR</string>
+    <string name="phone">Phone</string>
+    <string name="name">Name</string>
+    <string name="prompt">Choose a Service</string>
+    <string name="todo">TODO</string>
+    <string name="calculate">CALCULATE</string>
+    <string name="save">SAVE</string>
+    <string name="Clear">Clear</string>
+
+    <string-array name="Services">
+        <item>Trimming</item>
+        <item>Planting</item>
+    </string-array>
 </resources>
