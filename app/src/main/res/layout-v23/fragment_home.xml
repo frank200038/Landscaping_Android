@@ -31,7 +31,6 @@
         app:layout_constraintTop_toTopOf="@+id/clear" />
 
     <Button
-
         android:id="@+id/clear"
         android:layout_below="@id/totalsqft"
         android:layout_width="50dp"

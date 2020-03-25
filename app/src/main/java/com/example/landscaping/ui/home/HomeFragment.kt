@@ -48,12 +48,19 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private lateinit var phone : EditText
     private lateinit var costTotal : EditText
     private lateinit var sqftTotal : EditText
+    private lateinit var clear : Button
     private var serviceArray:ArrayList<Spinner> = arrayListOf()
     private var ftArray1 : ArrayList<EditText> = arrayListOf()
     private var ftArray2 : ArrayList<EditText> = arrayListOf()
     private var sqftArray : ArrayList<EditText> = arrayListOf()
     private var costArray : ArrayList<EditText> = arrayListOf()
     private lateinit var prefs : SharedPreferences
+    private lateinit var serviceArrayToSave : ArrayList<Any>
+    private lateinit var ftArrayToSave1 : ArrayList<Any>
+    private lateinit var ftArrayToSave2 : ArrayList<Any>
+    private lateinit var sqftArrayToSave : ArrayList<Any>
+    private lateinit var costArrayToSave : ArrayList<Any>
+    private var userDataAndTotalToSave : ArrayList<String> = arrayListOf()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -71,7 +78,15 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        serviceArrayToSave = retrievePrefs(prefs,"Service",true)
+        ftArrayToSave1 = retrievePrefs(prefs,"ft1",false)
+        ftArrayToSave2 = retrievePrefs(prefs, "ft2",false)
+        sqftArrayToSave = retrievePrefs(prefs,"sqft",false)
+        costArrayToSave = retrievePrefs(prefs,"cost",false)
+        userDataAndTotalToSave.add(retrieveUserDataAndTotal(prefs,"name"))
+        userDataAndTotalToSave.add(retrieveUserDataAndTotal(prefs,"phone"))
+        userDataAndTotalToSave.add(retrieveUserDataAndTotal(prefs,"costTotal"))
+        userDataAndTotalToSave.add(retrieveUserDataAndTotal(prefs,"sqftTotal"))
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -104,12 +119,30 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         cost_4 = view.cost5 as EditText
         costTotal = view.totalcost as EditText
         sqftTotal = view.totalsqft as EditText
+        clear = view.clear as Button
         addAllArrays()
-        setSpinnerListener()
+        processRetrievedPrefsArray(serviceArrayToSave,serviceArray as ArrayList<Any>,true)
+        processRetrievedPrefsArray(ftArrayToSave1,ftArray1 as ArrayList<Any>,false)
+        processRetrievedPrefsArray(ftArrayToSave2,ftArray2 as ArrayList<Any>,false)
+        processRetrievedPrefsArray(sqftArrayToSave,sqftArray as ArrayList<Any>,false)
+        name.setText(userDataAndTotalToSave[0])
+        phone.setText(userDataAndTotalToSave[1])
+        sqftTotal.setText(userDataAndTotalToSave[2])
+        costTotal.setText(userDataAndTotalToSave[3])
+        //setSpinnerListener()
         view.setOnClickListener {
             it.hideKeyboard()
         }
-
+        clear.setOnClickListener {
+            clearAllData(serviceArray as ArrayList<Any>,true)
+            clearAllData(ftArray1 as ArrayList<Any>,false)
+            clearAllData(ftArray2 as ArrayList<Any>,false)
+            clearAllData(sqftArray as ArrayList<Any>,false)
+            name.setText("")
+            phone.setText("")
+            sqftTotal.setText("")
+            costTotal.setText("")
+        }
     }
 
     override fun onPause() {
@@ -146,14 +179,15 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         costArray.addAll(costToAdd)
     }
 
-    fun setSpinnerListener()
-    {
-        service1.onItemSelectedListener = this
-        service2.onItemSelectedListener = this
-        service3.onItemSelectedListener = this
-        service4.onItemSelectedListener = this
-        service5.onItemSelectedListener = this
-    }
+
+//    fun setSpinnerListener()
+//    {
+//        service1.onItemSelectedListener = this
+//        service2.onItemSelectedListener = this
+//        service3.onItemSelectedListener = this
+//        service4.onItemSelectedListener = this
+//        service5.onItemSelectedListener = this
+//    }
 
     fun savePrefs (prefs: SharedPreferences, array: ArrayList<Any>,name: String, Spinner: Boolean) : Boolean
     {
@@ -180,15 +214,96 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         return result
     }
 
-    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        if(position == 0)
+    fun retrievePrefs(prefs: SharedPreferences,name: String,Spinner: Boolean) : ArrayList<Any>
+    {
+        val count = prefs.getInt("${name}_size",0)
+        var arrayToReturn = arrayListOf<Any>()
+        if(count != 0)
         {
-            Toast.makeText(context,"Please Select a Service",Toast.LENGTH_SHORT).show()
+            if(Spinner)
+            {
+
+                for(i in 0..count-1)
+                {
+                    val string = prefs.getString("${name}_${i}","")
+                    when (string)
+                    {
+                        "Choose a Service" -> arrayToReturn.add(0)
+                        "Trimming" -> arrayToReturn.add(1)
+                        "Planting" -> arrayToReturn.add(2)
+                    }
+
+                }
+            }
+            else
+            {
+                for(i in 0..count-1)
+                {
+                    val string = prefs.getString("${name}_${i}","")
+                    arrayToReturn.add(string.toString())
+                }
+            }
+        }
+        return arrayToReturn
+    }
+
+    fun retrieveUserDataAndTotal(prefs: SharedPreferences,need:String):String
+    {
+        val string = prefs.getString("${need}","")
+        return string!!
+    }
+
+    fun processRetrievedPrefsArray(array:ArrayList<Any>, field:ArrayList<Any>, Spinner: Boolean)
+    {
+        if(array.count()!=0)
+        {
+            if(Spinner)
+            {
+                for(i in 0..array.count()-1)
+                {
+                    val field = field as ArrayList<Spinner>
+                    val array =  array as ArrayList<Int>
+                    field[i].setSelection(array[i])
+                }
+            }
+            else if(!Spinner)
+            {
+                for(i in 0..array.count()-1)
+                {
+                    val field = field as ArrayList<EditText>
+                    val array =  array as ArrayList<String>
+                    field[i].setText(array[i])
+                }
+            }
         }
     }
 
+    fun clearAllData(array: ArrayList<Any>, Spinner: Boolean)
+    {
+        if(Spinner)
+        {
+            val array = array as ArrayList<Spinner>
+            for (i in 0..array.count()-1)
+            {
+                array[i].setSelection(0)
+            }
+        }
+        else
+        {
+            val array = array as ArrayList<EditText>
+            for (i in 0..array.count()-1)
+            {
+                array[i].setText("")
+            }
+        }
+    }
+
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+
+    }
+
     override fun onNothingSelected(parent: AdapterView<*>?) {
-        TODO("Not yet implemented")
+
     }
 
 }
