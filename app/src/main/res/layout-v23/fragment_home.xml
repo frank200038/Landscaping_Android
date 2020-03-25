@@ -4,49 +4,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg"
+    android:background="@drawable/bg3"
     tools:context=".ui.home.HomeFragment">
 
 
     <Button
         android:id="@+id/calculate"
-        android:layout_width="77dp"
-        android:layout_height="77dp"
-        android:layout_marginStart="68dp"
-        android:layout_marginTop="236dp"
-        android:background="@drawable/shadow"
-        android:foreground="@drawable/ic_caluculate"
+        android:layout_width="49dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="16dp"
+        android:background="#00FFFFFF"
+        android:foreground="@drawable/ic_calculate"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/scrollView2"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView2"
+        app:layout_constraintEnd_toStartOf="@+id/clear"
+        app:layout_constraintTop_toTopOf="@+id/clear"
         tools:targetApi="m" />
 
     <Button
         android:id="@+id/save"
-        android:layout_width="77dp"
-        android:layout_height="77dp"
-        android:layout_marginEnd="52dp"
-
+        android:layout_width="46dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:background="#00FFFFFF"
         android:foreground="@drawable/ic_save"
-        android:text="@string/save"
-        app:layout_constraintEnd_toEndOf="@+id/scrollView2"
-        app:layout_constraintTop_toTopOf="@+id/calculate" />
+        app:layout_constraintStart_toEndOf="@+id/clear"
+        app:layout_constraintTop_toTopOf="@+id/clear" />
 
     <Button
+
         android:id="@+id/clear"
-        android:layout_width="40dp"
-        android:layout_height="56dp"
-        android:layout_marginTop="136dp"
-
-
+        android:layout_below="@id/totalsqft"
+        android:layout_width="50dp"
+        android:layout_height="47dp"
+        android:layout_marginBottom="180dp"
+        android:background="#00FFFFFF"
         android:foreground="@drawable/ic_delete"
         android:textSize="18sp"
         android:textStyle="bold"
         android:windowSoftInputMode="adjustPan|adjustResize"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.53"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
+        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
 
@@ -87,27 +86,41 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
 
-    <TextView
-
-
-        android:id="@+id/text_home"
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:fontFamily="@font/amaranth_bold"
-        android:text="@string/estimator"
-        android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textSize="40sp"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="8dp" />
+        android:layout_height="95dp"
+        android:background="@color/colorAccent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+
+
+            android:id="@+id/text_home"
+            android:layout_width="411dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/amaranth_bold"
+            android:gravity="center"
+            android:text="@string/estimator"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="40sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </RelativeLayout>
 
 
     <EditText
         android:id="@+id/name"
         android:layout_width="300dp"
         android:layout_height="35dp"
-        android:layout_below="@id/text_home"
+        android:layout_below="@id/relativeLayout"
         android:layout_marginTop="80dp"
         android:background="@drawable/rounded_gray"
         android:gravity="center_horizontal|center_vertical"
@@ -115,7 +128,7 @@
         android:importantForAutofill="no"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -123,7 +136,7 @@
         android:id="@+id/phone"
         android:layout_width="300dp"
         android:layout_height="35dp"
-        android:layout_below="@id/text_home"
+        android:layout_below="@id/relativeLayout"
         android:layout_marginTop="120dp"
         android:autofillHints=""
         android:background="@drawable/rounded_gray"
