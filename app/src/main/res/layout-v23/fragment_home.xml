@@ -38,19 +38,19 @@
 
     <Button
         android:id="@+id/clear"
-        android:elevation="30dp"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_below="@id/totalsqft"
+        android:layout_marginTop="74dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="210dp"
         android:background="@drawable/rounded_white"
+        android:elevation="30dp"
         android:foreground="@drawable/ic_delete2"
         android:textSize="18sp"
         android:textStyle="bold"
         android:windowSoftInputMode="adjustPan|adjustResize"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/calculate" />
+        app:layout_constraintEnd_toStartOf="@+id/calculate"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
 
     <EditText
 

@@ -18,6 +18,7 @@
     <string name="Clear">Clear</string>
     <string name="contact">contact</string>
     <string name="history">HISTORY</string>
+    <string name="search">Search</string>
 
 
     <string-array name="Services">

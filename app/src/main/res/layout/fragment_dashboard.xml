@@ -6,119 +6,68 @@
     android:layout_height="match_parent"
     tools:context=".ui.dashboard.DashboardFragment">
 
+    <!--    <SearchView-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent" />-->
 
 
+    <!--        <EditText-->
+    <!--            android:layout_width="fill_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:id="@+id/searchbox"-->
+    <!--            android:layout_alignParentBottom="true"-->
+    <!--            android:text="Test"-->
+    <!--            android:background="#ffffff"-->
+    <!--            />-->
 
+<!--    <RelativeLayout-->
 
-<!--    <ScrollView-->
-<!--        android:layout_width="405dp"-->
-<!--        android:layout_height="611dp"-->
-<!--        android:padding="6dp"-->
+<!--        android:id="@+id/relativeLayout2"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="60dp"-->
+<!--        -->
 <!--        app:layout_constraintEnd_toEndOf="parent"-->
 <!--        app:layout_constraintHorizontal_bias="0.5"-->
+<!--        android:padding="8dp"-->
 <!--        app:layout_constraintStart_toStartOf="parent"-->
 <!--        app:layout_constraintTop_toTopOf="parent">-->
+
+    <SearchView
+
+        android:id="@+id/searchView"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:divider="@null"
+        app:layout_goneMarginEnd="6dp"
+        app:layout_goneMarginStart="10dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="6dp"
+        android:background="@drawable/rounded_white"
+        android:elevation="3dp"
+        app:queryBackground="@android:color/transparent"
+        android:iconifiedByDefault="false"
+        android:longClickable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+<!--    </RelativeLayout>-->
 
     <ListView
         android:id="@android:id/list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        />
-
-           <LinearLayout
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:background="#EC8585"
-               android:orientation="vertical">
-
-
-
-
-
-        <!--            <TextView-->
-        <!--                android:text="Salchichon"-->
-        <!--                android:gravity="center"-->
-        <!--                android:padding="4dp"-->
-        <!--                android:layout_margin="10dp"-->
-        <!--                android:background="@drawable/rounded_gray"-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="wrap_content"/>-->
-        <!--            <TextView-->
-        <!--                android:text="Salchichon"-->
-        <!--                android:gravity="center"-->
-        <!--                android:padding="4dp"-->
-        <!--                android:layout_margin="6dp"-->
-        <!--                android:background="@drawable/rounded_gray"-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="wrap_content"/>-->
-        <!--            <TextView-->
-        <!--                android:text="Salchichon"-->
-        <!--                android:gravity="center"-->
-        <!--                android:padding="4dp"-->
-        <!--                android:layout_margin="6dp"-->
-        <!--                android:background="@drawable/rounded_gray"-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="wrap_content"/>-->
-        <!--            <TextView-->
-        <!--                android:text="Salchichon"-->
-        <!--                android:gravity="center"-->
-        <!--                android:padding="4dp"-->
-        <!--                android:layout_margin="6dp"-->
-        <!--                android:background="@drawable/rounded_gray"-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="wrap_content"/>-->
-        <!--            <TextView-->
-        <!--                android:text="Salchichon"-->
-        <!--                android:gravity="center"-->
-        <!--                android:padding="4dp"-->
-        <!--                android:layout_margin="6dp"-->
-        <!--                android:background="@drawable/rounded_gray"-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="wrap_content"/>-->
-        <!--            <TextView-->
-        <!--                android:text="Salchichon"-->
-        <!--                android:gravity="center"-->
-        <!--                android:padding="4dp"-->
-        <!--                android:layout_margin="6dp"-->
-        <!--                android:background="@drawable/rounded_gray"-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="wrap_content"/>-->
-        <!--            <TextView-->
-        <!--                android:text="Salchichon"-->
-        <!--                android:gravity="center"-->
-        <!--                android:padding="4dp"-->
-        <!--                android:layout_margin="6dp"-->
-        <!--                android:background="@drawable/rounded_gray"-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="wrap_content"/>-->
-        <!--            <TextView-->
-        <!--                android:text="Salchichon"-->
-        <!--                android:gravity="center"-->
-        <!--                android:padding="4dp"-->
-        <!--                android:layout_margin="6dp"-->
-        <!--                android:background="@drawable/rounded_gray"-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="wrap_content"/>-->
-        <!--            <TextView-->
-        <!--                android:text="Salchichon"-->
-        <!--                android:gravity="center"-->
-        <!--                android:padding="4dp"-->
-        <!--                android:layout_margin="6dp"-->
-        <!--                android:background="@drawable/rounded_gray"-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="wrap_content"/>-->
-        <!--            <TextView-->
-        <!--                android:text="Salchichon"-->
-        <!--                android:gravity="center"-->
-        <!--                android:padding="4dp"-->
-        <!--                android:layout_margin="6dp"-->
-        <!--                android:background="@drawable/rounded_gray"-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="wrap_content"/>-->
-             </LinearLayout>
-
-
-<!--    </ScrollView>-->
-
+        android:background="@drawable/rounded_whiteokay"
+        android:divider="@null"
+        android:dividerHeight="0dp"
+        android:paddingBottom="125dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

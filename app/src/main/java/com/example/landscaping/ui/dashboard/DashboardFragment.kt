@@ -5,19 +5,15 @@ import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.ListView
-import android.widget.RelativeLayout
-import android.widget.TextView
+import android.view.*
+import android.widget.*
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.ListFragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
+
 import com.example.landscaping.*
 import kotlinx.android.synthetic.main.fragment_dashboard.view.*
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -33,6 +29,20 @@ class DashboardFragment : ListFragment() {
 
     @InternalCoroutinesApi
     private lateinit var estimationViewModel : EstimationViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+//        (activity as AppCompatActivity).supportActionBar!!.show()
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        //(activity as AppCompatActivity).supportActionBar!!.show()
+
+    }
+
+
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -47,6 +57,7 @@ class DashboardFragment : ListFragment() {
     @InternalCoroutinesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(relativeLayout, savedInstanceState)
+
         Log.d("Count","${values.count()}")
 
             if(values.count() == 0)
@@ -64,6 +75,8 @@ class DashboardFragment : ListFragment() {
             estimationViewModel.allEstimation.observe(viewLifecycleOwner, Observer { estimation ->
                 estimation.map { Log.d("Observe", "${estimation[0].phone}");val adapterArray = ArrayList<Estimation>(estimation);adapter.setValue(adapterArray) }})
     }
+
+
 
     override fun onListItemClick(l: ListView, v: View, position: Int, id: Long) {
         super.onListItemClick(l, v, position, id)

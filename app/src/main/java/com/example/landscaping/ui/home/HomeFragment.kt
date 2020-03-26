@@ -98,6 +98,9 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         userDataAndTotalToSave.add(retrieveUserDataAndTotal(prefs,"phone"))
         userDataAndTotalToSave.add(retrieveUserDataAndTotal(prefs,"costTotal"))
         userDataAndTotalToSave.add(retrieveUserDataAndTotal(prefs,"sqftTotal"))
+        val activity = activity as AppCompatActivity
+        val actionBar = activity.supportActionBar
+        actionBar?.hide()
     }
     @InternalCoroutinesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -183,6 +186,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
             calculate()
             it.hideKeyboard()
         }
+
     }
 
     override fun onPause() {
