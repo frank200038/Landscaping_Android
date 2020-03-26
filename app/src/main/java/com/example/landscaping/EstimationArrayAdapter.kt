@@ -22,16 +22,16 @@ class EstimationArrayAdapter(context: Context, @LayoutRes private val layoutRes:
         {
             val inflater : LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
             rowView = inflater.inflate(R.layout.row_view,null)
-            var viewHolder = ViewHolder()
+            val viewHolder = ViewHolder()
             viewHolder.name = rowView.name_list
             viewHolder.phone = rowView.phone_list
             rowView.setTag(viewHolder)
         }
 
-        var viewHolder = rowView!!.tag as ViewHolder;
-        var s = value[position]
+        val viewHolder = rowView!!.tag as ViewHolder
+        val s = value[position]
         viewHolder.name.setText(s)
-        viewHolder.phone.setText("ffff")
+        viewHolder.phone.setText("fff")
 
 //        val inflater : LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 //        val rowView : View = inflater.inflate(R.layout.row_view,parent,true)
