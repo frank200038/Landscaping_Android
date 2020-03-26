@@ -1,6 +1,8 @@
 package com.example.landscaping.ui.dashboard
 
+import android.app.ListActivity
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,6 +12,7 @@ import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.ListFragment
 import androidx.lifecycle.Observer
@@ -18,10 +21,12 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.landscaping.*
 import kotlinx.android.synthetic.main.fragment_dashboard.view.*
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_home.view.*
+import kotlinx.android.synthetic.main.row_view.view.*
 
 import kotlinx.coroutines.InternalCoroutinesApi
 
-class DashboardFragment : Fragment() {
+class DashboardFragment : ListFragment() {
 
     private lateinit var dashboardViewModel: DashboardViewModel
     private var values:ArrayList<Estimation> = ArrayList(1)
@@ -38,9 +43,7 @@ class DashboardFragment : Fragment() {
         return root
     }
 
-
-
-
+    @RequiresApi(Build.VERSION_CODES.O)
     @InternalCoroutinesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(relativeLayout, savedInstanceState)
@@ -61,4 +64,13 @@ class DashboardFragment : Fragment() {
             estimationViewModel.allEstimation.observe(viewLifecycleOwner, Observer { estimation ->
                 estimation.map { Log.d("Observe", "${estimation[0].phone}");val adapterArray = ArrayList<Estimation>(estimation);adapter.setValue(adapterArray) }})
     }
+
+    override fun onListItemClick(l: ListView, v: View, position: Int, id: Long) {
+        super.onListItemClick(l, v, position, id)
+        var adapter = l.adapter as EstimationArrayAdapter
+        var item = adapter.getValueAtIndex(position)
+        Log.d("Selected","Select ${item}")
+    }
+
+
 }

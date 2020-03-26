@@ -40,6 +40,11 @@ class EstimationArrayAdapter(context: Context, @LayoutRes private var layoutRes:
         notifyDataSetChanged()
     }
 
+    fun getValueAtIndex(index:Int): Estimation
+    {
+        return this.value[index]
+    }
+
     override fun  getCount():Int
     {
     return value.count()

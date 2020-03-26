@@ -148,6 +148,22 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         sqftTotal.setText(userDataAndTotalToSave[2])
         costTotal.setText(userDataAndTotalToSave[3])
         //setSpinnerListener()
+        phone.setOnFocusChangeListener { v, hasFocus ->
+            if(!hasFocus)
+            {
+                if(phone.text.toString().count() == 10)
+                {
+                    phone.setText(processStringAfterEditing(phone.text.toString()))
+                }
+            }
+            else
+            {
+                if(phone.text.toString().contains("(") && phone.text.toString().contains(")")&&phone.text.toString().contains("-"))
+                {
+                    phone.setText(processStringBeforeEditing(phone.text.toString()))
+                }
+            }
+        }
         view.setOnClickListener {
             it.hideKeyboard()
         }
@@ -378,6 +394,26 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
             costTotal.setText("")
         }
 
+    }
+
+    fun processStringAfterEditing(text:String):String
+    {
+        var substring = text.substring(0,3)
+        val firstPart = "("+substring+")"
+        substring = text.substring(3,6)
+        val secondPart = substring+"-"
+        val thirdPart = text.substring(6)
+        return firstPart+secondPart+thirdPart
+    }
+
+    fun processStringBeforeEditing(text:String):String
+    {
+        var substring = text.substring(1,4)
+        val firstPart = substring
+        substring = text.substring(5,8)
+        val secondPart = substring
+        val thirdPart = text.substring(9)
+        return firstPart+secondPart+thirdPart
     }
 
     fun <T> ArrayList<T>.asString(Spinner: Boolean) : ArrayList<String>
