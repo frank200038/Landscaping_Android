@@ -6,7 +6,7 @@ import androidx.room.*
 
 
 @Entity(tableName = "estimation_table")
-data class Estimation(//var names:String,var phones:String, var services:ArrayList<String>,var ft1s: ArrayList<String>,var ft2s: ArrayList<String>,var sqfts: ArrayList<String>,var costs: ArrayList<String>,var sqftTotals: String,var costTotals: String)
+data class Estimation(
 
     @PrimaryKey(autoGenerate = true)  var id:Int = 0,
     @ColumnInfo(name = "name")  var name: String = "",
