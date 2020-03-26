@@ -152,6 +152,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
             it.hideKeyboard()
         }
         clear.setOnClickListener {
+            it.hideKeyboard()
             clearAllData(serviceArray as ArrayList<Any>,true)
             clearAllData(ftArray1 as ArrayList<Any>,false)
             clearAllData(ftArray2 as ArrayList<Any>,false)
@@ -164,6 +165,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         }
         calculate.setOnClickListener {
             calculate()
+            it.hideKeyboard()
         }
     }
 
@@ -200,16 +202,6 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         val costToAdd = listOf<EditText>(cost_0,cost_1,cost_2,cost_3,cost_4)
         costArray.addAll(costToAdd)
     }
-
-
-//    fun setSpinnerListener()
-//    {
-//        service1.onItemSelectedListener = this
-//        service2.onItemSelectedListener = this
-//        service3.onItemSelectedListener = this
-//        service4.onItemSelectedListener = this
-//        service5.onItemSelectedListener = this
-//    }
 
     fun savePrefs (prefs: SharedPreferences, array: ArrayList<Any>,name: String, Spinner: Boolean) : Boolean
     {
@@ -321,7 +313,9 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
     }
 
     fun calculate()
-    {   var sqftTotalVal = 0.0
+    {
+
+        var sqftTotalVal = 0.0
         var costTotalVal = 0.0
         for (i in 0..serviceArray.count()-1)
         {
