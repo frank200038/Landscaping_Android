@@ -13,6 +13,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.example.landscaping.ui.dashboard.DashboardFragment
 import kotlinx.coroutines.InternalCoroutinesApi
 
 class MainActivity : AppCompatActivity() {
@@ -35,10 +36,7 @@ class MainActivity : AppCompatActivity() {
 
         val actionbar = supportActionBar
         actionbar?.hide()
-        estimationViewModel = ViewModelProvider(this).get(EstimationViewModel::class.java)
-        estimationViewModel.allEstimation.observe(this, Observer {
-            estimation -> estimation.map { Log.d("Observe","${it.name}") }
-        })
+
 
 
     }
