@@ -203,6 +203,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         editor.putString("phone",phone.text.toString())
         editor.commit()
     }
+
     fun View.hideKeyboard()
     {
         val inputMethodManager = context!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -251,7 +252,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
     fun retrievePrefs(prefs: SharedPreferences,name: String,Spinner: Boolean) : ArrayList<Any>
     {
         val count = prefs.getInt("${name}_size",0)
-        var arrayToReturn = arrayListOf<Any>()
+        val arrayToReturn = arrayListOf<Any>()
         if(count != 0)
         {
             if(Spinner)
@@ -283,7 +284,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     fun retrieveUserDataAndTotal(prefs: SharedPreferences,need:String):String
     {
-        val string = prefs.getString("${need}","")
+        val string = prefs.getString(need,"")
         return string!!
     }
 

@@ -6,6 +6,7 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -26,7 +27,7 @@ class DashboardFragment : ListFragment() {
 
     private lateinit var dashboardViewModel: DashboardViewModel
     private var values:ArrayList<Estimation> = ArrayList(1)
-
+    private lateinit var adapter: EstimationArrayAdapter
     @InternalCoroutinesApi
     private lateinit var estimationViewModel : EstimationViewModel
 
@@ -64,7 +65,7 @@ class DashboardFragment : ListFragment() {
             {
                 Log.d("Empty","Empty")
             }
-            val adapter = EstimationArrayAdapter(
+             adapter = EstimationArrayAdapter(
                 activity!!.applicationContext,
                 android.R.layout.simple_list_item_1,
                 values
@@ -74,6 +75,9 @@ class DashboardFragment : ListFragment() {
             estimationViewModel = ViewModelProvider(this).get(EstimationViewModel::class.java)
             estimationViewModel.allEstimation.observe(viewLifecycleOwner, Observer { estimation ->
                 estimation.map { Log.d("Observe", "${estimation[0].phone}");val adapterArray = ArrayList<Estimation>(estimation);adapter.setValue(adapterArray) }})
+            val searchView = view.findViewById<SearchView>(R.id.searchView)
+            setOnQueryListener(searchView)
+
     }
 
 
@@ -83,6 +87,29 @@ class DashboardFragment : ListFragment() {
         var adapter = l.adapter as EstimationArrayAdapter
         var item = adapter.getValueAtIndex(position)
         Log.d("Selected","Select ${item}")
+    }
+
+    fun setOnQueryListener(search: SearchView)
+    {
+        search.setOnQueryTextListener(object: SearchView.OnQueryTextListener
+        {
+            override fun onQueryTextChange(newText: String?): Boolean {
+                Log.d("Changed","Select ${newText}")
+                adapter.filter.filter(newText)
+                return true
+            }
+
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                view?.hideKeyboard()
+                return false
+            }
+        })
+    }
+
+    fun View.hideKeyboard()
+    {
+        val inputMethodManager = context!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(this.windowToken,0)
     }
 
 
