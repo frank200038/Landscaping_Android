@@ -69,7 +69,7 @@ class EstimationArrayAdapter(context: Context, @LayoutRes private var layoutRes:
                     val search = constraint.toString().toLowerCase(Locale.ROOT)
                     for (item in value)
                     {
-                        if (item.name.contains(search) || item.phone.contains(search))
+                        if (item.name.toLowerCase(Locale.ROOT).contains(search) || item.phone.toLowerCase(Locale.ROOT).contains(search))
                         {
                             results.add(item)
                             Log.d("Filter","${item}")
