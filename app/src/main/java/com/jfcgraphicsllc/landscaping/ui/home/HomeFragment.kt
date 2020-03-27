@@ -138,6 +138,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 processSave()
         }
         addAllArrays()
+        Log.d("serivce","${serviceArrayToSave} + ${ftArrayToSave1} + ${ftArrayToSave2} + ${sqftArrayToSave} + ${userDataAndTotalToSave} + ")
         processRetrievedPrefsArray(serviceArrayToSave,serviceArray as ArrayList<Any>,true)
         processRetrievedPrefsArray(ftArrayToSave1,ftArray1 as ArrayList<Any>,false)
         processRetrievedPrefsArray(ftArrayToSave2,ftArray2 as ArrayList<Any>,false)
@@ -286,6 +287,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     fun processRetrievedPrefsArray(array:ArrayList<Any>, field:ArrayList<Any>, Spinner: Boolean)
     {
+        Log.d("Retrieve","${array}")
         if(array.count()!=0)
         {
             if(Spinner)
