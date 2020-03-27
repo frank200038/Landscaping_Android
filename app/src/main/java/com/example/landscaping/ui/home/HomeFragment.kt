@@ -298,6 +298,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 {
                     val field = field as ArrayList<Spinner>
                     val array =  array as ArrayList<Int>
+                    Log.d("Array","${array.count()}+${i} + ${field} + ${array} + ${field[i]} + ${array[i]}")
                     field[i].setSelection(array[i])
                 }
             }

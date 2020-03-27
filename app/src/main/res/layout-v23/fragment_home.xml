@@ -283,9 +283,11 @@
                     android:id="@+id/service1"
                     android:layout_width="140dp"
                     android:layout_height="40dp"
-
                     android:background="#ffffff"
+
                     android:entries="@array/Services"
+                    android:nextFocusDown="@+id/ft1"
+                    android:nextFocusForward="@+id/ft1"
                     android:prompt="@string/prompt" />
 
                 <EditText
@@ -298,6 +300,9 @@
                     android:gravity="center_horizontal|center_vertical"
                     android:hint="@string/ft0"
                     android:inputType="numberDecimal"
+                    android:nextFocusDown="@+id/ft2"
+                    android:nextFocusForward="@+id/ft2"
+                    android:selectAllOnFocus="false"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
@@ -311,6 +316,8 @@
                     android:hint="@string/ft0"
                     android:importantForAutofill="no"
                     android:inputType="numberDecimal"
+                    android:nextFocusDown="@+id/service2"
+                    android:nextFocusForward="@+id/service2"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
@@ -364,9 +371,11 @@
                     android:id="@+id/service2"
                     android:layout_width="140dp"
                     android:layout_height="40dp"
-
                     android:background="#ffffff"
+
                     android:entries="@array/Services"
+                    android:nextFocusDown="@+id/ft12"
+                    android:nextFocusForward="@+id/ft12"
                     android:prompt="@string/prompt" />
 
                 <EditText
@@ -379,6 +388,8 @@
                     android:gravity="center_horizontal|center_vertical"
                     android:hint="@string/ft0"
                     android:inputType="numberDecimal"
+                    android:nextFocusDown="@+id/ft22"
+                    android:nextFocusForward="@+id/ft22"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
@@ -392,6 +403,8 @@
                     android:gravity="center_horizontal|center_vertical"
                     android:hint="@string/ft0"
                     android:inputType="numberDecimal"
+                    android:nextFocusDown="@+id/service3"
+                    android:nextFocusForward="@+id/service3"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
@@ -444,9 +457,11 @@
                     android:id="@+id/service3"
                     android:layout_width="140dp"
                     android:layout_height="40dp"
-
                     android:background="#ffffff"
+
                     android:entries="@array/Services"
+                    android:nextFocusDown="@+id/ft13"
+                    android:nextFocusForward="@+id/ft13"
                     android:prompt="@string/prompt" />
 
                 <EditText
@@ -459,6 +474,8 @@
                     android:hint="@string/ft0"
                     android:importantForAutofill="no"
                     android:inputType="numberDecimal"
+                    android:nextFocusDown="@+id/ft23"
+                    android:nextFocusForward="@+id/ft23"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
@@ -472,6 +489,8 @@
                     android:hint="@string/ft0"
                     android:importantForAutofill="no"
                     android:inputType="numberDecimal"
+                    android:nextFocusDown="@+id/service4"
+                    android:nextFocusForward="@+id/service4"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
@@ -525,9 +544,11 @@
                     android:id="@+id/service4"
                     android:layout_width="140dp"
                     android:layout_height="40dp"
-
                     android:background="#ffffff"
+
                     android:entries="@array/Services"
+                    android:nextFocusDown="@+id/ft14"
+                    android:nextFocusForward="@+id/ft14"
                     android:prompt="@string/prompt" />
 
                 <EditText
@@ -540,6 +561,8 @@
                     android:hint="@string/ft0"
                     android:importantForAutofill="no"
                     android:inputType="numberDecimal"
+                    android:nextFocusDown="@+id/ft24"
+                    android:nextFocusForward="@+id/ft24"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
@@ -553,6 +576,8 @@
                     android:hint="@string/ft0"
                     android:importantForAutofill="no"
                     android:inputType="numberDecimal"
+                    android:nextFocusDown="@+id/service5"
+                    android:nextFocusForward="@+id/service5"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
@@ -608,9 +633,11 @@
                     android:id="@+id/service5"
                     android:layout_width="140dp"
                     android:layout_height="40dp"
-
                     android:background="#ffffff"
+
                     android:entries="@array/Services"
+                    android:nextFocusDown="@+id/ft15"
+                    android:nextFocusForward="@+id/ft15"
                     android:prompt="@string/prompt" />
 
                 <EditText
@@ -623,6 +650,8 @@
                     android:hint="@string/ft0"
                     android:importantForAutofill="no"
                     android:inputType="numberDecimal"
+                    android:nextFocusDown="@+id/ft25"
+                    android:nextFocusForward="@+id/ft25"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
@@ -631,6 +660,7 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginStart="8dp"
+
                     android:background="@drawable/rounded_darkgray"
                     android:gravity="center_horizontal|center_vertical"
                     android:hint="@string/ft0"
