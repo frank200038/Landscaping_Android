@@ -85,7 +85,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        Log.e("Start","------------------------------------------------------------------------")
         serviceArrayToSave = retrievePrefs(prefs,"Service",true)
         ftArrayToSave1 = retrievePrefs(prefs,"ft1",false)
         ftArrayToSave2 = retrievePrefs(prefs, "ft2",false)
@@ -95,7 +95,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         userDataAndTotalToSave.add(retrieveUserDataAndTotal(prefs,"phone"))
         userDataAndTotalToSave.add(retrieveUserDataAndTotal(prefs,"costTotal"))
         userDataAndTotalToSave.add(retrieveUserDataAndTotal(prefs,"sqftTotal"))
-        Log.d("OnCreate","${serviceArrayToSave} + ${ftArrayToSave1} + ${ftArrayToSave2} + ${sqftArrayToSave} + ${userDataAndTotalToSave}")
+        Log.e("OnCreate","${serviceArrayToSave} + ${ftArrayToSave1} + ${ftArrayToSave2} + ${sqftArrayToSave} + ${userDataAndTotalToSave}")
         val activity = activity as AppCompatActivity
         val actionBar = activity.supportActionBar
         actionBar?.hide()
@@ -140,7 +140,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 processSave()
         }
         addAllArrays()
-        Log.d("OnViewCreated","${serviceArrayToSave} + ${ftArrayToSave1} + ${ftArrayToSave2} + ${sqftArrayToSave} + ${userDataAndTotalToSave} + ")
+        Log.e("OnViewCreated","${serviceArrayToSave} + ${ftArrayToSave1} + ${ftArrayToSave2} + ${sqftArrayToSave} + ${userDataAndTotalToSave} + ")
         processRetrievedPrefsArray(serviceArrayToSave,serviceArray as ArrayList<Any>,true)
         processRetrievedPrefsArray(ftArrayToSave1,ftArray1 as ArrayList<Any>,false)
         processRetrievedPrefsArray(ftArrayToSave2,ftArray2 as ArrayList<Any>,false)
@@ -196,6 +196,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
 //        sqftArrayToSave.clear()
 //        costArrayToSave.clear()
 //        userDataAndTotalToSave.clear()
+        Log.e("ONPAUSE","----------------------------------------------------------------------")
         savePrefs(prefs,serviceArray as ArrayList<Any>,"Service",true)
         savePrefs(prefs,ftArray1 as ArrayList<Any>,"ft1",false)
         savePrefs(prefs,ftArray2 as ArrayList<Any>, "ft2",false)
@@ -207,6 +208,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         editor.putString("name",name.text.toString())
         editor.putString("phone",phone.text.toString())
         editor.commit()
+        Log.e("End","----------------------------------------------------------------------")
     }
 
     fun View.hideKeyboard()
@@ -233,7 +235,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
     {
         val editor = prefs.edit()
         editor.putInt("${name}_size",array.count())
-        Log.d("SavePrefs","${name}_size + ${array.count()}")
+        Log.e("SavePrefs","${name}_size + ${array.count()}")
         if(Spinner)
         {
             val arrayToSaveSpinner = array as ArrayList<Spinner>
@@ -251,13 +253,14 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
             }
         }
         val result = editor.commit()
+
         return result
     }
 
     fun retrievePrefs(prefs: SharedPreferences,name: String,Spinner: Boolean) : ArrayList<Any>
     {
         val count = prefs.getInt("${name}_size",0)
-        Log.d("RetrievePrefs","${count}")
+        Log.e("RetrievePrefs","${count}")
         val arrayToReturn = arrayListOf<Any>()
         if(count != 0)
         {
@@ -296,10 +299,10 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     fun processRetrievedPrefsArray(array:ArrayList<Any>, field:ArrayList<Any>, Spinner: Boolean)
     {
-        Log.d("processRetrievedPrefs1","${array}")
+        Log.e("processRetrievedPrefs1","${array}")
         if(array.count()!=0 && array.count() != field.count())
         {
-            Log.d("Wrong","Wrong")
+            Log.e("Wrong","Wrong")
         }
         if(array.count()!=0 )//&& array.count() == field.count())
         {
@@ -309,7 +312,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 {
                     val field = field as ArrayList<Spinner>
                     val array =  array as ArrayList<Int>
-                    Log.d("processRetrievedPrefs2","${array.count()}+${i} + ${field} + ${array} + ${field[i]} + ${array[i]}")
+                    Log.e("processRetrievedPrefs2","${array.count()}+${i} + ${field} + ${array} + ${field[i]} + ${array[i]}")
                     field[i].setSelection(array[i])
                 }
             }
