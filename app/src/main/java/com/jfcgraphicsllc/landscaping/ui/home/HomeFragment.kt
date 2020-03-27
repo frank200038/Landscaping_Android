@@ -85,7 +85,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if(serviceArrayToSave.count()!=0 && ftArrayToSave1.count()!=0 && ftArrayToSave2.count()!=0 && sqftArrayToSave.count()!=0 && userDataAndTotalToSave.count()!=0)
+        if(serviceArrayToSave != null && ftArrayToSave1!= null && ftArrayToSave2!= null && sqftArrayToSave!= null && userDataAndTotalToSave!= null)
         {Log.d("ReBefore","${serviceArrayToSave} + ${ftArrayToSave1} + ${ftArrayToSave2} + ${sqftArrayToSave} + ${userDataAndTotalToSave}")}
         serviceArrayToSave = retrievePrefs(prefs,"Service",true)
         ftArrayToSave1 = retrievePrefs(prefs,"ft1",false)
