@@ -196,7 +196,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
 //        sqftArrayToSave.clear()
 //        costArrayToSave.clear()
 //        userDataAndTotalToSave.clear()
-        Log.e("ONPAUSE","----------------------------------------------------------------------")
+        Log.e("ONPAUSE","---------------------------------------------------------------------")
         savePrefs(prefs,serviceArray as ArrayList<Any>,"Service",true)
         savePrefs(prefs,ftArray1 as ArrayList<Any>,"ft1",false)
         savePrefs(prefs,ftArray2 as ArrayList<Any>, "ft2",false)
