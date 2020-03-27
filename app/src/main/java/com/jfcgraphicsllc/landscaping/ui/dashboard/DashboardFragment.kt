@@ -1,6 +1,5 @@
-package com.example.landscaping.ui.dashboard
+package com.jfcgraphicsllc.landscaping.ui.dashboard
 
-import android.app.ListActivity
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
@@ -9,17 +8,12 @@ import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.ListFragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 
-import com.example.landscaping.*
-import kotlinx.android.synthetic.main.fragment_dashboard.view.*
+import com.jfcgraphicsllc.landscaping.*
 import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.fragment_home.view.*
-import kotlinx.android.synthetic.main.row_view.view.*
 
 import kotlinx.coroutines.InternalCoroutinesApi
 

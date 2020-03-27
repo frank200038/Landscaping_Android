@@ -1,4 +1,4 @@
-package com.example.landscaping.ui.home
+package com.jfcgraphicsllc.landscaping.ui.home
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -11,18 +11,14 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.landscaping.Estimation
-import com.example.landscaping.EstimationRepository
-import com.example.landscaping.EstimationViewModel
+import com.jfcgraphicsllc.landscaping.Estimation
+import com.jfcgraphicsllc.landscaping.EstimationViewModel
 
-import com.example.landscaping.R
-import kotlinx.android.synthetic.main.fragment_home.*
+import com.jfcgraphicsllc.landscaping.R
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import kotlinx.coroutines.InternalCoroutinesApi
 
-import java.security.cert.CertPathValidatorException
 import kotlin.math.round
 
 class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {

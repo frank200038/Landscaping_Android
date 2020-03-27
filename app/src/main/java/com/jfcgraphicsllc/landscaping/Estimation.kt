@@ -1,7 +1,5 @@
-package com.example.landscaping
+package com.jfcgraphicsllc.landscaping
 
-import android.widget.Spinner
-import androidx.annotation.*
 import androidx.room.*
 
 

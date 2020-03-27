@@ -1,4 +1,4 @@
-package com.example.landscaping
+package com.jfcgraphicsllc.landscaping
 
 import android.content.Context
 import androidx.room.*

@@ -1,4 +1,4 @@
-package com.example.landscaping.ui.dashboard
+package com.jfcgraphicsllc.landscaping.ui.dashboard
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
