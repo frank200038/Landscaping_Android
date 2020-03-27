@@ -94,6 +94,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         userDataAndTotalToSave.add(retrieveUserDataAndTotal(prefs,"phone"))
         userDataAndTotalToSave.add(retrieveUserDataAndTotal(prefs,"costTotal"))
         userDataAndTotalToSave.add(retrieveUserDataAndTotal(prefs,"sqftTotal"))
+        Log.d("Re","${serviceArrayToSave} + ${ftArrayToSave1} + ${ftArrayToSave2} + ${sqftArrayToSave} + ${userDataAndTotalToSave}")
         val activity = activity as AppCompatActivity
         val actionBar = activity.supportActionBar
         actionBar?.hide()
@@ -188,6 +189,12 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     override fun onPause() {
         super.onPause()
+        serviceArrayToSave.clear()
+        ftArrayToSave1.clear()
+        ftArrayToSave2.clear()
+        sqftArrayToSave.clear()
+        costArrayToSave.clear()
+        userDataAndTotalToSave.clear()
         savePrefs(prefs,serviceArray as ArrayList<Any>,"Service",true)
         savePrefs(prefs,ftArray1 as ArrayList<Any>,"ft1",false)
         savePrefs(prefs,ftArray2 as ArrayList<Any>, "ft2",false)
@@ -225,6 +232,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
     {
         val editor = prefs.edit()
         editor.putInt("${name}_size",array.count())
+        Log.d("Put","${name}_size + ${array.count()}")
         if(Spinner)
         {
             val arrayToSaveSpinner = array as ArrayList<Spinner>
@@ -249,6 +257,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
     fun retrievePrefs(prefs: SharedPreferences,name: String,Spinner: Boolean) : ArrayList<Any>
     {
         val count = prefs.getInt("${name}_size",0)
+        Log.d("Prefs","${count}")
         val arrayToReturn = arrayListOf<Any>()
         if(count != 0)
         {
