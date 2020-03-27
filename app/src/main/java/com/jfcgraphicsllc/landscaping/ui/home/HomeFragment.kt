@@ -85,6 +85,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d("ReBefore","${serviceArrayToSave} + ${ftArrayToSave1} + ${ftArrayToSave2} + ${sqftArrayToSave} + ${userDataAndTotalToSave}")
         serviceArrayToSave = retrievePrefs(prefs,"Service",true)
         ftArrayToSave1 = retrievePrefs(prefs,"ft1",false)
         ftArrayToSave2 = retrievePrefs(prefs, "ft2",false)
@@ -189,12 +190,12 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     override fun onPause() {
         super.onPause()
-        serviceArrayToSave.clear()
-        ftArrayToSave1.clear()
-        ftArrayToSave2.clear()
-        sqftArrayToSave.clear()
-        costArrayToSave.clear()
-        userDataAndTotalToSave.clear()
+//        serviceArrayToSave.clear()
+//        ftArrayToSave1.clear()
+//        ftArrayToSave2.clear()
+//        sqftArrayToSave.clear()
+//        costArrayToSave.clear()
+//        userDataAndTotalToSave.clear()
         savePrefs(prefs,serviceArray as ArrayList<Any>,"Service",true)
         savePrefs(prefs,ftArray1 as ArrayList<Any>,"ft1",false)
         savePrefs(prefs,ftArray2 as ArrayList<Any>, "ft2",false)
@@ -297,7 +298,11 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
     fun processRetrievedPrefsArray(array:ArrayList<Any>, field:ArrayList<Any>, Spinner: Boolean)
     {
         Log.d("Retrieve","${array}")
-        if(array.count()!=0)
+        if(array.count()!=0 && array.count() != field.count())
+        {
+            Log.d("Wrong","Wrong")
+        }
+        if(array.count()!=0 )//&& array.count() == field.count())
         {
             if(Spinner)
             {
@@ -319,6 +324,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 }
             }
         }
+
     }
 
     fun clearAllData(array: ArrayList<Any>, Spinner: Boolean)
