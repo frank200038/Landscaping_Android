@@ -1,7 +1,9 @@
 package com.jfcgraphicsllc.landscaping
 
 import android.os.Bundle
+import android.view.View
 import android.view.WindowManager
+import android.widget.ImageView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -28,9 +30,8 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
 
+
     }
-
-
 
 
 }

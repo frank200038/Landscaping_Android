@@ -9,6 +9,15 @@
     android:background="#72E6E6E6"
     >
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="2dp"
+        android:text="@string/dollar"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/totalcost_history"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
 
     <Button
         android:id="@+id/screenshot"
@@ -17,22 +26,23 @@
         android:layout_marginBottom="96dp"
         android:background="@drawable/rounded_white"
         android:elevation="40dp"
-        android:foreground="@drawable/ic_save"
 
+        android:foreground="@drawable/ic_save"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:targetApi="m" />
 
+
     <EditText
 
         android:id="@+id/totalsqft_history"
 
-        android:layout_width="40dp"
+        android:layout_width="88dp"
         android:layout_height="40dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="87dp"
+        android:layout_marginEnd="132dp"
         android:background="@drawable/rounded_darkgray"
         android:cursorVisible="false"
         android:focusable="false"
@@ -47,11 +57,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
 
-
     <EditText
         android:id="@+id/totalcost_history"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="79dp"
+        android:layout_height="39dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="39dp"
         android:background="@drawable/rounded_darkgray"
@@ -257,15 +266,16 @@
                     android:id="@+id/service1_history"
                     android:layout_width="140dp"
                     android:layout_height="40dp"
-                    android:padding="2dp"
                     android:background="#ffffff"
-                    android:entries="@array/Services"
-                    android:hint="@string/Service"
-                    android:inputType="text"
-                    android:prompt="@string/prompt"
                     android:cursorVisible="false"
+                    android:entries="@array/Services"
                     android:focusable="false"
-                    android:importantForAutofill="no" />
+                    android:hint="@string/Service"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:padding="2dp"
+                    android:prompt="@string/prompt"
+                    android:textSize="14sp" />
 
                 <EditText
                     android:id="@+id/ft1_history"
@@ -348,15 +358,16 @@
                     android:id="@+id/service2_history"
                     android:layout_width="140dp"
                     android:layout_height="40dp"
-                    android:padding="2dp"
                     android:background="#ffffff"
-                    android:entries="@array/Services"
-                    android:hint="@string/Service"
-                    android:inputType="text"
-                    android:prompt="@string/prompt"
                     android:cursorVisible="false"
+                    android:entries="@array/Services"
                     android:focusable="false"
-                    android:importantForAutofill="no" />
+                    android:hint="@string/Service"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:padding="2dp"
+                    android:prompt="@string/prompt"
+                    android:textSize="14sp" />
 
                 <EditText
                     android:id="@+id/ft12_history"
@@ -437,15 +448,16 @@
                     android:id="@+id/service3_history"
                     android:layout_width="140dp"
                     android:layout_height="40dp"
-                    android:padding="2dp"
                     android:background="#ffffff"
-                    android:entries="@array/Services"
-                    android:hint="@string/Service"
-                    android:inputType="text"
-                    android:prompt="@string/prompt"
                     android:cursorVisible="false"
+                    android:entries="@array/Services"
                     android:focusable="false"
-                    android:importantForAutofill="no" />
+                    android:hint="@string/Service"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:padding="2dp"
+                    android:prompt="@string/prompt"
+                    android:textSize="14sp" />
 
                 <EditText
                     android:id="@+id/ft13_history"
@@ -527,15 +539,16 @@
                     android:id="@+id/service4_history"
                     android:layout_width="140dp"
                     android:layout_height="40dp"
-                    android:padding="2dp"
                     android:background="#ffffff"
-                    android:entries="@array/Services"
-                    android:hint="@string/Service"
-                    android:inputType="text"
-                    android:prompt="@string/prompt"
                     android:cursorVisible="false"
+                    android:entries="@array/Services"
                     android:focusable="false"
-                    android:importantForAutofill="no" />
+                    android:hint="@string/Service"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:padding="2dp"
+                    android:prompt="@string/prompt"
+                    android:textSize="14sp" />
 
                 <EditText
                     android:id="@+id/ft14_history"
@@ -617,15 +630,16 @@
                     android:id="@+id/service5_history"
                     android:layout_width="140dp"
                     android:layout_height="40dp"
-                    android:padding="2dp"
                     android:background="#ffffff"
+                    android:cursorVisible="false"
                     android:entries="@array/Services"
+                    android:focusable="false"
                     android:hint="@string/Service"
                     android:inputType="text"
+                    android:padding="2dp"
                     android:prompt="@string/prompt"
-                    android:cursorVisible="false"
-                    android:focusable="false"
-                    android:importantForAutofill="no" />
+                    android:importantForAutofill="no"
+                    android:textSize="14sp" />
 
                 <EditText
                     android:id="@+id/ft15_history"
