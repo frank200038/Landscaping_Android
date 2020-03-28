@@ -145,6 +145,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         processRetrievedPrefsArray(ftArrayToSave1,ftArray1 as ArrayList<Any>,false)
         processRetrievedPrefsArray(ftArrayToSave2,ftArray2 as ArrayList<Any>,false)
         processRetrievedPrefsArray(sqftArrayToSave,sqftArray as ArrayList<Any>,false)
+        processRetrievedPrefsArray(costArrayToSave,costArray as ArrayList<Any>, false)
         name.setText(userDataAndTotalToSave[0])
         phone.setText(userDataAndTotalToSave[1])
         sqftTotal.setText(userDataAndTotalToSave[2])
