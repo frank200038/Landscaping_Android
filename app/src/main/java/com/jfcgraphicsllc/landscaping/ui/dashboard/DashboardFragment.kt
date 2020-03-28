@@ -1,6 +1,7 @@
 package com.jfcgraphicsllc.landscaping.ui.dashboard
 
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -54,7 +55,6 @@ class DashboardFragment : ListFragment() {
         super.onViewCreated(relativeLayout, savedInstanceState)
 
         Log.d("Count","${values.count()}")
-
             if(values.count() == 0)
             {
                 Log.d("Empty","Empty")
@@ -80,6 +80,9 @@ class DashboardFragment : ListFragment() {
         super.onListItemClick(l, v, position, id)
         var adapter = l.adapter as EstimationArrayAdapter
         var item = adapter.getValueAtIndex(position)
+        val intent = Intent(activity,DisplayHistoryActivity::class.java)
+        intent.putExtra("historyData",item)
+        view!!.context!!.startActivity(intent)
         Log.d("Selected","Select ${item}")
     }
 

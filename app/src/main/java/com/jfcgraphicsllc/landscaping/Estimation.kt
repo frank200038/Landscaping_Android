@@ -1,10 +1,11 @@
 package com.jfcgraphicsllc.landscaping
 
 import androidx.room.*
+import java.io.Serializable
 
 
 @Entity(tableName = "estimation_table")
-data class Estimation(
+data class Estimation (
 
     @PrimaryKey(autoGenerate = true)  var id:Int = 0,
     @ColumnInfo(name = "name")  var name: String = "",
@@ -16,7 +17,7 @@ data class Estimation(
     @ColumnInfo(name = "cost")  var cost: ArrayList<String> = arrayListOf(),
     @ColumnInfo(name = "sqftTotal")  var sqftTotal: String = "",
     @ColumnInfo(name = "costTotal")  var costTotal: String = ""
-)
+): Serializable
 {
    constructor() : this(0,"","",ArrayList<String>(5),ArrayList<String>(5),ArrayList<String>(5),ArrayList<String>(5),ArrayList<String>(5),"","")
 

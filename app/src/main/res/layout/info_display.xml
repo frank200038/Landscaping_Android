@@ -106,8 +106,9 @@
         android:background="@drawable/rounded_gray"
         android:gravity="center_horizontal|center_vertical"
         android:hint="@string/name"
+        android:cursorVisible="false"
+        android:focusable="false"
         android:importantForAutofill="no"
-        android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
@@ -121,6 +122,8 @@
         android:layout_below="@id/relativeLayout"
         android:layout_marginTop="120dp"
         android:autofillHints=""
+        android:cursorVisible="false"
+        android:focusable="false"
         android:background="@drawable/rounded_gray"
         android:gravity="center_vertical|center_horizontal"
         android:hint="@string/phone"
@@ -251,6 +254,7 @@
                 android:paddingBottom="6dp">
 
                 <EditText
+                    android:id="@+id/service1_history"
                     android:layout_width="140dp"
                     android:layout_height="40dp"
                     android:padding="2dp"
@@ -259,6 +263,8 @@
                     android:hint="@string/Service"
                     android:inputType="text"
                     android:prompt="@string/prompt"
+                    android:cursorVisible="false"
+                    android:focusable="false"
                     android:importantForAutofill="no" />
 
                 <EditText
@@ -271,7 +277,10 @@
                     android:gravity="center_horizontal|center_vertical"
                     android:hint="@string/ft0"
                     android:inputType="numberDecimal"
+
                     android:textSize="14sp"
+                    android:cursorVisible="false"
+                    android:focusable="false"
                     android:textStyle="bold" />
 
                 <EditText
@@ -282,6 +291,8 @@
                     android:background="@drawable/rounded_darkgray"
                     android:gravity="center_horizontal|center_vertical"
                     android:hint="@string/ft0"
+                    android:cursorVisible="false"
+                    android:focusable="false"
                     android:importantForAutofill="no"
                     android:inputType="numberDecimal"
                     android:textSize="14sp"
@@ -343,6 +354,8 @@
                     android:hint="@string/Service"
                     android:inputType="text"
                     android:prompt="@string/prompt"
+                    android:cursorVisible="false"
+                    android:focusable="false"
                     android:importantForAutofill="no" />
 
                 <EditText
@@ -356,6 +369,8 @@
                     android:hint="@string/ft0"
                     android:inputType="numberDecimal"
                     android:textSize="14sp"
+                    android:cursorVisible="false"
+                    android:focusable="false"
                     android:textStyle="bold" />
 
                 <EditText
@@ -367,6 +382,8 @@
                     android:background="@drawable/rounded_darkgray"
                     android:gravity="center_horizontal|center_vertical"
                     android:hint="@string/ft0"
+                    android:cursorVisible="false"
+                    android:focusable="false"
                     android:inputType="numberDecimal"
                     android:textSize="14sp"
                     android:textStyle="bold" />
@@ -426,6 +443,8 @@
                     android:hint="@string/Service"
                     android:inputType="text"
                     android:prompt="@string/prompt"
+                    android:cursorVisible="false"
+                    android:focusable="false"
                     android:importantForAutofill="no" />
 
                 <EditText
@@ -436,6 +455,8 @@
                     android:background="@drawable/rounded_darkgray"
                     android:gravity="center_horizontal|center_vertical"
                     android:hint="@string/ft0"
+                    android:cursorVisible="false"
+                    android:focusable="false"
                     android:importantForAutofill="no"
                     android:inputType="numberDecimal"
                     android:textSize="14sp"
@@ -451,6 +472,8 @@
                     android:hint="@string/ft0"
                     android:importantForAutofill="no"
                     android:inputType="numberDecimal"
+                    android:cursorVisible="false"
+                    android:focusable="false"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
@@ -510,6 +533,8 @@
                     android:hint="@string/Service"
                     android:inputType="text"
                     android:prompt="@string/prompt"
+                    android:cursorVisible="false"
+                    android:focusable="false"
                     android:importantForAutofill="no" />
 
                 <EditText
@@ -535,6 +560,8 @@
                     android:hint="@string/ft0"
                     android:importantForAutofill="no"
                     android:inputType="numberDecimal"
+                    android:cursorVisible="false"
+                    android:focusable="false"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
@@ -596,10 +623,12 @@
                     android:hint="@string/Service"
                     android:inputType="text"
                     android:prompt="@string/prompt"
+                    android:cursorVisible="false"
+                    android:focusable="false"
                     android:importantForAutofill="no" />
 
                 <EditText
-                    android:id="@+id/ft15_history_history"
+                    android:id="@+id/ft15_history"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginStart="8dp"
@@ -621,6 +650,8 @@
                     android:hint="@string/ft0"
                     android:importantForAutofill="no"
                     android:inputType="numberDecimal"
+                    android:cursorVisible="false"
+                    android:focusable="false"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
