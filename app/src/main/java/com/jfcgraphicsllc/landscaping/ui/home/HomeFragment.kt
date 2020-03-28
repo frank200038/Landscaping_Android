@@ -2,6 +2,7 @@ package com.jfcgraphicsllc.landscaping.ui.home
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.graphics.drawable.AnimatedVectorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat
 import com.jfcgraphicsllc.landscaping.Estimation
 import com.jfcgraphicsllc.landscaping.EstimationViewModel
 
@@ -55,6 +57,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private lateinit var sqftTotal : EditText
     private lateinit var clear : Button
     private lateinit var calculate : Button
+    private lateinit var tryButton : ImageView
     private var serviceArray:ArrayList<Spinner> = arrayListOf()
     private var ftArray1 : ArrayList<EditText> = arrayListOf()
     private var ftArray2 : ArrayList<EditText> = arrayListOf()
@@ -134,6 +137,11 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         sqftTotal = view.totalsqft as EditText
         clear = view.clear as Button
         calculate = view.calculate as Button
+//        tryButton = view.trybutton as ImageView
+//        tryButton.setOnClickListener{
+//            animate(it)
+//            calculate()
+//        }
         estimationViewModel = ViewModelProvider(this).get(EstimationViewModel::class.java)
         val save = view.save as Button
         save.setOnClickListener {
@@ -183,6 +191,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
             costTotal.setText("")
         }
         calculate.setOnClickListener {
+
             calculate()
             it.hideKeyboard()
         }
@@ -460,6 +469,21 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         }
         return array
     }
+
+    fun animate(view: View)
+    {
+        val v = view as ImageView
+        val d = v.drawable
+        if (d is AnimatedVectorDrawableCompat)
+        {
+            d.start()
+        }
+        else if(d is AnimatedVectorDrawable)
+        {
+            d.start()
+        }
+    }
+
 
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
