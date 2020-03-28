@@ -9,7 +9,21 @@ import android.content.Intent
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import android.app.Activity
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.os.Environment
+import android.provider.MediaStore
+import android.view.View
+import androidx.constraintlayout.widget.ConstraintLayout
 import kotlinx.android.synthetic.main.fragment_home.view.*
+import java.io.File
+import java.io.FileOutputStream
+import java.lang.Exception
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.util.*
+import kotlin.collections.ArrayList
+
 
 class DisplayHistoryActivity : AppCompatActivity() {
     private lateinit var service1 : EditText
@@ -41,8 +55,7 @@ class DisplayHistoryActivity : AppCompatActivity() {
     private lateinit var phone : EditText
     private lateinit var costTotal : EditText
     private lateinit var sqftTotal : EditText
-    private lateinit var clear : Button
-    private lateinit var calculate : Button
+    private lateinit var screenShot : Button
     private var serviceArray:ArrayList<EditText> = arrayListOf()
     private var ftArray1 : ArrayList<EditText> = arrayListOf()
     private var ftArray2 : ArrayList<EditText> = arrayListOf()
@@ -88,11 +101,14 @@ class DisplayHistoryActivity : AppCompatActivity() {
         cost_4 = findViewById(R.id.cost5_history)
         costTotal = findViewById(R.id.totalcost_history)
         sqftTotal = findViewById(R.id.totalsqft_history)
+        screenShot = findViewById(R.id.screenshot)
+        val layOut = findViewById<ConstraintLayout>(R.id.constraints)
         addAllArrays()
         processRetrievedData(serviceArray, "service",estimation)
         processRetrievedData(ftArray1 ,"ft1",estimation)
         processRetrievedData(ftArray2 ,"ft2",estimation)
         processRetrievedData(sqftArray,"sqft",estimation)
+         processRetrievedData(costArray,"cost",estimation)
         if(estimation != null)
         {
             name.setText(estimation.name)
@@ -139,8 +155,22 @@ class DisplayHistoryActivity : AppCompatActivity() {
                     "ft1" -> for(i in 0..array.count()-1){array[i].setText(estimation.ft1[i])}
                     "ft2" -> for(i in 0..array.count()-1){array[i].setText(estimation.ft2[i])}
                     "sqft" -> for(i in 0..array.count()-1){array[i].setText(estimation.sqft[i])}
+                    "cost" -> for(i in 0..array.count()-1){array[i].setText(estimation.cost[i])}
                 }
             }
         }
+    }
+
+    fun takeScreenShot(view: View):Bitmap
+    {
+        val returnedBitmap = Bitmap.createBitmap(view.width,view.height,Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(returnedBitmap)
+        val bgDrawable = view.background
+        if (bgDrawable != null)
+        {
+            bgDrawable.draw(canvas)
+        }
+        view.draw(canvas)
+        return returnedBitmap
     }
 }
