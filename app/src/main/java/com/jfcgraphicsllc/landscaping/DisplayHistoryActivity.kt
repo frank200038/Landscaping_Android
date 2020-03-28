@@ -120,15 +120,15 @@ class DisplayHistoryActivity : AppCompatActivity() {
 
     fun addAllArrays()
     {
-        val serviceToAdd = listOf<EditText>(service1,service2,service3,service4,service5)
+        val serviceToAdd = listOf(service1,service2,service3,service4,service5)
         serviceArray.addAll(serviceToAdd)
-        val ftToAdd1 = listOf<EditText>(ft_1_0,ft_1_1,ft_1_2,ft_1_3,ft_1_4)
+        val ftToAdd1 = listOf(ft_1_0,ft_1_1,ft_1_2,ft_1_3,ft_1_4)
         ftArray1.addAll(ftToAdd1)
-        val ftToAdd2 = listOf<EditText>(ft_2_0,ft_2_1,ft_2_2,ft_2_3,ft_2_4)
+        val ftToAdd2 = listOf(ft_2_0,ft_2_1,ft_2_2,ft_2_3,ft_2_4)
         ftArray2.addAll(ftToAdd2)
-        val sqftToAdd = listOf<EditText>(sqft_0,sqft_1,sqft_2,sqft_3,sqft_4)
+        val sqftToAdd = listOf(sqft_0,sqft_1,sqft_2,sqft_3,sqft_4)
         sqftArray.addAll(sqftToAdd)
-        val costToAdd = listOf<EditText>(cost_0,cost_1,cost_2,cost_3,cost_4)
+        val costToAdd = listOf(cost_0,cost_1,cost_2,cost_3,cost_4)
         costArray.addAll(costToAdd)
     }
 

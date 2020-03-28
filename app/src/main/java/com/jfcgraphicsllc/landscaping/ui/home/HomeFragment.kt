@@ -190,12 +190,12 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     override fun onPause() {
         super.onPause()
-//        serviceArrayToSave.clear()
-//        ftArrayToSave1.clear()
-//        ftArrayToSave2.clear()
-//        sqftArrayToSave.clear()
-//        costArrayToSave.clear()
-//        userDataAndTotalToSave.clear()
+        serviceArrayToSave.clear()
+        ftArrayToSave1.clear()
+        ftArrayToSave2.clear()
+        sqftArrayToSave.clear()
+        costArrayToSave.clear()
+        userDataAndTotalToSave.clear()
         Log.e("ONPAUSE","---------------------------------------------------------------------")
         savePrefs(prefs,serviceArray as ArrayList<Any>,"Service",true)
         savePrefs(prefs,ftArray1 as ArrayList<Any>,"ft1",false)
