@@ -1,18 +1,17 @@
 package com.jfcgraphicsllc.landscaping
 
-import android.graphics.drawable.AnimatedVectorDrawable
+
 import android.os.Bundle
-import android.view.View
 import android.view.WindowManager
-import android.widget.ImageView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat
+
 import kotlinx.coroutines.InternalCoroutinesApi
+
 
 class MainActivity : AppCompatActivity() {
     @InternalCoroutinesApi

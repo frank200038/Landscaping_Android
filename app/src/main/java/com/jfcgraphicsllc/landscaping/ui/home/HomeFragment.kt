@@ -1,5 +1,6 @@
 package com.jfcgraphicsllc.landscaping.ui.home
 
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import android.content.Context
 import android.content.SharedPreferences
 import android.graphics.drawable.AnimatedVectorDrawable
@@ -16,7 +17,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat
 import com.jfcgraphicsllc.landscaping.Estimation
 import com.jfcgraphicsllc.landscaping.EstimationViewModel
-
 import com.jfcgraphicsllc.landscaping.R
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import kotlinx.coroutines.InternalCoroutinesApi
@@ -57,7 +57,6 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private lateinit var sqftTotal : EditText
     private lateinit var clear : Button
     private lateinit var calculate : Button
-    private lateinit var tryButton : ImageView
     private var serviceArray:ArrayList<Spinner> = arrayListOf()
     private var ftArray1 : ArrayList<EditText> = arrayListOf()
     private var ftArray2 : ArrayList<EditText> = arrayListOf()
@@ -70,6 +69,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private lateinit var sqftArrayToSave : ArrayList<Any>
     private lateinit var costArrayToSave : ArrayList<Any>
     private var userDataAndTotalToSave : ArrayList<String> = arrayListOf()
+    private val Crashlytics = FirebaseCrashlytics.getInstance()
     @InternalCoroutinesApi
     private lateinit var estimationViewModel : EstimationViewModel
     override fun onAttach(context: Context) {
@@ -89,6 +89,13 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.e("Start","------------------------------------------------------------------------")
+        Crashlytics.log("Start ------------------------------------------------------------------------")
+        if(Crashlytics.didCrashOnPreviousExecution())
+        {
+            val editor = prefs.edit()
+            editor.clear()
+            editor.apply()
+        }
         serviceArrayToSave = retrievePrefs(prefs,"Service",true)
         ftArrayToSave1 = retrievePrefs(prefs,"ft1",false)
         ftArrayToSave2 = retrievePrefs(prefs, "ft2",false)
@@ -99,6 +106,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         userDataAndTotalToSave.add(retrieveUserDataAndTotal(prefs,"costTotal"))
         userDataAndTotalToSave.add(retrieveUserDataAndTotal(prefs,"sqftTotal"))
         Log.e("OnCreate","${serviceArrayToSave} + ${ftArrayToSave1} + ${ftArrayToSave2} + ${sqftArrayToSave} + ${userDataAndTotalToSave}")
+        Crashlytics.log("OnCreate ${serviceArrayToSave} + ${ftArrayToSave1} + ${ftArrayToSave2} + ${sqftArrayToSave} + ${userDataAndTotalToSave}")
         val activity = activity as AppCompatActivity
         val actionBar = activity.supportActionBar
         actionBar?.hide()
@@ -137,11 +145,6 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         sqftTotal = view.totalsqft as EditText
         clear = view.clear as Button
         calculate = view.calculate as Button
-//        tryButton = view.trybutton as ImageView
-//        tryButton.setOnClickListener{
-//            animate(it)
-//            calculate()
-//        }
         estimationViewModel = ViewModelProvider(this).get(EstimationViewModel::class.java)
         val save = view.save as Button
         save.setOnClickListener {
@@ -149,6 +152,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         }
         addAllArrays()
         Log.e("OnViewCreated","${serviceArrayToSave} + ${ftArrayToSave1} + ${ftArrayToSave2} + ${sqftArrayToSave} + ${userDataAndTotalToSave} + ")
+        Crashlytics.log("OnViewCreated, ${serviceArrayToSave} + ${ftArrayToSave1} + ${ftArrayToSave2} + ${sqftArrayToSave} + ${userDataAndTotalToSave}")
         processRetrievedPrefsArray(serviceArrayToSave,serviceArray as ArrayList<Any>,true)
         processRetrievedPrefsArray(ftArrayToSave1,ftArray1 as ArrayList<Any>,false)
         processRetrievedPrefsArray(ftArrayToSave2,ftArray2 as ArrayList<Any>,false)
@@ -158,7 +162,6 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         phone.setText(userDataAndTotalToSave[1])
         sqftTotal.setText(userDataAndTotalToSave[2])
         costTotal.setText(userDataAndTotalToSave[3])
-        //setSpinnerListener()
         phone.setOnFocusChangeListener { v, hasFocus ->
             if(!hasFocus)
             {
@@ -207,6 +210,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         costArrayToSave.clear()
         userDataAndTotalToSave.clear()
         Log.e("ONPAUSE","---------------------------------------------------------------------")
+        Crashlytics.log("ONPAUSE ------------------------------------------------------------------")
         savePrefs(prefs,serviceArray as ArrayList<Any>,"Service",true)
         savePrefs(prefs,ftArray1 as ArrayList<Any>,"ft1",false)
         savePrefs(prefs,ftArray2 as ArrayList<Any>, "ft2",false)
@@ -219,6 +223,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         editor.putString("phone",phone.text.toString())
         editor.commit()
         Log.e("End","----------------------------------------------------------------------")
+        Crashlytics.log("END ------------------------------------------------------------------")
     }
 
     fun View.hideKeyboard()
@@ -246,6 +251,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         val editor = prefs.edit()
         editor.putInt("${name}_size",array.count())
         Log.e("SavePrefs","${name}_size + ${array.count()}")
+        Crashlytics.log("SavePrefs ${name}_size + ${array.count()}")
         if(Spinner)
         {
             val arrayToSaveSpinner = array as ArrayList<Spinner>
@@ -271,6 +277,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
     {
         val count = prefs.getInt("${name}_size",0)
         Log.e("RetrievePrefs","${count}")
+        Crashlytics.log("RetrievePrefs ${count}")
         val arrayToReturn = arrayListOf<Any>()
         if(count != 0)
         {
@@ -310,6 +317,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
     fun processRetrievedPrefsArray(array:ArrayList<Any>, field:ArrayList<Any>, Spinner: Boolean)
     {
         Log.e("processRetrievedPrefs1","${array}")
+        Crashlytics.log("processRetrievedPrefs1 ${array}")
         if(array.count()!=0 && array.count() != field.count())
         {
             Log.e("Wrong","Wrong")
@@ -323,6 +331,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                     val field = field as ArrayList<Spinner>
                     val array =  array as ArrayList<Int>
                     Log.e("processRetrievedPrefs2","${array.count()}+${i} + ${field} + ${array} + ${field[i]} + ${array[i]}")
+                    Crashlytics.log("processRetrievedPrefs2 ${array.count()}+${i} + ${field} + ${array} + ${field[i]} + ${array[i]}")
                     field[i].setSelection(array[i])
                 }
             }

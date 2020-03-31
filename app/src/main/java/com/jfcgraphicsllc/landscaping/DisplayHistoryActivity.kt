@@ -101,8 +101,7 @@ class DisplayHistoryActivity : AppCompatActivity() {
         cost_4 = findViewById(R.id.cost5_history)
         costTotal = findViewById(R.id.totalcost_history)
         sqftTotal = findViewById(R.id.totalsqft_history)
-        screenShot = findViewById(R.id.screenshot)
-        val layOut = findViewById<ConstraintLayout>(R.id.constraints)
+
         addAllArrays()
         processRetrievedData(serviceArray, "service",estimation)
         processRetrievedData(ftArray1 ,"ft1",estimation)
