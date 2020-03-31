@@ -12,6 +12,7 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.ListFragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.google.firebase.analytics.FirebaseAnalytics
 
 import com.jfcgraphicsllc.landscaping.*
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -25,7 +26,7 @@ class DashboardFragment : ListFragment() {
     private lateinit var adapter: EstimationArrayAdapter
     @InternalCoroutinesApi
     private lateinit var estimationViewModel : EstimationViewModel
-
+    private lateinit var analytics: FirebaseAnalytics
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.jfcgraphicsllc.landscaping.Estimation
 import com.jfcgraphicsllc.landscaping.EstimationViewModel
 import com.jfcgraphicsllc.landscaping.R
@@ -70,6 +71,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private lateinit var costArrayToSave : ArrayList<Any>
     private var userDataAndTotalToSave : ArrayList<String> = arrayListOf()
     private val Crashlytics = FirebaseCrashlytics.getInstance()
+    private lateinit var analytics: FirebaseAnalytics
     @InternalCoroutinesApi
     private lateinit var estimationViewModel : EstimationViewModel
     override fun onAttach(context: Context) {
@@ -110,6 +112,8 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         val activity = activity as AppCompatActivity
         val actionBar = activity.supportActionBar
         actionBar?.hide()
+
+
     }
     @InternalCoroutinesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

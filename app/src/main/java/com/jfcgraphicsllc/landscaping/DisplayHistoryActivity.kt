@@ -15,6 +15,7 @@ import android.os.Environment
 import android.provider.MediaStore
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.google.firebase.analytics.FirebaseAnalytics
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import java.io.File
 import java.io.FileOutputStream
@@ -61,7 +62,7 @@ class DisplayHistoryActivity : AppCompatActivity() {
     private var ftArray2 : ArrayList<EditText> = arrayListOf()
     private var sqftArray : ArrayList<EditText> = arrayListOf()
     private var costArray : ArrayList<EditText> = arrayListOf()
-
+    private lateinit var analytics:FirebaseAnalytics
 
      override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -115,6 +116,8 @@ class DisplayHistoryActivity : AppCompatActivity() {
             sqftTotal.setText(estimation.sqftTotal)
             costTotal.setText(estimation.costTotal)
         }
+         analytics = FirebaseAnalytics.getInstance(this)
+         analytics.setCurrentScreen(this,"DisplayHistory",null)
     }
 
     fun addAllArrays()
