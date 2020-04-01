@@ -69,7 +69,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private lateinit var ftArrayToSave2 : ArrayList<Any>
     private lateinit var sqftArrayToSave : ArrayList<Any>
     private lateinit var costArrayToSave : ArrayList<Any>
-    private var userDataAndTotalToSave : ArrayList<String> = arrayListOf()
+    private var userDataAndTotalToSave : ArrayList<String> = ArrayList(4)
     private val Crashlytics = FirebaseCrashlytics.getInstance()
     private lateinit var analytics: FirebaseAnalytics
     @InternalCoroutinesApi
