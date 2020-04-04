@@ -1,6 +1,6 @@
 package com.jfcgraphicsllc.landscaping.ui.home
 
-import com.google.firebase.crashlytics.FirebaseCrashlytics
+//import com.google.firebase.crashlytics.FirebaseCrashlytics
 import android.content.Context
 import android.content.SharedPreferences
 import android.graphics.drawable.AnimatedVectorDrawable
@@ -15,63 +15,40 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat
-import com.google.firebase.analytics.FirebaseAnalytics
+//import com.google.firebase.analytics.FirebaseAnalytics
 import com.jfcgraphicsllc.landscaping.Estimation
 import com.jfcgraphicsllc.landscaping.EstimationViewModel
 import com.jfcgraphicsllc.landscaping.R
+import com.jfcgraphicsllc.landscaping.databinding.FragmentHomeBinding
+import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
+import kotlinx.android.synthetic.main.fragment_home.view.clear
+import kotlinx.android.synthetic.main.fragment_home.view.phone
 import kotlinx.coroutines.InternalCoroutinesApi
+import java.text.DecimalFormat
 
 import kotlin.math.round
 
-class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
+class HomeFragment : Fragment() {
 
-    private lateinit var homeViewModel: HomeViewModel
-    private lateinit var service1 : Spinner
-    private lateinit var service2 : Spinner
-    private lateinit var service3 : Spinner
-    private lateinit var service4 : Spinner
-    private lateinit var service5 : Spinner
-    private lateinit var ft_1_0: EditText
-    private lateinit var ft_1_1: EditText
-    private lateinit var ft_1_2: EditText
-    private lateinit var ft_1_3: EditText
-    private lateinit var ft_1_4: EditText
-    private lateinit var ft_2_0: EditText
-    private lateinit var ft_2_1: EditText
-    private lateinit var ft_2_2: EditText
-    private lateinit var ft_2_3: EditText
-    private lateinit var ft_2_4: EditText
-    private lateinit var sqft_0: EditText
-    private lateinit var sqft_1: EditText
-    private lateinit var sqft_2: EditText
-    private lateinit var sqft_3: EditText
-    private lateinit var sqft_4: EditText
-    private lateinit var cost_0: EditText
-    private lateinit var cost_1: EditText
-    private lateinit var cost_2: EditText
-    private lateinit var cost_3: EditText
-    private lateinit var cost_4: EditText
-    private lateinit var name : EditText
-    private lateinit var phone : EditText
-    private lateinit var costTotal : EditText
-    private lateinit var sqftTotal : EditText
-    private lateinit var clear : Button
-    private lateinit var calculate : Button
+    private var _binding : FragmentHomeBinding? = null
+    private val binding get() = _binding!!
     private var serviceArray:ArrayList<Spinner> = arrayListOf()
     private var ftArray1 : ArrayList<EditText> = arrayListOf()
     private var ftArray2 : ArrayList<EditText> = arrayListOf()
     private var sqftArray : ArrayList<EditText> = arrayListOf()
     private var costArray : ArrayList<EditText> = arrayListOf()
+    private var userDataAndTotalArray : ArrayList<EditText> = arrayListOf()
     private lateinit var prefs : SharedPreferences
-    private lateinit var serviceArrayToSave : ArrayList<Any>
-    private lateinit var ftArrayToSave1 : ArrayList<Any>
-    private lateinit var ftArrayToSave2 : ArrayList<Any>
-    private lateinit var sqftArrayToSave : ArrayList<Any>
-    private lateinit var costArrayToSave : ArrayList<Any>
-    private var userDataAndTotalToSave : ArrayList<String> = ArrayList(4)
-    private val Crashlytics = FirebaseCrashlytics.getInstance()
-    private lateinit var analytics: FirebaseAnalytics
+    private  var serviceArrayToSave : ArrayList<Any> = arrayListOf()
+    private  var ftArrayToSave1 : ArrayList<Any> = arrayListOf()
+    private  var ftArrayToSave2 : ArrayList<Any> = arrayListOf()
+    private  var sqftArrayToSave : ArrayList<Any> = arrayListOf()
+    private  var costArrayToSave : ArrayList<Any> = arrayListOf()
+    private var userDataAndTotalToSave : ArrayList<Any> = arrayListOf()
+    private val name = arrayListOf("Service","ft1","ft2","sqft","cost","userData")
+    //private val Crashlytics = FirebaseCrashlytics.getInstance()
+   // private lateinit var analytics: FirebaseAnalytics
     @InternalCoroutinesApi
     private lateinit var estimationViewModel : EstimationViewModel
     override fun onAttach(context: Context) {
@@ -83,32 +60,21 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.fragment_home, container, false)
-
+        _binding = FragmentHomeBinding.inflate(inflater,container,false)
+        val root = binding.root
         return root
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.e("Start","------------------------------------------------------------------------")
-        Crashlytics.log("Start ------------------------------------------------------------------------")
-        if(Crashlytics.didCrashOnPreviousExecution())
-        {
-            val editor = prefs.edit()
-            editor.clear()
-            editor.apply()
-        }
-        serviceArrayToSave = retrievePrefs(prefs,"Service",true)
-        ftArrayToSave1 = retrievePrefs(prefs,"ft1",false)
-        ftArrayToSave2 = retrievePrefs(prefs, "ft2",false)
-        sqftArrayToSave = retrievePrefs(prefs,"sqft",false)
-        costArrayToSave = retrievePrefs(prefs,"cost",false)
-        userDataAndTotalToSave.add(retrieveUserDataAndTotal(prefs,"name"))
-        userDataAndTotalToSave.add(retrieveUserDataAndTotal(prefs,"phone"))
-        userDataAndTotalToSave.add(retrieveUserDataAndTotal(prefs,"costTotal"))
-        userDataAndTotalToSave.add(retrieveUserDataAndTotal(prefs,"sqftTotal"))
+//        if(Crashlytics.didCrashOnPreviousExecution())
+//        {
+//            val editor = prefs.edit()
+//            editor.clear()
+//            editor.apply()
+//        }
+        retrievePrefs(prefs,name,serviceArrayToSave,ftArrayToSave1,ftArrayToSave2,sqftArrayToSave,costArrayToSave,userDataAndTotalToSave)
         Log.e("OnCreate","${serviceArrayToSave} + ${ftArrayToSave1} + ${ftArrayToSave2} + ${sqftArrayToSave} + ${userDataAndTotalToSave}")
-        Crashlytics.log("OnCreate ${serviceArrayToSave} + ${ftArrayToSave1} + ${ftArrayToSave2} + ${sqftArrayToSave} + ${userDataAndTotalToSave}")
         val activity = activity as AppCompatActivity
         val actionBar = activity.supportActionBar
         actionBar?.hide()
@@ -118,87 +84,38 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
     @InternalCoroutinesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        name = view.name as EditText
-        phone = view.phone as EditText
-        service1 = view.service1 as Spinner
-        service2 = view.service2 as Spinner
-        service3 = view.service3 as Spinner
-        service4 = view.service4 as Spinner
-        service5 = view.service5 as Spinner
-        ft_1_0 = view.ft1 as EditText
-        ft_1_1 = view.ft12 as EditText
-        ft_1_2 = view.ft13 as EditText
-        ft_1_3 = view.ft14 as EditText
-        ft_1_4 = view.ft15 as EditText
-        ft_2_0 = view.ft2 as EditText
-        ft_2_1 = view.ft22 as EditText
-        ft_2_2 = view.ft23 as EditText
-        ft_2_3 = view.ft24 as EditText
-        ft_2_4 = view.ft25 as EditText
-        sqft_0 = view.sqft1 as EditText
-        sqft_1 = view.sqft2 as EditText
-        sqft_2 = view.sqft3 as EditText
-        sqft_3 = view.sqft4 as EditText
-        sqft_4 = view.sqft5 as EditText
-        cost_0 = view.cost1 as EditText
-        cost_1 = view.cost2 as EditText
-        cost_2 = view.cost3 as EditText
-        cost_3 = view.cost4 as EditText
-        cost_4 = view.cost5 as EditText
-        costTotal = view.totalcost as EditText
-        sqftTotal = view.totalsqft as EditText
-        clear = view.clear as Button
-        calculate = view.calculate as Button
-        estimationViewModel = ViewModelProvider(this).get(EstimationViewModel::class.java)
-        val save = view.save as Button
-        save.setOnClickListener {
-                processSave()
-        }
         addAllArrays()
+        estimationViewModel = ViewModelProvider(this).get(EstimationViewModel::class.java)
+        binding.save.setOnClickListener {
+            processSave()
+            clearAllData()
+        }
         Log.e("OnViewCreated","${serviceArrayToSave} + ${ftArrayToSave1} + ${ftArrayToSave2} + ${sqftArrayToSave} + ${userDataAndTotalToSave} + ")
-        Crashlytics.log("OnViewCreated, ${serviceArrayToSave} + ${ftArrayToSave1} + ${ftArrayToSave2} + ${sqftArrayToSave} + ${userDataAndTotalToSave}")
-        processRetrievedPrefsArray(serviceArrayToSave,serviceArray as ArrayList<Any>,true)
-        processRetrievedPrefsArray(ftArrayToSave1,ftArray1 as ArrayList<Any>,false)
-        processRetrievedPrefsArray(ftArrayToSave2,ftArray2 as ArrayList<Any>,false)
-        processRetrievedPrefsArray(sqftArrayToSave,sqftArray as ArrayList<Any>,false)
-        processRetrievedPrefsArray(costArrayToSave,costArray as ArrayList<Any>, false)
-        name.setText(userDataAndTotalToSave[0])
-        phone.setText(userDataAndTotalToSave[1])
-        sqftTotal.setText(userDataAndTotalToSave[2])
-        costTotal.setText(userDataAndTotalToSave[3])
-        phone.setOnFocusChangeListener { v, hasFocus ->
+        processRetrievedPrefsArray(serviceArrayToSave,ftArrayToSave1,ftArrayToSave2,sqftArrayToSave,costArrayToSave,userDataAndTotalToSave)
+        binding.phone.setOnFocusChangeListener { v, hasFocus ->
             if(!hasFocus)
             {
-                if(phone.text.toString().count() == 10)
+                if(binding.phone.text.toString().count() == 10)
                 {
-                    phone.setText(processStringAfterEditing(phone.text.toString()))
+                    binding.phone.setText(processStringAfterEditing(binding.phone.text.toString()))
                 }
             }
             else
             {
-                if(phone.text.toString().contains("(") && phone.text.toString().contains(")")&&phone.text.toString().contains("-"))
+                if(binding.phone.text.toString().contains("(") && binding.phone.text.toString().contains(")")&&binding.phone.text.toString().contains("-"))
                 {
-                    phone.setText(processStringBeforeEditing(phone.text.toString()))
+                    binding.phone.setText(processStringBeforeEditing(binding.phone.text.toString()))
                 }
             }
         }
         view.setOnClickListener {
             it.hideKeyboard()
         }
-        clear.setOnClickListener {
+        binding.clear.setOnClickListener {
             it.hideKeyboard()
-            clearAllData(serviceArray as ArrayList<Any>,true)
-            clearAllData(ftArray1 as ArrayList<Any>,false)
-            clearAllData(ftArray2 as ArrayList<Any>,false)
-            clearAllData(sqftArray as ArrayList<Any>,false)
-            clearAllData(costArray as ArrayList<Any>,false)
-            name.setText("")
-            phone.setText("")
-            sqftTotal.setText("")
-            costTotal.setText("")
+            clearAllData()
         }
-        calculate.setOnClickListener {
-
+        binding.calculate.setOnClickListener {
             calculate()
             it.hideKeyboard()
         }
@@ -207,27 +124,11 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     override fun onPause() {
         super.onPause()
-        serviceArrayToSave.clear()
-        ftArrayToSave1.clear()
-        ftArrayToSave2.clear()
-        sqftArrayToSave.clear()
-        costArrayToSave.clear()
-        userDataAndTotalToSave.clear()
         Log.e("ONPAUSE","---------------------------------------------------------------------")
-        Crashlytics.log("ONPAUSE ------------------------------------------------------------------")
-        savePrefs(prefs,serviceArray as ArrayList<Any>,"Service",true)
-        savePrefs(prefs,ftArray1 as ArrayList<Any>,"ft1",false)
-        savePrefs(prefs,ftArray2 as ArrayList<Any>, "ft2",false)
-        savePrefs(prefs,sqftArray as ArrayList<Any>,"sqft",false)
-        savePrefs(prefs,costArray as ArrayList<Any>,"cost",false)
-        val editor = prefs.edit()
-        editor.putString("costTotal",costTotal.text.toString())
-        editor.putString("sqftTotal",sqftTotal.text.toString())
-        editor.putString("name",name.text.toString())
-        editor.putString("phone",phone.text.toString())
-        editor.commit()
+        savePrefs(prefs,name,serviceArray as ArrayList<Any>, ftArray1 as ArrayList<Any> ,
+            ftArray2 as ArrayList<Any>, sqftArray as ArrayList<Any>,costArray as ArrayList<Any>,userDataAndTotalArray as ArrayList<Any> )
         Log.e("End","----------------------------------------------------------------------")
-        Crashlytics.log("END ------------------------------------------------------------------")
+
     }
 
     fun View.hideKeyboard()
@@ -238,139 +139,114 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     fun addAllArrays()
     {
-        val serviceToAdd = listOf<Spinner>(service1,service2,service3,service4,service5)
+        val serviceToAdd = listOf(binding.service1,binding.service2,binding.service3,binding.service4,binding.service5)
         serviceArray.addAll(serviceToAdd)
-        val ftToAdd1 = listOf<EditText>(ft_1_0,ft_1_1,ft_1_2,ft_1_3,ft_1_4)
+        val ftToAdd1 = listOf(binding.ft1,binding.ft12,binding.ft13,binding.ft14,binding.ft15)
         ftArray1.addAll(ftToAdd1)
-        val ftToAdd2 = listOf<EditText>(ft_2_0,ft_2_1,ft_2_2,ft_2_3,ft_2_4)
+        val ftToAdd2 = listOf(binding.ft2,binding.ft22,binding.ft23,binding.ft24,binding.ft25)
         ftArray2.addAll(ftToAdd2)
-        val sqftToAdd = listOf<EditText>(sqft_0,sqft_1,sqft_2,sqft_3,sqft_4)
+        val sqftToAdd = listOf(binding.sqft1,binding.sqft2,binding.sqft3,binding.sqft4,binding.sqft5)
         sqftArray.addAll(sqftToAdd)
-        val costToAdd = listOf<EditText>(cost_0,cost_1,cost_2,cost_3,cost_4)
+        val costToAdd = listOf(binding.cost1,binding.cost2,binding.cost3,binding.cost4,binding.cost5)
         costArray.addAll(costToAdd)
+        val userDataAndTotalToAdd = listOf(binding.name,binding.phone,binding.totalsqft,binding.totalcost)
+        userDataAndTotalArray.addAll(userDataAndTotalToAdd)
     }
 
-    fun savePrefs (prefs: SharedPreferences, array: ArrayList<Any>,name: String, Spinner: Boolean) : Boolean
+    fun savePrefs(prefs: SharedPreferences, name: ArrayList<String>, vararg input: ArrayList<Any>)
     {
         val editor = prefs.edit()
-        editor.putInt("${name}_size",array.count())
-        Log.e("SavePrefs","${name}_size + ${array.count()}")
-        Crashlytics.log("SavePrefs ${name}_size + ${array.count()}")
-        if(Spinner)
+        for (index in 0..input.size-1)
         {
-            val arrayToSaveSpinner = array as ArrayList<Spinner>
-            for(i in 0..array.count()-1)
+            editor.putInt("${name[index]}_size",input[index].count())
+            if(input[index][0] is Spinner)
             {
-                editor.putString("${name}_${i}",arrayToSaveSpinner[i].selectedItem.toString())
-            }
-        }
-        else
-        {
-           val arrayToSaveEditText = array as ArrayList<EditText>
-            for(i in 0..array.count()-1)
-            {
-                editor.putString("${name}_${i}",arrayToSaveEditText[i].text.toString())
-            }
-        }
-        val result = editor.commit()
-
-        return result
-    }
-
-    fun retrievePrefs(prefs: SharedPreferences,name: String,Spinner: Boolean) : ArrayList<Any>
-    {
-        val count = prefs.getInt("${name}_size",0)
-        Log.e("RetrievePrefs","${count}")
-        Crashlytics.log("RetrievePrefs ${count}")
-        val arrayToReturn = arrayListOf<Any>()
-        if(count != 0)
-        {
-            if(Spinner)
-            {
-
-                for(i in 0..count-1)
+                val arrayToSaveSpinner = input[index] as ArrayList<Spinner>
+                for(i in 0..arrayToSaveSpinner.count()-1)
                 {
-                    val string = prefs.getString("${name}_${i}","")
-                    when (string)
-                    {
-                        "Choose a Service" -> arrayToReturn.add(0)
-                        "Trimming" -> arrayToReturn.add(1)
-                        "Planting" -> arrayToReturn.add(2)
-                    }
-
+                    editor.putInt("${name[index]}_${i}",arrayToSaveSpinner[i].selectedItemPosition)
                 }
             }
             else
             {
-                for(i in 0..count-1)
+                val arrayToSaveEditText = input[index] as ArrayList<EditText>
+                for(i in 0..arrayToSaveEditText.count()-1)
                 {
-                    val string = prefs.getString("${name}_${i}","")
-                    arrayToReturn.add(string.toString())
+                    editor.putString("${name[index]}_${i}",arrayToSaveEditText[i].text.toString())
                 }
             }
         }
-        return arrayToReturn
+        editor.apply()
     }
 
-    fun retrieveUserDataAndTotal(prefs: SharedPreferences,need:String):String
+    fun retrievePrefs(prefs: SharedPreferences,name: ArrayList<String>, vararg array : ArrayList<Any>)
     {
-        val string = prefs.getString(need,"")
-        return string!!
-    }
 
-    fun processRetrievedPrefsArray(array:ArrayList<Any>, field:ArrayList<Any>, Spinner: Boolean)
-    {
-        Log.e("processRetrievedPrefs1","${array}")
-        Crashlytics.log("processRetrievedPrefs1 ${array}")
-        if(array.count()!=0 && array.count() != field.count())
-        {
-            Log.e("Wrong","Wrong")
-        }
-        if(array.count()!=0 )//&& array.count() == field.count())
-        {
-            if(Spinner)
+        for (index in 0..array.size-1)
+        {   array[index].clear()
+            val count = prefs.getInt("${name[index]}_size",0)
+            if(count != 0)
             {
-                for(i in 0..array.count()-1)
+                if (index == 0)
                 {
-                    val field = field as ArrayList<Spinner>
-                    val array =  array as ArrayList<Int>
-                    Log.e("processRetrievedPrefs2","${array.count()}+${i} + ${field} + ${array} + ${field[i]} + ${array[i]}")
-                    Crashlytics.log("processRetrievedPrefs2 ${array.count()}+${i} + ${field} + ${array} + ${field[i]} + ${array[i]}")
-                    field[i].setSelection(array[i])
+                    for(i in 0..count-1)
+                    {
+                        val position = prefs.getInt("${name[index]}_${i}",0)
+                        Log.d("RetrievePrefs","${index} + ${array[index]} + ${name[index]} + ${count} + ${position}")
+                        array[index].add(position)
+                    }
                 }
-            }
-            else if(!Spinner)
-            {
-                for(i in 0..array.count()-1)
+                else
                 {
-                    val field = field as ArrayList<EditText>
-                    val array =  array as ArrayList<String>
-                    field[i].setText(array[i])
+                    for(i in 0..count-1)
+                    {
+                        val string = prefs.getString("${name[index]}_${i}","")
+                        Log.d("RetrievePrefs2","${index} + ${array[index]} + ${name[index]} + ${count} + ${string}")
+                        array[index].add(string.toString())
+                    }
                 }
             }
         }
-
     }
 
-    fun clearAllData(array: ArrayList<Any>, Spinner: Boolean)
+    fun processRetrievedPrefsArray(spinner: ArrayList<Any>,vararg array: ArrayList<Any>)
     {
-        if(Spinner)
+
+        val field = arrayListOf(ftArray1,ftArray2,sqftArray,costArray,userDataAndTotalArray)
+        for(i in 0..spinner.count()-1)
         {
-            val array = array as ArrayList<Spinner>
-            for (i in 0..array.count()-1)
-            {
-                array[i].setSelection(0)
-            }
+            serviceArray[i].setSelection(spinner[i].toString().toInt())
         }
-        else
+        for(index in 0..array.count()-1)
         {
-            val array = array as ArrayList<EditText>
-            for (i in 0..array.count()-1)
+            if(array[index].count()!=0)
             {
-                array[i].setText("")
+
+                for (i in 0..array[index].count()-1)
+                {
+                    Log.e("processRetrievedPrefs3","${index} + ${i} + ${field[index][i]} + ${array[index]} + ${array[index][i]}")
+                    field[index][i].setText(array[index][i].toString())
+                }
             }
         }
     }
+
+    fun clearAllData()
+    {
+        for(i in 0..serviceArray.count()-1)
+        {
+            serviceArray[i].setSelection(0)
+        }
+        val field = arrayListOf(ftArray1,ftArray2,sqftArray,costArray,userDataAndTotalArray)
+        for(index in 0..field.count()-1)
+        {
+            for (i in 0..field[index].count()-1)
+            {
+                field[index][i].setText("")
+            }
+        }
+    }
+
 
     fun calculate()
     {
@@ -379,65 +255,63 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         var costTotalVal = 0.0
         for (i in 0..serviceArray.count()-1)
         {
+            val decimal = DecimalFormat("#.##")
             if(ftArray1[i].text.toString()!="" && ftArray2[i].text.toString()!="")
             {
                 val ft_1 = ftArray1[i].text.toString().toDouble()
                 val ft_2 = ftArray2[i].text.toString().toDouble()
-                val sqft = round(ft_1*ft_2)*1.0
-                sqftArray[i].setText(sqft.toString())
+                val sqft = ft_1*ft_2
+                sqftArray[i].setText(decimal.format(sqft))
                 sqftTotalVal += sqft
                 if(serviceArray[i].selectedItemPosition!=0)
                 {   var cost = 0.0
                     when(serviceArray[i].selectedItemPosition)
                     {
-                        1-> cost = round(sqft*5.0)
-                        2-> cost = round(sqft*8.0)
+                        1-> cost = sqft*5.0
+                        2-> cost = sqft*8.0
                     }
-                    costArray[i].setText(cost.toString())
+                    costArray[i].setText(decimal.format(cost))
                     costTotalVal += cost
                 }
             }
-            sqftTotal.setText(sqftTotalVal.toString())
-            costTotal.setText(costTotalVal.toString())
+            binding.totalsqft.setText(decimal.format(sqftTotalVal))
+            binding.totalcost.setText(decimal.format(costTotalVal))
         }
     }
 
     @InternalCoroutinesApi
-    fun processSave()
-    {
-        if(name.text.toString() == "" && phone.text.toString() == "")
-        {
+    fun processSave() {
+        if (binding.name.text.toString() == "" && binding.phone.text.toString() == "") {
             Toast.makeText(
                 context,
                 "Empty Phone and Name",
                 Toast.LENGTH_LONG
             ).show()
-        }
-        else
-        {
+        } else {
             val serviceStringArray = serviceArray.asString(true)
             val ftStringArray1 = ftArray1.asString(false)
             val ftStringArray2 = ftArray2.asString(false)
             val sqftStringArray = sqftArray.asString(false)
             val costStringArray = costArray.asString(false)
-            val estimation = Estimation(0,name.text.toString(),phone.text.toString(),serviceStringArray,ftStringArray1,ftStringArray2,sqftStringArray,costStringArray,sqftTotal.text.toString(),costTotal.text.toString())
+            val userDataAndTotalStringArray = userDataAndTotalArray.asString(false)
+            val estimation = Estimation(
+                0,
+                serviceStringArray,
+                ftStringArray1,
+                ftStringArray2,
+                sqftStringArray,
+                costStringArray,
+                userDataAndTotalStringArray
+            )
+            Log.d("Save", "${serviceStringArray} +${ftStringArray1} +${ftStringArray2} + ${sqftStringArray} + ${costStringArray} + ${userDataAndTotalStringArray} +")
             estimationViewModel.insert(estimation)
             Toast.makeText(
                 context,
                 "Saved",
                 Toast.LENGTH_LONG
             ).show()
-            clearAllData(serviceArray as ArrayList<Any>,true)
-            clearAllData(ftArray1 as ArrayList<Any>,false)
-            clearAllData(ftArray2 as ArrayList<Any>,false)
-            clearAllData(sqftArray as ArrayList<Any>,false)
-            clearAllData(costArray as ArrayList<Any>,false)
-            name.setText("")
-            phone.setText("")
-            sqftTotal.setText("")
-            costTotal.setText("")
+            clearAllData()
         }
-
     }
 
     fun processStringAfterEditing(text:String):String
@@ -483,29 +357,9 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         return array
     }
 
-    fun animate(view: View)
-    {
-        val v = view as ImageView
-        val d = v.drawable
-        if (d is AnimatedVectorDrawableCompat)
-        {
-            d.start()
-        }
-        else if(d is AnimatedVectorDrawable)
-        {
-            d.start()
-        }
-    }
 
 
 
-    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        TODO()
-    }
-
-    override fun onNothingSelected(parent: AdapterView<*>?) {
-
-    }
 
 
 }

@@ -31,8 +31,8 @@ class EstimationArrayAdapter(context: Context, @LayoutRes private var layoutRes:
         }
         val viewHolder = rowView!!.tag as ViewHolder
         val estimation = filtered[position]
-        viewHolder.name.setText(estimation.name)
-        viewHolder.phone.setText(estimation.phone)
+        viewHolder.name.setText(estimation.userDataAndTotal[0])
+        viewHolder.phone.setText(estimation.userDataAndTotal[1])
         return rowView
     }
 
@@ -69,7 +69,7 @@ class EstimationArrayAdapter(context: Context, @LayoutRes private var layoutRes:
                     val search = constraint.toString().toLowerCase(Locale.ROOT)
                     for (item in value)
                     {
-                        if (item.name.toLowerCase().contains(search) || item.phone.toLowerCase(Locale.ROOT).contains(search))
+                        if (item.userDataAndTotal[0].toLowerCase().contains(search) || item.userDataAndTotal[1].toLowerCase(Locale.ROOT).contains(search))
                         {
                             results.add(item)
                             Log.d("Filter","${item}")

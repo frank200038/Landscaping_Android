@@ -12,7 +12,7 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.ListFragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.google.firebase.analytics.FirebaseAnalytics
+//import com.google.firebase.analytics.FirebaseAnalytics
 
 import com.jfcgraphicsllc.landscaping.*
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -26,7 +26,7 @@ class DashboardFragment : ListFragment() {
     private lateinit var adapter: EstimationArrayAdapter
     @InternalCoroutinesApi
     private lateinit var estimationViewModel : EstimationViewModel
-    private lateinit var analytics: FirebaseAnalytics
+   // private lateinit var analytics: FirebaseAnalytics
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -69,7 +69,7 @@ class DashboardFragment : ListFragment() {
             listView.adapter = adapter
             estimationViewModel = ViewModelProvider(this).get(EstimationViewModel::class.java)
             estimationViewModel.allEstimation.observe(viewLifecycleOwner, Observer { estimation ->
-                estimation.map { Log.d("Observe", "${estimation[0].phone}");val adapterArray = ArrayList<Estimation>(estimation);adapter.setValue(adapterArray) }})
+                estimation.map { Log.d("Observe", "${estimation[0].userDataAndTotal[1]}");val adapterArray = ArrayList<Estimation>(estimation);adapter.setValue(adapterArray) }})
             val searchView = view.findViewById<SearchView>(R.id.searchView)
             setOnQueryListener(searchView)
 

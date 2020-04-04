@@ -8,18 +8,16 @@ import java.io.Serializable
 data class Estimation (
 
     @PrimaryKey(autoGenerate = true)  var id:Int = 0,
-    @ColumnInfo(name = "name")  var name: String = "",
-    @ColumnInfo(name = "phone")  var phone: String = "",
     @ColumnInfo(name = "service")   var service: ArrayList<String> = arrayListOf(),
     @ColumnInfo(name = "ft1")  var ft1: ArrayList<String> = arrayListOf(),
     @ColumnInfo(name = "ft2")  var ft2: ArrayList<String> = arrayListOf(),
     @ColumnInfo(name = "sqft")  var sqft: ArrayList<String> = arrayListOf(),
     @ColumnInfo(name = "cost")  var cost: ArrayList<String> = arrayListOf(),
-    @ColumnInfo(name = "sqftTotal")  var sqftTotal: String = "",
-    @ColumnInfo(name = "costTotal")  var costTotal: String = ""
+    @ColumnInfo(name = "userData")  var userDataAndTotal: ArrayList<String> = arrayListOf()
+
 ): Serializable
 {
-   constructor() : this(0,"","",ArrayList<String>(5),ArrayList<String>(5),ArrayList<String>(5),ArrayList<String>(5),ArrayList<String>(5),"","")
+   constructor() : this(0,ArrayList<String>(5),ArrayList<String>(5),ArrayList<String>(5),ArrayList<String>(5),ArrayList<String>(5))
 
 //    fun getName():String
 //    {

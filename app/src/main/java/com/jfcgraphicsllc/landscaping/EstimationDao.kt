@@ -6,7 +6,7 @@ import androidx.room.*
 @Dao
 interface EstimationDao
 {
-    @Query("SELECT * from estimation_table ORDER BY phone ASC")
+    @Query("SELECT * from estimation_table")
     fun getOrderedEstimation(): LiveData<List<Estimation>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)

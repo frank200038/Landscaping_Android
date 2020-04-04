@@ -9,8 +9,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.gms.measurement.module.Analytics
-import com.google.firebase.analytics.FirebaseAnalytics
+//import com.google.android.gms.measurement.module.Analytics
+//import com.google.firebase.analytics.FirebaseAnalytics
 
 import kotlinx.coroutines.InternalCoroutinesApi
 
@@ -18,7 +18,7 @@ import kotlinx.coroutines.InternalCoroutinesApi
 class MainActivity : AppCompatActivity() {
     @InternalCoroutinesApi
     private lateinit var estimationViewModel:EstimationViewModel
-    private lateinit var firebaseAnalytics: FirebaseAnalytics
+    //private lateinit var firebaseAnalytics: FirebaseAnalytics
     @InternalCoroutinesApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_home, R.id.navigation_dashboard))
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-        firebaseAnalytics = FirebaseAnalytics.getInstance(this)
+       // firebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
 
     }
