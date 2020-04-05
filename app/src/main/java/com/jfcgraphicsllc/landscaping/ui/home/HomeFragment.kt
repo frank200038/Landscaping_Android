@@ -1,9 +1,7 @@
 package com.jfcgraphicsllc.landscaping.ui.home
 
-//import com.google.firebase.crashlytics.FirebaseCrashlytics
 import android.content.Context
 import android.content.SharedPreferences
-import android.graphics.drawable.AnimatedVectorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,16 +12,9 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat
-//import com.google.firebase.analytics.FirebaseAnalytics
 import com.jfcgraphicsllc.landscaping.Estimation
 import com.jfcgraphicsllc.landscaping.EstimationViewModel
-import com.jfcgraphicsllc.landscaping.R
 import com.jfcgraphicsllc.landscaping.databinding.FragmentHomeBinding
-import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.fragment_home.view.*
-import kotlinx.android.synthetic.main.fragment_home.view.clear
-import kotlinx.android.synthetic.main.fragment_home.view.phone
 import kotlinx.coroutines.InternalCoroutinesApi
 import java.text.DecimalFormat
 
@@ -49,8 +40,7 @@ class HomeFragment : Fragment() {
     private  var costArrayToSave : ArrayList<Any> = arrayListOf()
     private var userDataAndTotalToSave : ArrayList<Any> = arrayListOf()
     private val name = arrayListOf("Service","ft1","ft2","sqft","cost","userData")
-    //private val Crashlytics = FirebaseCrashlytics.getInstance()
-   // private lateinit var analytics: FirebaseAnalytics
+
     @InternalCoroutinesApi
     private lateinit var estimationViewModel : EstimationViewModel
     override fun onAttach(context: Context) {
@@ -69,12 +59,6 @@ class HomeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        if(Crashlytics.didCrashOnPreviousExecution())
-//        {
-//            val editor = prefs.edit()
-//            editor.clear()
-//            editor.apply()
-//        }
         retrievePrefs(prefs,name,serviceArrayToSave,ftArrayToSave1,ftArrayToSave2,sqftArrayToSave,costArrayToSave,userDataAndTotalToSave)
         Log.e("OnCreate","${serviceArrayToSave} + ${ftArrayToSave1} + ${ftArrayToSave2} + ${sqftArrayToSave} + ${userDataAndTotalToSave}")
         val activity = activity as AppCompatActivity
@@ -126,10 +110,10 @@ class HomeFragment : Fragment() {
 
     override fun onPause() {
         super.onPause()
-        Log.e("ONPAUSE","---------------------------------------------------------------------")
+
         savePrefs(prefs,name,serviceArray as ArrayList<Any>, ftArray1 as ArrayList<Any> ,
             ftArray2 as ArrayList<Any>, sqftArray as ArrayList<Any>,costArray as ArrayList<Any>,userDataAndTotalArray as ArrayList<Any> )
-        Log.e("End","----------------------------------------------------------------------")
+
 
     }
 
