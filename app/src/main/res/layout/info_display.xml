@@ -194,7 +194,7 @@
         android:background="@drawable/rounded_whiteokay"
         android:fontFamily="@font/cabin_bold"
         android:gravity="center_horizontal|center_vertical"
-        android:text="@string/sqft"
+        android:text="@string/Units"
         android:textColor="#000000"
         android:textSize="18sp"
         android:textStyle="bold"
