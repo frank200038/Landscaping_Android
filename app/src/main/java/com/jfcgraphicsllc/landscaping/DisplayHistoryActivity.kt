@@ -1,29 +1,10 @@
 package com.jfcgraphicsllc.landscaping
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.util.Log
-import android.widget.Button
 import android.widget.EditText
-import android.content.Intent
-import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
-import android.app.Activity
-import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.os.Environment
-import android.provider.MediaStore
-import android.view.View
-import androidx.constraintlayout.widget.ConstraintLayout
 import com.jfcgraphicsllc.landscaping.databinding.InfoDisplayBinding
-//import com.google.firebase.analytics.FirebaseAnalytics
-import kotlinx.android.synthetic.main.fragment_home.view.*
-import java.io.File
-import java.io.FileOutputStream
-import java.lang.Exception
-import java.text.SimpleDateFormat
-import java.time.LocalDateTime
-import java.util.*
 import kotlin.collections.ArrayList
 
 
@@ -36,7 +17,6 @@ class DisplayHistoryActivity : AppCompatActivity() {
     private var sqftArray : ArrayList<EditText> = arrayListOf()
     private var costArray : ArrayList<EditText> = arrayListOf()
     private var userDataAndTotalArray : ArrayList<EditText> = arrayListOf()
-    //private lateinit var analytics:FirebaseAnalytics
 
      override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,8 +32,6 @@ class DisplayHistoryActivity : AppCompatActivity() {
         addAllArrays()
         processRetrievedData(estimation,serviceArray,ftArray1,ftArray2,sqftArray,costArray,userDataAndTotalArray)
 
-//         analytics = FirebaseAnalytics.getInstance(this)
-//         analytics.setCurrentScreen(this,"DisplayHistory",null)
     }
 
     fun addAllArrays()
