@@ -9,17 +9,14 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-
 import com.google.firebase.analytics.FirebaseAnalytics
 
-import kotlinx.coroutines.InternalCoroutinesApi
 
 
 class MainActivity : AppCompatActivity() {
-    @InternalCoroutinesApi
-    private lateinit var estimationViewModel:EstimationViewModel
+
     private lateinit var firebaseAnalytics: FirebaseAnalytics
-    @InternalCoroutinesApi
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
