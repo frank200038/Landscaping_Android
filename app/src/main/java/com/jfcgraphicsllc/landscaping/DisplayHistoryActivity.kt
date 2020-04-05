@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.jfcgraphicsllc.landscaping.databinding.InfoDisplayBinding
 import kotlin.collections.ArrayList
 
@@ -11,6 +12,7 @@ import kotlin.collections.ArrayList
 class DisplayHistoryActivity : AppCompatActivity() {
 
     private lateinit var binding : InfoDisplayBinding
+    private lateinit var firebaseAnalytics: FirebaseAnalytics
     private var serviceArray:ArrayList<EditText> = arrayListOf()
     private var ftArray1 : ArrayList<EditText> = arrayListOf()
     private var ftArray2 : ArrayList<EditText> = arrayListOf()
@@ -20,6 +22,7 @@ class DisplayHistoryActivity : AppCompatActivity() {
 
      override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        firebaseAnalytics = FirebaseAnalytics.getInstance(this)
         binding = InfoDisplayBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
