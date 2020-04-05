@@ -17,12 +17,14 @@ import com.jfcgraphicsllc.landscaping.EstimationViewModel
 import com.jfcgraphicsllc.landscaping.databinding.FragmentHomeBinding
 import kotlinx.coroutines.InternalCoroutinesApi
 import java.text.DecimalFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 import kotlin.math.round
 import kotlin.math.roundToInt
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     private var _binding : FragmentHomeBinding? = null
     private val binding get() = _binding!!
@@ -72,24 +74,32 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         addAllArrays()
         estimationViewModel = ViewModelProvider(this).get(EstimationViewModel::class.java)
-        binding.save.setOnClickListener {
-            processSave()
-            clearAllData()
-        }
-        Log.e("OnViewCreated","${serviceArrayToSave} + ${ftArrayToSave1} + ${ftArrayToSave2} + ${sqftArrayToSave} + ${userDataAndTotalToSave} + ")
-        processRetrievedPrefsArray(serviceArrayToSave,ftArrayToSave1,ftArrayToSave2,sqftArrayToSave,costArrayToSave,userDataAndTotalToSave)
+        Log.e(
+            "OnViewCreated",
+            "${serviceArrayToSave} + ${ftArrayToSave1} + ${ftArrayToSave2} + ${sqftArrayToSave} + ${userDataAndTotalToSave} + "
+        )
+        binding.service1.onItemSelectedListener = this
+        binding.service2.onItemSelectedListener = this
+        binding.service3.onItemSelectedListener = this
+        binding.service4.onItemSelectedListener = this
+        binding.service5.onItemSelectedListener = this
+        processRetrievedPrefsArray(
+            serviceArrayToSave,
+            ftArrayToSave1,
+            ftArrayToSave2,
+            sqftArrayToSave,
+            costArrayToSave,
+            userDataAndTotalToSave
+        )
         binding.phone.setOnFocusChangeListener { v, hasFocus ->
-            if(!hasFocus)
-            {
-                if(binding.phone.text.toString().count() == 10)
-                {
+            if (!hasFocus) {
+                if (binding.phone.text.toString().count() == 10) {
                     binding.phone.setText(processStringAfterEditing(binding.phone.text.toString()))
                 }
-            }
-            else
-            {
-                if(binding.phone.text.toString().contains("(") && binding.phone.text.toString().contains(")")&&binding.phone.text.toString().contains("-"))
-                {
+            } else {
+                if (binding.phone.text.toString().contains("(") && binding.phone.text.toString()
+                        .contains(")") && binding.phone.text.toString().contains("-")
+                ) {
                     binding.phone.setText(processStringBeforeEditing(binding.phone.text.toString()))
                 }
             }
@@ -105,8 +115,13 @@ class HomeFragment : Fragment() {
             calculate()
             it.hideKeyboard()
         }
+        binding.save.setOnClickListener {
+            processSave()
+            clearAllData()
+        }
 
     }
+
 
     override fun onPause() {
         super.onPause()
@@ -246,9 +261,31 @@ class HomeFragment : Fragment() {
             {
                 val ft_1 = ftArray1[i].text.toString().toDouble()
                 val ft_2 = ftArray2[i].text.toString().toDouble()
-                val sqft = ft_1*ft_2
+                var sqft = 0.0
+                if(serviceArray[i].selectedItemPosition != 0 )
+                {
+                    when(serviceArray[i].selectedItemPosition)
+                    {
+                        1 -> sqft = (ft_1*ft_2)
+                        2 -> sqft = (ft_1*ft_2)
+                        3 -> sqft = (ft_1*ft_2)
+                        12 -> sqft = (ft_1*ft_2)
+                        13 -> sqft = (ft_1*ft_2)
+
+                        else ->
+
+                            sqft = (ft_1+ft_2)
+
+
+
+
+
+
+                    }
+                }
                 sqftArray[i].setText(decimal.format(sqft))
                 sqftTotalVal += sqft
+
                 if(serviceArray[i].selectedItemPosition!=0)
                 {   var cost = 0.0
                     when(serviceArray[i].selectedItemPosition)
@@ -256,7 +293,7 @@ class HomeFragment : Fragment() {
                         1-> 	cost = round	((sqft)*(12))
                         2-> 	cost = round	((sqft)*(7))
                         3-> 	cost = round	((sqft)*(4.5))
-                        4-> 	cost = round	((sqft)*(28))
+                        4-> 	cost = round	((ft_1)*(28))
                         5-> 	cost = multipleOfFour(sqft) * 33.33
                         6-> 	cost = round	((sqft)*(31))
                         7-> 	cost = multipleOfSix(sqft) * 91.66
@@ -406,5 +443,109 @@ class HomeFragment : Fragment() {
         return valueToReturn.toDouble()
     }
 
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        val parentSpinner = parent as Spinner
+        Log.d("spinner","${parentSpinner}")
+        if(parentSpinner == binding.service1)
+        {
+            if (parentSpinner.selectedItemPosition == 4 || position == 6 || position == 8 || position == 10) {
 
+                binding.sqft1.setHint("Lft")
+                binding.ft2.isFocusable = false
+                binding.ft2.isCursorVisible = false
+                binding.ft2.visibility = View.GONE
+                binding.ft2.setText("0")
+
+            }
+            if (parentSpinner.selectedItemPosition == 5 || position == 7 || position == 9 || position == 11) {
+
+                binding.sqft1.setHint("Gate")
+                binding.ft2.isFocusable = false
+                binding.ft2.isCursorVisible = false
+                binding.ft2.visibility = View.GONE
+                binding.ft2.setText("0")
+            }
+
+            else  {
+                binding.ft2.visibility = View.VISIBLE
+                binding.ft2.isFocusable = true
+                binding.ft2.isCursorVisible = true
+                binding.ft2.setText("")
+                binding.sqft1.setHint("Sqft")
+
+            }
+
+
+        }
+        else if(parentSpinner == binding.service2)
+        {
+            if (parentSpinner.selectedItemPosition == 4) {
+
+                binding.sqft2.setHint("Lft")
+                binding.ft22.isFocusable = false
+                binding.ft22.isCursorVisible = false
+                binding.ft22.visibility = View.GONE
+            }
+                else  {
+                binding.ft22.visibility = View.VISIBLE
+                binding.ft22.isFocusable = true
+                binding.ft22.isCursorVisible = true
+
+            }
+        }
+        else if(parentSpinner == binding.service3)
+        {
+            if (parentSpinner.selectedItemPosition == 4) {
+
+                binding.sqft3.setHint("Lft")
+                binding.ft23.isFocusable = false
+                binding.ft23.isCursorVisible = false
+                binding.ft23.visibility = View.GONE
+            }
+            else  {
+                binding.ft23.visibility = View.VISIBLE
+                binding.ft23.isFocusable = true
+                binding.ft23.isCursorVisible = true
+
+            }
+
+        }
+        else if(parentSpinner == binding.service4)
+        {
+            if (parentSpinner.selectedItemPosition == 4) {
+
+                binding.sqft4.setHint("Lft")
+                binding.ft24.isFocusable = false
+                binding.ft24.isCursorVisible = false
+                binding.ft24.visibility = View.GONE
+            }
+            else  {
+                binding.ft24.visibility = View.VISIBLE
+                binding.ft24.isFocusable = true
+                binding.ft24.isCursorVisible = true
+
+            }
+
+        }
+        else if(parentSpinner == binding.service5)
+        {
+            if (parentSpinner.selectedItemPosition == 4) {
+
+                binding.sqft5.setHint("Lft")
+                binding.ft25.isFocusable = false
+                binding.ft25.isCursorVisible = false
+                binding.ft25.visibility = View.GONE
+            }
+            else  {
+                binding.ft25.visibility = View.VISIBLE
+                binding.ft25.isFocusable = true
+                binding.ft25.isCursorVisible = true
+
+            }
+        }
+    }
+
+    override fun onNothingSelected(parent: AdapterView<*>?) {
+        TODO("Not yet implemented")
+    }
 }
