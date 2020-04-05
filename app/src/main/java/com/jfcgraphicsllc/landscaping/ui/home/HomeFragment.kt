@@ -28,6 +28,7 @@ import kotlinx.coroutines.InternalCoroutinesApi
 import java.text.DecimalFormat
 
 import kotlin.math.round
+import kotlin.math.roundToInt
 
 class HomeFragment : Fragment() {
 
@@ -255,7 +256,7 @@ class HomeFragment : Fragment() {
         var costTotalVal = 0.0
         for (i in 0..serviceArray.count()-1)
         {
-            val decimal = DecimalFormat("#.##")
+            val decimal = DecimalFormat("#")
             if(ftArray1[i].text.toString()!="" && ftArray2[i].text.toString()!="")
             {
                 val ft_1 = ftArray1[i].text.toString().toDouble()
@@ -267,8 +268,22 @@ class HomeFragment : Fragment() {
                 {   var cost = 0.0
                     when(serviceArray[i].selectedItemPosition)
                     {
-                        1-> cost = sqft*5.0
-                        2-> cost = sqft*8.0
+                        1-> 	cost = round	((sqft)*(12))
+                        2-> 	cost = round	((sqft)*(7))
+                        3-> 	cost = round	((sqft)*(4.5))
+                        4-> 	cost = round	((sqft)*(28))
+                        5-> 	cost = multipleOfFour(sqft) * 33.33
+                        6-> 	cost = round	((sqft)*(31))
+                        7-> 	cost = multipleOfSix(sqft) * 91.66
+                        8-> 	cost = round 	((sqft)*(19))
+                        9-> 	cost = multipleOfFour(sqft) * 33.33
+                        10-> 	cost = round	((sqft)*(30))
+                        11-> 	cost = multipleOfFour(sqft) * 100
+                        12-> 	cost = multipleOfThree(sqft) * 30
+                        13-> 	cost = multipleOfThree(sqft) * 26.6
+                        14-> 	cost = round	((sqft)*(300))
+                        15-> 	cost = round	((sqft)*(300))
+                        16-> 	cost = round	((sqft)*(300))
                     }
                     costArray[i].setText(decimal.format(cost))
                     costTotalVal += cost
@@ -357,9 +372,54 @@ class HomeFragment : Fragment() {
         return array
     }
 
+    fun multipleOfFour(value: Double) : Double
+    {
+        var valueToReturn = value.roundToInt()
+        if(valueToReturn%4 != 0)
+        {
+            if(valueToReturn < 4)
+            {
+                return 4.0
+            }
+            else
+            {
+                val quotient = (valueToReturn / 4 ) + 1
+                valueToReturn = 4*quotient
+                return valueToReturn.toDouble()
+            }
+        }
+        return valueToReturn.toDouble()
+    }
 
+    fun multipleOfThree(value: Double) : Double
+    {
+        var valueToReturn = value.roundToInt()
+        if(valueToReturn < 3)
+        {
+            return 3.0
+        }
+        return valueToReturn.toDouble()
+    }
 
-
+    fun multipleOfSix(value: Double) : Double
+    {
+        var valueToReturn = value.roundToInt()
+        if(valueToReturn%6 != 0)
+        {
+            if(valueToReturn < 6)
+            {
+                return 6.0
+            }
+            else
+            {
+                val quotient = (valueToReturn / 6 ) + 1
+                valueToReturn = 6*quotient
+                Log.d("6","${quotient} + ${valueToReturn} + ${value}")
+                return valueToReturn.toDouble()
+            }
+        }
+        return valueToReturn.toDouble()
+    }
 
 
 }

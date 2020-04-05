@@ -79,8 +79,22 @@ class DisplayHistoryActivity : AppCompatActivity() {
                 0 -> for (i in 0..array[index].count() - 1) {
                     when (estimation.service[i]) {
                         "0" -> array[index][i].setText("Choose A Services")
-                        "1" -> array[index][i].setText("Trimming")
-                        "2" -> array[index][i].setText("Planting")
+                        "1"	-> array[index][i].setText	("	Pavers patios walkway jobs 	")
+                        "2"	-> array[index][i].setText	("	Concrete patios walkway jobs 	")
+                        "3"	-> array[index][i].setText	("	Black top driveway	")
+                        "4"	-> array[index][i].setText	("	Solid white pvc fence	")
+                        "5"	-> array[index][i].setText	("	4 Foot solid pcv gate 	")
+                        "6"	-> array[index][i].setText	("	Designed top pvc 6x8 pvc w fence	")
+                        "7"	-> array[index][i].setText	("	Designed 4 foot gate	")
+                        "8"	-> array[index][i].setText	("	Stockade wood fence 	")
+                        "9"	-> array[index][i].setText	("	4 Foot stockade wood gate 	")
+                        "10"	-> array[index][i].setText	("	Aluminum decorative fence 	")
+                        "11"	-> array[index][i].setText	("	Aluminum decorative 4 foot gate 	")
+                        "12"	-> array[index][i].setText	("	Black, brown and red  mulch 	")
+                        "13"	-> array[index][i].setText	("	Natural brown mulch 	")
+                        "14"	-> array[index][i].setText	("	Spring clean ups 	")
+                        "15"	-> array[index][i].setText	("	Fall clean ups 	")
+                        "16"	-> array[index][i].setText	("	Trimming 	")
                     }
                 }
                 1 -> for (i in 0..array[index].count() - 1) {
