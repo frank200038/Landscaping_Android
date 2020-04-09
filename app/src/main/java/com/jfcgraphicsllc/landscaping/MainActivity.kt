@@ -31,20 +31,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         anime()
-//        val user = FirebaseAuth.getInstance().currentUser
-//        Log.e("User","${user}")
-//        if (user == null)
-//        {
-//            val providers = arrayListOf(AuthUI.IdpConfig.EmailBuilder().setAllowNewAccounts(false).build())
-//            startActivityForResult(
-//                AuthUI.getInstance()
-//                    .createSignInIntentBuilder()
-//                    .setAvailableProviders(providers)
-//                    .setTheme(R.style.bg)
-//                    .build(),
-//                0)
-//            Log.e("Start Activity","Start Activity")
-//        }
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
         val navController = findNavController(R.id.nav_host_fragment)
@@ -150,14 +136,5 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-//    override fun onBackPressed() {
-//        val user = FirebaseAuth.getInstance().currentUser
-//        if(user == null)
-//        {
-//            return
-//        }
-//       return super.onBackPressed()
-//
-//    }
 
 }

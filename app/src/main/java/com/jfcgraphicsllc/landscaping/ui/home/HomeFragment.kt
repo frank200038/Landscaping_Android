@@ -467,30 +467,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     @InternalCoroutinesApi
     fun processSave(update: Boolean) {
-        val user = FirebaseAuth.getInstance().currentUser
-        if(user == null)
-        {
-                val alertDialog = AlertDialog.Builder(activity)
-                alertDialog.setTitle("Please Sign In")
-                alertDialog.setMessage("You need to Sign In to save the data")
-                alertDialog.setNegativeButton("Exit"){dialog, which ->
-                    activity!!.finish()
-                }
-                alertDialog.setPositiveButton("Sign In"){dialog, which ->
-                    val providers = arrayListOf(AuthUI.IdpConfig.EmailBuilder().setAllowNewAccounts(false).build())
-                    startActivityForResult(
-                        AuthUI.getInstance()
-                            .createSignInIntentBuilder()
-                            .setTheme(R.style.bg)
-                            .setAvailableProviders(providers)
-                            .build(),
-                        0)
-                }
-                alertDialog.setCancelable(false)
-                alertDialog.show()
-
-        }
-        else if (binding.name.text.toString() == "" && binding.phone.text.toString() == "") {
+        if (binding.name.text.toString() == "" && binding.phone.text.toString() == "") {
             Toast.makeText(
                 context,
                 "Empty Phone and Name",
