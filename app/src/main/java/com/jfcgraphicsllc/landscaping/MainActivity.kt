@@ -39,6 +39,7 @@ class MainActivity : AppCompatActivity() {
                 AuthUI.getInstance()
                     .createSignInIntentBuilder()
                     .setAvailableProviders(providers)
+                    .setTheme(R.style.bg)
                     .build(),
                 0)
             Log.e("Start Activity","Start Activity")
@@ -76,6 +77,7 @@ class MainActivity : AppCompatActivity() {
                     val providers = arrayListOf(AuthUI.IdpConfig.EmailBuilder().setAllowNewAccounts(false).build())
                     startActivityForResult(AuthUI.getInstance()
                         .createSignInIntentBuilder()
+                        .setTheme(R.style.bg)
                         .setAvailableProviders(providers)
                         .build(),
                         0)
