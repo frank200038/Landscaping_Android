@@ -10,65 +10,42 @@
         android:id="@+id/bgsplash"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:elevation="9dp"
+        android:elevation="11dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/logo_splash"
-            android:layout_width="450dp"
-            android:layout_height="270dp"
-            android:layout_marginTop="176dp"
-            android:layout_marginStart="-20dp"
-            android:elevation="9dp"
-            android:src="@drawable/ic_logons"
-            />
-
-        <LinearLayout
-            android:id="@+id/textplash"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="85dp"
-            android:layout_marginTop="356dp"
-            android:elevation="9dp"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/days_one"
-                android:text="Welcome Back"
-                android:textColor="@color/white"
-                android:textSize="30dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/cabin_bold"
-                android:text="ESTIMATOR"
-                android:textColor="@color/lightgray"
-                android:textSize="26dp" />
-
-
-        </LinearLayout>
-
-
         <ImageView
             android:id="@+id/bgapp"
             android:layout_width="match_parent"
-            android:layout_height="800dp"
+            android:layout_height="900dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginStart="0dp"
             android:layout_marginTop="0dp"
             android:layout_marginEnd="0dp"
+            android:translationY="-270dp"
             android:elevation="8dp"
             android:foregroundGravity="center_horizontal"
-            android:scaleType="fitXY"
-            android:src="@drawable/bg_red" />
-
+            android:src="@drawable/splash1" />
+    </FrameLayout>
+    <FrameLayout
+        android:id="@+id/bgsplash2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <ImageView
+            android:id="@+id/bgapp2"
+            android:layout_width="match_parent"
+            android:layout_height="1000dp"
+            android:layout_gravity="center_horizontal"
+            android:translationY="-140dp"
+            android:elevation="8dp"
+            android:foregroundGravity="center_horizontal"
+            android:src="@drawable/splash2" />
     </FrameLayout>
 
 

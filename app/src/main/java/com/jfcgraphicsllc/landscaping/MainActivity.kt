@@ -103,8 +103,13 @@ class MainActivity : AppCompatActivity() {
     {
         val bgapp: FrameLayout = findViewById(R.id.bgsplash)
         val bganim = AnimationUtils.loadAnimation(this,R.anim.bganim)
-        val Y : Float = -2650.toFloat()
-        bgapp.animate().translationY(Y).setDuration(1000).setStartDelay(300)
+        val Y : Float = -2850.toFloat()
+        bgapp.animate().translationY(Y).setDuration(2500).setStartDelay(600)
+
+        val bgapp2: FrameLayout = findViewById(R.id.bgsplash2)
+        val bganim2 = AnimationUtils.loadAnimation(this,R.anim.bganim2)
+        val W : Float = 2950.toFloat()
+        bgapp2.animate().translationY(W).setDuration(2500).setStartDelay(400)
     }
 
 
