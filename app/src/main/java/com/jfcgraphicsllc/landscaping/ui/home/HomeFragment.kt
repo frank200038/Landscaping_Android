@@ -176,34 +176,6 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         }
         binding.logout.setOnClickListener{
             FirebaseAuth.getInstance().signOut()
-//            val alertDialog = AlertDialog.Builder(activity)
-//            alertDialog.setTitle("Log Out")
-//            alertDialog.setMessage("Do you want to log out?")
-//            alertDialog.setNegativeButton("No"){dialog, which ->
-//                activity!!.onBackPressed()
-//            }
-//            alertDialog.setPositiveButton("Yes"){dialog, which ->
-//
-//                val alertDialog = AlertDialog.Builder(activity)
-//                alertDialog.setTitle("You have logged out")
-//                alertDialog.setMessage("You need to sign in to use this app!")
-//                alertDialog.setPositiveButton("Sign In") { dialog, which ->
-//                    val providers = arrayListOf(AuthUI.IdpConfig.EmailBuilder().setAllowNewAccounts(false).build())
-//                    startActivityForResult(
-//                        AuthUI.getInstance()
-//                            .createSignInIntentBuilder()
-//                            .setTheme(R.style.bg)
-//                            .setAvailableProviders(providers)
-//                            .build(),
-//                        0)
-//                }
-//                alertDialog.setNegativeButton("Exit"){dialog, which ->
-//                    activity!!.finish()
-//                }
-//                alertDialog.setCancelable(false)
-//                alertDialog.show()
-//            }
-//            alertDialog.show()
         }
     }
 
