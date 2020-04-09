@@ -7,14 +7,31 @@
     android:background="#72E6E6E6"
     tools:context=".ui.home.HomeFragment">
 
-<!--    <ImageView-->
-<!--        android:id="@+id/trybutton"-->
-<!--        android:layout_width="80dp"-->
-<!--        android:layout_height="80dp"-->
-<!--        android:elevation="10dp"-->
-<!--        android:onClick="animate"-->
-<!--        -->
-<!--        tools:layout_editor_absoluteX="173dp" />-->
+    <ImageButton
+        android:id="@+id/logout"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:clickable="true"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/ic_delete"
+        android:elevation="8dp"
+        android:foregroundGravity="right"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="8dp"
+        android:textSize="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="35dp"
+        android:foregroundGravity="right"
+        android:text="Logout"
+        android:textColor="@color/colorPrimaryDark"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
     <EditText
         android:id="@+id/totalcost"
