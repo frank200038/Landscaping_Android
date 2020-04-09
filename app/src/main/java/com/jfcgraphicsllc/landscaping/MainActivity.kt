@@ -7,6 +7,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.WindowManager
+import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.FrameLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -30,20 +31,20 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         anime()
-        val user = FirebaseAuth.getInstance().currentUser
-        Log.e("User","${user}")
-        if (user == null)
-        {
-            val providers = arrayListOf(AuthUI.IdpConfig.EmailBuilder().setAllowNewAccounts(false).build())
-            startActivityForResult(
-                AuthUI.getInstance()
-                    .createSignInIntentBuilder()
-                    .setAvailableProviders(providers)
-                    .setTheme(R.style.bg)
-                    .build(),
-                0)
-            Log.e("Start Activity","Start Activity")
-        }
+//        val user = FirebaseAuth.getInstance().currentUser
+//        Log.e("User","${user}")
+//        if (user == null)
+//        {
+//            val providers = arrayListOf(AuthUI.IdpConfig.EmailBuilder().setAllowNewAccounts(false).build())
+//            startActivityForResult(
+//                AuthUI.getInstance()
+//                    .createSignInIntentBuilder()
+//                    .setAvailableProviders(providers)
+//                    .setTheme(R.style.bg)
+//                    .build(),
+//                0)
+//            Log.e("Start Activity","Start Activity")
+//        }
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
         val navController = findNavController(R.id.nav_host_fragment)
@@ -103,23 +104,60 @@ class MainActivity : AppCompatActivity() {
     {
         val bgapp: FrameLayout = findViewById(R.id.bgsplash)
         val bganim = AnimationUtils.loadAnimation(this,R.anim.bganim)
-        val Y : Float = -2850.toFloat()
-        bgapp.animate().translationY(Y).setDuration(2500).setStartDelay(600)
+        bgapp.startAnimation(bganim)
 
         val bgapp2: FrameLayout = findViewById(R.id.bgsplash2)
         val bganim2 = AnimationUtils.loadAnimation(this,R.anim.bganim2)
-        val W : Float = 2950.toFloat()
-        bgapp2.animate().translationY(W).setDuration(2500).setStartDelay(400)
+        bganim2.setAnimationListener(object:Animation.AnimationListener{
+            override fun onAnimationRepeat(animation: Animation?) {
+
+            }
+
+            override fun onAnimationEnd(animation: Animation?) {
+                FirebaseAuth.getInstance().addAuthStateListener {
+                    val user = FirebaseAuth.getInstance().currentUser
+                    Log.e("User","${user}")
+                    Log.e("Animation Finish","Finish")
+                    if(user == null)
+                    {
+                        val alertDialog = AlertDialog.Builder(this@MainActivity)
+                        alertDialog.setTitle("Not Logged In")
+                        alertDialog.setMessage("You need to log in to use this App")
+                        alertDialog.setNegativeButton("Cancel"){dialog, which ->
+                            finish()
+                        }
+                        alertDialog.setPositiveButton("Sign In"){dialog, which ->
+                            val providers = arrayListOf(AuthUI.IdpConfig.EmailBuilder().setAllowNewAccounts(false).build())
+                            startActivityForResult(AuthUI.getInstance()
+                                .createSignInIntentBuilder()
+                                .setTheme(R.style.bg)
+                                .setAvailableProviders(providers)
+                                .build(),
+                                0)
+                        }
+                        alertDialog.setCancelable(false)
+                        alertDialog.show()
+                    }
+                }
+            }
+
+            override fun onAnimationStart(animation: Animation?) {
+
+            }
+
+        })
+        bgapp2.startAnimation(bganim2)
+
     }
 
-    override fun onBackPressed() {
-        val user = FirebaseAuth.getInstance().currentUser
-        if(user == null)
-        {
-            return
-        }
-       return super.onBackPressed()
-
-    }
+//    override fun onBackPressed() {
+//        val user = FirebaseAuth.getInstance().currentUser
+//        if(user == null)
+//        {
+//            return
+//        }
+//       return super.onBackPressed()
+//
+//    }
 
 }
