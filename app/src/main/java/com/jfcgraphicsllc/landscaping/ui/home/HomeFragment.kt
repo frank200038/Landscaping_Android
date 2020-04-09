@@ -705,59 +705,43 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
             if (position == 4 || position == 6 || position == 8 || position == 10 ) {
 
                 binding.sqft1.hint = "Lft"
-                binding.ft2.isFocusable = false
-                binding.ft2.isCursorVisible = false
                 binding.ft2.visibility = View.GONE
-                binding.ft2.setText("0")
+
                 Log.d("spinner","${position}")
             }
             else if (position == 5 || position == 7 || position == 9 || position == 11) {
-                binding.ft2.isFocusable = false
-                binding.ft2.isCursorVisible = false
                 binding.ft2.visibility = View.GONE
                 binding.sqft1.hint = "Gate"
                 binding.ft1.hint = "Ft"
                 Log.d("spinner", "${position}")
             }
             else if (position == 16) {
-                binding.ft2.isFocusable = false
-                binding.ft2.isCursorVisible = false
                 binding.ft2.visibility = View.GONE
                 binding.ft1.hint = "Hrs"
                 binding.sqft1.hint = "Hrs"
                 Log.d("spinner","${position}")
             }
-            else  {
+            else {
                 binding.ft2.visibility = View.VISIBLE
                 binding.ft2.isFocusable = true
                 binding.ft2.isCursorVisible = true
-                binding.ft2.setText("")
                 binding.ft1.hint = "Ft"
                 binding.sqft1.hint = "Sqft"
                 Log.d("spinner","${position}")
             }
-
-
         }
         else if(parentSpinner == binding.service2) {
             if (position == 4 || position == 6 || position == 8 || position == 10) {
 
                 binding.sqft2.hint = "Lft"
-                binding.ft22.isFocusable = false
-                binding.ft22.isCursorVisible = false
                 binding.ft22.visibility = View.GONE
-                binding.ft22.setText("0")
                 Log.d("spinner", "${position}")
             } else if (position == 5 || position == 7 || position == 9 || position == 11) {
-                binding.ft22.isFocusable = false
-                binding.ft22.isCursorVisible = false
                 binding.ft22.visibility = View.GONE
                 binding.sqft2.hint = "Gate"
                 binding.ft12.hint = "Ft"
                 Log.d("spinner", "${position}")
             } else if (position == 16) {
-                binding.ft22.isFocusable = false
-                binding.ft22.isCursorVisible = false
                 binding.ft22.visibility = View.GONE
                 binding.ft12.hint = "Hrs"
                 binding.sqft2.hint = "Hrs"
@@ -766,7 +750,6 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 binding.ft22.visibility = View.VISIBLE
                 binding.ft22.isFocusable = true
                 binding.ft22.isCursorVisible = true
-                binding.ft22.setText("")
                 binding.ft12.hint = "Ft"
                 binding.sqft2.hint = "Sqft"
                 Log.d("spinner", "${position}")
@@ -775,25 +758,17 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         else if(parentSpinner == binding.service3)
         {
             if (position == 4 || position == 6 || position == 8 || position == 10 ) {
-
                 binding.sqft3.hint = "Lft"
-                binding.ft23.isFocusable = false
-                binding.ft23.isCursorVisible = false
                 binding.ft23.visibility = View.GONE
-                binding.ft23.setText("0")
                 Log.d("spinner","${position}")
             }
             else if (position == 5 || position == 7 || position == 9 || position == 11) {
-                binding.ft23.isFocusable = false
-                binding.ft23.isCursorVisible = false
                 binding.ft23.visibility = View.GONE
                 binding.sqft3.hint = "Gate"
                 binding.ft13.hint = "Ft"
                 Log.d("spinner", "${position}")
             }
             else if (position == 16) {
-                binding.ft23.isFocusable = false
-                binding.ft23.isCursorVisible = false
                 binding.ft23.visibility = View.GONE
                 binding.ft13.hint= "Hrs"
                 binding.sqft3.hint= "Hrs"
@@ -803,7 +778,6 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 binding.ft23.visibility = View.VISIBLE
                 binding.ft23.isFocusable = true
                 binding.ft23.isCursorVisible = true
-                binding.ft23.setText("")
                 binding.ft13.hint = "Ft"
                 binding.sqft3.hint = "Sqft"
                 Log.d("spinner","${position}")
@@ -815,23 +789,17 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
             if (position == 4 || position == 6 || position == 8 || position == 10 ) {
 
                 binding.sqft4.hint = "Lft"
-                binding.ft24.isFocusable = false
-                binding.ft24.isCursorVisible = false
                 binding.ft24.visibility = View.GONE
-                binding.ft24.setText("0")
+
                 Log.d("spinner","${position}")
             }
             else if (position == 5 || position == 7 || position == 9 || position == 11) {
-                binding.ft24.isFocusable = false
-                binding.ft24.isCursorVisible = false
                 binding.ft24.visibility = View.GONE
                 binding.sqft4.hint = "Gate"
                 binding.ft14.hint = "Ft"
                 Log.d("spinner", "${position}")
             }
             else if (position == 16) {
-                binding.ft24.isFocusable = false
-                binding.ft24.isCursorVisible = false
                 binding.ft24.visibility = View.GONE
                 binding.ft14.hint= "Hrs"
                 binding.sqft4.hint= "Hrs"
@@ -841,7 +809,6 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 binding.ft24.visibility = View.VISIBLE
                 binding.ft24.isFocusable = true
                 binding.ft24.isCursorVisible = true
-                binding.ft24.setText("")
                 binding.ft14.hint = "Ft"
                 binding.sqft4.hint = "Sqft"
                 Log.d("spinner","${position}")
@@ -853,23 +820,17 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
             if (position == 4 || position == 6 || position == 8 || position == 10 ) {
 
                 binding.sqft5.hint = "Lft"
-                binding.ft25.isFocusable = false
-                binding.ft25.isCursorVisible = false
                 binding.ft25.visibility = View.GONE
-                binding.ft25.setText("0")
+
                 Log.d("spinner","${position}")
             }
             else if (position == 5 || position == 7 || position == 9 || position == 11) {
-                binding.ft25.isFocusable = false
-                binding.ft25.isCursorVisible = false
                 binding.ft25.visibility = View.GONE
                 binding.sqft5.hint = "Gate"
                 binding.ft15.hint = "Ft"
                 Log.d("spinner", "${position}")
             }
             else if (position == 16) {
-                binding.ft25.isFocusable = false
-                binding.ft25.isCursorVisible = false
                 binding.ft25.visibility = View.GONE
                 binding.ft15.hint= "Hrs"
                 binding.sqft5.hint= "Hrs"
@@ -879,7 +840,6 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 binding.ft25.visibility = View.VISIBLE
                 binding.ft25.isFocusable = true
                 binding.ft25.isCursorVisible = true
-                binding.ft25.setText("")
                 binding.ft15.hint = "Ft"
                 binding.sqft5.hint = "Sqft"
                 Log.d("spinner","${position}")
