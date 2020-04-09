@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        anime()
         val user = FirebaseAuth.getInstance().currentUser
         Log.e("User","${user}")
         if (user == null)
@@ -98,7 +99,6 @@ class MainActivity : AppCompatActivity() {
 
     fun anime()
     {
-        Log.e("efff","fffffff")
         val bgapp: FrameLayout = findViewById(R.id.bgsplash)
         val bganim = AnimationUtils.loadAnimation(this,R.anim.bganim)
         val Y : Float = -2650.toFloat()
