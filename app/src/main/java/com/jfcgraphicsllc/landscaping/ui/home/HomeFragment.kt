@@ -23,6 +23,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.jfcgraphicsllc.landscaping.Estimation
 import com.jfcgraphicsllc.landscaping.EstimationViewModel
+import com.jfcgraphicsllc.landscaping.R
 import com.jfcgraphicsllc.landscaping.databinding.FragmentHomeBinding
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.InternalCoroutinesApi
@@ -186,6 +187,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 startActivityForResult(
                     AuthUI.getInstance()
                         .createSignInIntentBuilder()
+                        .setTheme(R.style.bg)
                         .setAvailableProviders(providers)
                         .build(),
                     0)
@@ -468,6 +470,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                     startActivityForResult(
                         AuthUI.getInstance()
                             .createSignInIntentBuilder()
+                            .setTheme(R.style.bg)
                             .setAvailableProviders(providers)
                             .build(),
                         0)
