@@ -29,7 +29,7 @@ class DisplayHistoryActivity : AppCompatActivity() {
         val actionBar = this.supportActionBar
         actionBar?.hide()
         Log.d("ActionBar","${actionBar}")
-        val intent = getIntent()
+        val intent = intent
         val estimation = intent.getSerializableExtra("historyData") as Estimation
         Log.d("Data","${estimation}")
         addAllArrays()

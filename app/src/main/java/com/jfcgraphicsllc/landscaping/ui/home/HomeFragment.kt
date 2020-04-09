@@ -17,7 +17,6 @@ import com.jfcgraphicsllc.landscaping.EstimationViewModel
 import com.jfcgraphicsllc.landscaping.databinding.FragmentHomeBinding
 import kotlinx.coroutines.InternalCoroutinesApi
 import java.text.DecimalFormat
-import java.util.*
 import kotlin.collections.ArrayList
 
 
@@ -56,8 +55,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val root = binding.root
-        return root
+        return binding.root
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -105,7 +103,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
             costArrayToSave,
             userDataAndTotalToSave
         )
-        binding.phone.setOnFocusChangeListener { v, hasFocus ->
+        binding.phone.setOnFocusChangeListener { _v, hasFocus ->
             if (!hasFocus) {
                 if (binding.phone.text.toString().count() == 10) {
                     binding.phone.setText(processStringAfterEditing(binding.phone.text.toString()))
@@ -186,16 +184,16 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     fun savePrefs(prefs: SharedPreferences, name: ArrayList<String>, vararg input: ArrayList<Any>) {
         val editor = prefs.edit()
-        for (index in 0..input.size - 1) {
+        for (index in input.indices) {
             editor.putInt("${name[index]}_size", input[index].count())
             if (input[index][0] is Spinner) {
                 val arrayToSaveSpinner = input[index] as ArrayList<Spinner>
-                for (i in 0..arrayToSaveSpinner.count() - 1) {
+                for (i in arrayToSaveSpinner.indices) {
                     editor.putInt("${name[index]}_${i}", arrayToSaveSpinner[i].selectedItemPosition)
                 }
             } else {
                 val arrayToSaveEditText = input[index] as ArrayList<EditText>
-                for (i in 0..arrayToSaveEditText.count() - 1) {
+                for (i in arrayToSaveEditText.indices) {
                     editor.putString("${name[index]}_${i}", arrayToSaveEditText[i].text.toString())
                 }
             }
@@ -281,22 +279,22 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
             if (position != 0) {
                 Log.d("Contains","${worksWithEmpty.contains(position)}")
                 if (worksWithEmpty.contains(position)) {
-                    val ft_1 = if (ftArray1[i].text.toString() != "") ftArray1[i].text.toString()
+                    val ft1 = if (ftArray1[i].text.toString() != "") ftArray1[i].text.toString()
                         .toDouble() else 0.0
-                    val ft_2 = if (ftArray2[i].text.toString() != "") ftArray2[i].text.toString()
+                    val ft2 = if (ftArray2[i].text.toString() != "") ftArray2[i].text.toString()
                         .toDouble() else 0.0
                     when (position) {
-                        4 -> sqft = (ft_1 + ft_2)
-                        5 -> sqft = (ft_1 + ft_2)
-                        6 -> sqft = (ft_1 + ft_2)
-                        7 -> sqft = (ft_1 + ft_2)
-                        8 -> sqft = (ft_1 + ft_2)
-                        9 -> sqft = (ft_1 + ft_2)
-                        10 -> sqft = (ft_1 + ft_2)
-                        11 -> sqft = (ft_1 + ft_2)
-                        16 -> sqft = (ft_1 + ft_2)
+                        4 -> sqft = (ft1 + ft2)
+                        5 -> sqft = (ft1 + ft2)
+                        6 -> sqft = (ft1 + ft2)
+                        7 -> sqft = (ft1 + ft2)
+                        8 -> sqft = (ft1 + ft2)
+                        9 -> sqft = (ft1 + ft2)
+                        10 -> sqft = (ft1 + ft2)
+                        11 -> sqft = (ft1 + ft2)
+                        16 -> sqft = (ft1 + ft2)
                     }
-                    Log.d("Empty","${ft_1} + ${ft_2} + ${sqft}")
+                    Log.d("Empty","${ft1} + ${ft2} + ${sqft}")
                     Log.d("Sqft", "${sqft}")
                     sqftArray[i].setText(decimal.format(sqft))
                     sqftTotalVal += sqft
@@ -320,18 +318,18 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 {
                     if (ftArray1[i].text.toString() != "" && ftArray2[i].text.toString() != "")
                     {
-                        val ft_1 = ftArray1[i].text.toString().toDouble()
-                        val ft_2 = ftArray2[i].text.toString().toDouble()
+                        val ft1 = ftArray1[i].text.toString().toDouble()
+                        val ft2 = ftArray2[i].text.toString().toDouble()
                         when (position) {
-                            1 -> sqft = (ft_1 * ft_2)
-                            2 -> sqft = (ft_1 * ft_2)
-                            3 -> sqft = (ft_1 * ft_2)
-                            12 -> sqft = (ft_1 * ft_2)
-                            13 -> sqft = (ft_1 * ft_2)
-                            14 -> sqft = (ft_1 * ft_2)
-                            15 -> sqft = (ft_1 * ft_2)
+                            1 -> sqft = (ft1 * ft2)
+                            2 -> sqft = (ft1 * ft2)
+                            3 -> sqft = (ft1 * ft2)
+                            12 -> sqft = (ft1 * ft2)
+                            13 -> sqft = (ft1 * ft2)
+                            14 -> sqft = (ft1 * ft2)
+                            15 -> sqft = (ft1 * ft2)
                         }
-                        Log.d("NoEmpty","${ft_1} + ${ft_2} + ${sqft}")
+                        Log.d("NoEmpty","${ft1} + ${ft2} + ${sqft}")
                         Log.d("Sqft", "${sqft}")
                         sqftArray[i].setText(decimal.format(sqft))
                         sqftTotalVal += sqft
@@ -400,9 +398,9 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
     fun processStringAfterEditing(text:String):String
     {
         var substring = text.substring(0,3)
-        val firstPart = "("+substring+")"
+        val firstPart = "($substring)"
         substring = text.substring(3,6)
-        val secondPart = substring+"-"
+        val secondPart = "$substring-"
         val thirdPart = text.substring(6)
         return firstPart+secondPart+thirdPart
     }
@@ -496,7 +494,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         {
             if (position == 4 || position == 6 || position == 8 || position == 10 ) {
 
-                binding.sqft1.setHint("Lft")
+                binding.sqft1.hint = "Lft"
                 binding.ft2.isFocusable = false
                 binding.ft2.isCursorVisible = false
                 binding.ft2.visibility = View.GONE
@@ -507,16 +505,16 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 binding.ft2.isFocusable = false
                 binding.ft2.isCursorVisible = false
                 binding.ft2.visibility = View.GONE
-                binding.sqft1.setHint("Gate")
-                binding.ft1.setHint("Ft")
+                binding.sqft1.hint = "Gate"
+                binding.ft1.hint = "Ft"
                 Log.d("spinner", "${position}")
             }
             else if (position == 16) {
                 binding.ft2.isFocusable = false
                 binding.ft2.isCursorVisible = false
                 binding.ft2.visibility = View.GONE
-                binding.ft1.setHint("Hrs")
-                binding.sqft1.setHint("Hrs")
+                binding.ft1.hint = "Hrs"
+                binding.sqft1.hint = "Hrs"
                 Log.d("spinner","${position}")
             }
             else  {
@@ -524,8 +522,8 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 binding.ft2.isFocusable = true
                 binding.ft2.isCursorVisible = true
                 binding.ft2.setText("")
-                binding.ft1.setHint("Ft")
-                binding.sqft1.setHint("Sqft")
+                binding.ft1.hint = "Ft"
+                binding.sqft1.hint = "Sqft"
                 Log.d("spinner","${position}")
             }
 
@@ -534,7 +532,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         else if(parentSpinner == binding.service2) {
             if (position == 4 || position == 6 || position == 8 || position == 10) {
 
-                binding.sqft2.setHint("Lft")
+                binding.sqft2.hint = "Lft"
                 binding.ft22.isFocusable = false
                 binding.ft22.isCursorVisible = false
                 binding.ft22.visibility = View.GONE
@@ -544,23 +542,23 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 binding.ft22.isFocusable = false
                 binding.ft22.isCursorVisible = false
                 binding.ft22.visibility = View.GONE
-                binding.sqft2.setHint("Gate")
-                binding.ft12.setHint("Ft")
+                binding.sqft2.hint = "Gate"
+                binding.ft12.hint = "Ft"
                 Log.d("spinner", "${position}")
             } else if (position == 16) {
                 binding.ft22.isFocusable = false
                 binding.ft22.isCursorVisible = false
                 binding.ft22.visibility = View.GONE
-                binding.ft12.setHint("Hrs")
-                binding.sqft2.setHint("Hrs")
+                binding.ft12.hint = "Hrs"
+                binding.sqft2.hint = "Hrs"
                 Log.d("spinner", "${position}")
             } else {
                 binding.ft22.visibility = View.VISIBLE
                 binding.ft22.isFocusable = true
                 binding.ft22.isCursorVisible = true
                 binding.ft22.setText("")
-                binding.ft12.setHint("Ft")
-                binding.sqft2.setHint("Sqft")
+                binding.ft12.hint = "Ft"
+                binding.sqft2.hint = "Sqft"
                 Log.d("spinner", "${position}")
             }
         }
@@ -568,7 +566,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         {
             if (position == 4 || position == 6 || position == 8 || position == 10 ) {
 
-                binding.sqft3.setHint("Lft")
+                binding.sqft3.hint = "Lft"
                 binding.ft23.isFocusable = false
                 binding.ft23.isCursorVisible = false
                 binding.ft23.visibility = View.GONE
@@ -579,16 +577,16 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 binding.ft23.isFocusable = false
                 binding.ft23.isCursorVisible = false
                 binding.ft23.visibility = View.GONE
-                binding.sqft3.setHint("Gate")
-                binding.ft13.setHint("Ft")
+                binding.sqft3.hint = "Gate"
+                binding.ft13.hint = "Ft"
                 Log.d("spinner", "${position}")
             }
             else if (position == 16) {
                 binding.ft23.isFocusable = false
                 binding.ft23.isCursorVisible = false
                 binding.ft23.visibility = View.GONE
-                binding.ft13.setHint("Hrs")
-                binding.sqft3.setHint("Hrs")
+                binding.ft13.hint= "Hrs"
+                binding.sqft3.hint= "Hrs"
                 Log.d("spinner","${position}")
             }
             else  {
@@ -596,8 +594,8 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 binding.ft23.isFocusable = true
                 binding.ft23.isCursorVisible = true
                 binding.ft23.setText("")
-                binding.ft13.setHint("Ft")
-                binding.sqft3.setHint("Sqft")
+                binding.ft13.hint = "Ft"
+                binding.sqft3.hint = "Sqft"
                 Log.d("spinner","${position}")
             }
 
@@ -606,7 +604,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         {
             if (position == 4 || position == 6 || position == 8 || position == 10 ) {
 
-                binding.sqft4.setHint("Lft")
+                binding.sqft4.hint = "Lft"
                 binding.ft24.isFocusable = false
                 binding.ft24.isCursorVisible = false
                 binding.ft24.visibility = View.GONE
@@ -617,16 +615,16 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 binding.ft24.isFocusable = false
                 binding.ft24.isCursorVisible = false
                 binding.ft24.visibility = View.GONE
-                binding.sqft4.setHint("Gate")
-                binding.ft14.setHint("Ft")
+                binding.sqft4.hint = "Gate"
+                binding.ft14.hint = "Ft"
                 Log.d("spinner", "${position}")
             }
             else if (position == 16) {
                 binding.ft24.isFocusable = false
                 binding.ft24.isCursorVisible = false
                 binding.ft24.visibility = View.GONE
-                binding.ft14.setHint("Hrs")
-                binding.sqft4.setHint("Hrs")
+                binding.ft14.hint= "Hrs"
+                binding.sqft4.hint= "Hrs"
                 Log.d("spinner","${position}")
             }
             else  {
@@ -634,8 +632,8 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 binding.ft24.isFocusable = true
                 binding.ft24.isCursorVisible = true
                 binding.ft24.setText("")
-                binding.ft14.setHint("Ft")
-                binding.sqft4.setHint("Sqft")
+                binding.ft14.hint = "Ft"
+                binding.sqft4.hint = "Sqft"
                 Log.d("spinner","${position}")
             }
         }
@@ -644,7 +642,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         {
             if (position == 4 || position == 6 || position == 8 || position == 10 ) {
 
-                binding.sqft5.setHint("Lft")
+                binding.sqft5.hint = "Lft"
                 binding.ft25.isFocusable = false
                 binding.ft25.isCursorVisible = false
                 binding.ft25.visibility = View.GONE
@@ -655,16 +653,16 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 binding.ft25.isFocusable = false
                 binding.ft25.isCursorVisible = false
                 binding.ft25.visibility = View.GONE
-                binding.sqft5.setHint("Gate")
-                binding.ft15.setHint("Ft")
+                binding.sqft5.hint = "Gate"
+                binding.ft15.hint = "Ft"
                 Log.d("spinner", "${position}")
             }
             else if (position == 16) {
                 binding.ft25.isFocusable = false
                 binding.ft25.isCursorVisible = false
                 binding.ft25.visibility = View.GONE
-                binding.ft15.setHint("Hrs")
-                binding.sqft5.setHint("Hrs")
+                binding.ft15.hint= "Hrs"
+                binding.sqft5.hint= "Hrs"
                 Log.d("spinner","${position}")
             }
             else  {
@@ -672,8 +670,8 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 binding.ft25.isFocusable = true
                 binding.ft25.isCursorVisible = true
                 binding.ft25.setText("")
-                binding.ft15.setHint("Ft")
-                binding.sqft5.setHint("Sqft")
+                binding.ft15.hint = "Ft"
+                binding.sqft5.hint = "Sqft"
                 Log.d("spinner","${position}")
             }
         }
