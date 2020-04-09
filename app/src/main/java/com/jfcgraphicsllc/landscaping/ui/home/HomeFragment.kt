@@ -183,14 +183,24 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
             }
             alertDialog.setPositiveButton("Yes"){dialog, which ->
                 FirebaseAuth.getInstance().signOut()
-                val providers = arrayListOf(AuthUI.IdpConfig.EmailBuilder().setAllowNewAccounts(false).build())
-                startActivityForResult(
-                    AuthUI.getInstance()
-                        .createSignInIntentBuilder()
-                        .setTheme(R.style.bg)
-                        .setAvailableProviders(providers)
-                        .build(),
-                    0)
+                val alertDialog = AlertDialog.Builder(activity)
+                alertDialog.setTitle("You have logged out")
+                alertDialog.setMessage("You need to sign in to use this app!")
+                alertDialog.setPositiveButton("Sign In") { dialog, which ->
+                    val providers = arrayListOf(AuthUI.IdpConfig.EmailBuilder().setAllowNewAccounts(false).build())
+                    startActivityForResult(
+                        AuthUI.getInstance()
+                            .createSignInIntentBuilder()
+                            .setTheme(R.style.bg)
+                            .setAvailableProviders(providers)
+                            .build(),
+                        0)
+                }
+                alertDialog.setNegativeButton("Exit"){dialog, which ->
+                    activity!!.finish()
+                }
+                alertDialog.setCancelable(false)
+                alertDialog.show()
             }
             alertDialog.show()
         }
