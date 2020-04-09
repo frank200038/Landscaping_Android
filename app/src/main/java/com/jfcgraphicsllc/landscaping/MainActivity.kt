@@ -108,7 +108,7 @@ class MainActivity : AppCompatActivity() {
                     {
                         val alertDialog = AlertDialog.Builder(this@MainActivity)
                         alertDialog.setTitle("Not Logged In")
-                        alertDialog.setMessage("You need to log in to use this App")
+                        alertDialog.setMessage("You Need to Sign In")
                         alertDialog.setNegativeButton("Cancel"){dialog, which ->
                             finish()
                         }
