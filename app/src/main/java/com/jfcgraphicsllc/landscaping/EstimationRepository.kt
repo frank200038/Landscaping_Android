@@ -9,4 +9,13 @@ class EstimationRepository(private val estimationDao:EstimationDao)
     {
         estimationDao.insert(estimation)
     }
+
+    suspend fun update(estimation: Estimation) {
+        estimationDao.update(estimation)
+    }
+
+    suspend fun remove(estimation: Estimation)
+    {
+        estimationDao.remove(estimation)
+    }
 }

@@ -11,4 +11,10 @@ interface EstimationDao
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(estimation:Estimation)
+
+    @Update
+    suspend fun update(estimation: Estimation)
+
+    @Delete
+    suspend fun remove(estimation: Estimation)
 }

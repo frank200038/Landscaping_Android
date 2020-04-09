@@ -23,4 +23,12 @@ class EstimationViewModel(application: Application):AndroidViewModel(application
     fun insert(estimation: Estimation) = viewModelScope.launch {
         repository.insert(estimation)
     }
+
+    fun update(estimation: Estimation) = viewModelScope.launch {
+        repository.update(estimation)
+    }
+
+    fun remove(estimation: Estimation) =  viewModelScope.launch {
+        repository.remove(estimation)
+    }
 }

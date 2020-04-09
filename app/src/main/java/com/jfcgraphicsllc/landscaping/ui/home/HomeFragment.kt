@@ -1,7 +1,9 @@
 package com.jfcgraphicsllc.landscaping.ui.home
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.SharedPreferences
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,10 +14,22 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.firebase.ui.auth.AuthUI
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.crashlytics.FirebaseCrashlytics
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.jfcgraphicsllc.landscaping.Estimation
 import com.jfcgraphicsllc.landscaping.EstimationViewModel
 import com.jfcgraphicsllc.landscaping.databinding.FragmentHomeBinding
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.InternalCoroutinesApi
+import kotlinx.coroutines.launch
+import java.io.File
+import java.io.FileNotFoundException
+import java.io.IOException
 import java.text.DecimalFormat
 import kotlin.collections.ArrayList
 
@@ -34,12 +48,15 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private var costArray: ArrayList<EditText> = arrayListOf()
     private var userDataAndTotalArray: ArrayList<EditText> = arrayListOf()
     private lateinit var prefs: SharedPreferences
+    private lateinit var prefs2 : SharedPreferences
     private var serviceArrayToSave: ArrayList<Any> = arrayListOf()
     private var ftArrayToSave1: ArrayList<Any> = arrayListOf()
     private var ftArrayToSave2: ArrayList<Any> = arrayListOf()
     private var sqftArrayToSave: ArrayList<Any> = arrayListOf()
     private var costArrayToSave: ArrayList<Any> = arrayListOf()
     private var userDataAndTotalToSave: ArrayList<Any> = arrayListOf()
+    private var estimation: Estimation? = null
+    private val crashlytics : FirebaseCrashlytics = FirebaseCrashlytics.getInstance()
     private val name = arrayListOf("Service", "ft1", "ft2", "sqft", "cost", "userData")
 
     @InternalCoroutinesApi
@@ -47,6 +64,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         prefs = context.getSharedPreferences("Data", Context.MODE_PRIVATE)
+        prefs2 = context.getSharedPreferences("Database_info",Context.MODE_PRIVATE)
     }
 
     override fun onCreateView(
@@ -60,16 +78,35 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        retrievePrefs(
-            prefs,
-            name,
-            serviceArrayToSave,
-            ftArrayToSave1,
-            ftArrayToSave2,
-            sqftArrayToSave,
-            costArrayToSave,
-            userDataAndTotalToSave
-        )
+        if(crashlytics.didCrashOnPreviousExecution())
+        {
+            Log.e("Wrong","wrong")
+            prefs.edit().clear().commit()
+
+        }
+        if(arguments?.getSerializable("data") != null) {
+            estimation = arguments?.getSerializable("data") as Estimation
+            retrieveDataFromHistory(
+                estimation!!,
+                serviceArrayToSave,
+                ftArrayToSave1,
+                ftArrayToSave2,
+                sqftArrayToSave,
+                costArrayToSave,
+                userDataAndTotalToSave)
+        }
+        else {
+            retrievePrefs(
+                prefs,
+                name,
+                serviceArrayToSave,
+                ftArrayToSave1,
+                ftArrayToSave2,
+                sqftArrayToSave,
+                costArrayToSave,
+                userDataAndTotalToSave
+            )
+        }
         Log.e(
             "OnCreate",
             "${serviceArrayToSave} + ${ftArrayToSave1} + ${ftArrayToSave2} + ${sqftArrayToSave} + ${userDataAndTotalToSave}"
@@ -128,27 +165,31 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
             it.hideKeyboard()
         }
         binding.save.setOnClickListener {
-            processSave()
-            clearAllData()
-        }
+            if (estimation != null) {
+                processSave(true)
 
+            } else {
+                processSave(false)
+                clearAllData()
+            }
+        }
     }
 
 
     override fun onPause() {
         super.onPause()
-
-        savePrefs(
-            prefs,
-            name,
-            serviceArray as ArrayList<Any>,
-            ftArray1 as ArrayList<Any>,
-            ftArray2 as ArrayList<Any>,
-            sqftArray as ArrayList<Any>,
-            costArray as ArrayList<Any>,
-            userDataAndTotalArray as ArrayList<Any>
-        )
-
+        if(estimation == null) {
+            savePrefs(
+                prefs,
+                name,
+                serviceArray as ArrayList<Any>,
+                ftArray1 as ArrayList<Any>,
+                ftArray2 as ArrayList<Any>,
+                sqftArray as ArrayList<Any>,
+                costArray as ArrayList<Any>,
+                userDataAndTotalArray as ArrayList<Any>
+            )
+        }
 
     }
 
@@ -228,6 +269,38 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                             "${index} + ${array[index]} + ${name[index]} + ${count} + ${string}"
                         )
                         array[index].add(string.toString())
+                    }
+                }
+            }
+        }
+    }
+
+    fun retrieveDataFromHistory(estimation:Estimation,vararg array: ArrayList<Any>)
+    {
+        val count = arrayListOf(estimation.service.count(),estimation.ft1.count(),estimation.ft2.count(),estimation.sqft.count(),estimation.cost.count(),estimation.userDataAndTotal.count())
+        val data = arrayListOf(estimation.service,estimation.ft1,estimation.ft2,estimation.sqft,estimation.cost,estimation.userDataAndTotal)
+        for (index in 0..array.size-1)
+        {
+            array[index].clear()
+            if(count[index] != 0)
+            {
+                if (index == 0)
+                {
+                    for(i in 0 until count[index])
+                    {
+                        val service = data[index][i]
+                        array[index].add(service.toInt())
+                        Log.d("RetrieveData","${index} + ${array[index]} + ${count}+${service}")
+
+                    }
+                }
+                else
+                {
+                    for(i in 0 until count[index])
+                    {
+                        val dataToSave = data[index][i]
+                        Log.d("RetrieveData2","${index} + ${array[index]} + ${count} + ${dataToSave}")
+                        array[index].add(dataToSave)
                     }
                 }
             }
@@ -361,8 +434,30 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
 
     @InternalCoroutinesApi
-    fun processSave() {
-        if (binding.name.text.toString() == "" && binding.phone.text.toString() == "") {
+    fun processSave(update: Boolean) {
+        val user = FirebaseAuth.getInstance().currentUser
+        if(user == null)
+        {
+                val alertDialog = AlertDialog.Builder(activity)
+                alertDialog.setTitle("Please Sign In")
+                alertDialog.setMessage("You need to Sign In to save the data")
+                alertDialog.setNegativeButton("Exit"){dialog, which ->
+                    activity!!.finish()
+                }
+                alertDialog.setPositiveButton("Sign In"){dialog, which ->
+                    val providers = arrayListOf(AuthUI.IdpConfig.EmailBuilder().setAllowNewAccounts(false).build())
+                    startActivityForResult(
+                        AuthUI.getInstance()
+                            .createSignInIntentBuilder()
+                            .setAvailableProviders(providers)
+                            .build(),
+                        0)
+                }
+                alertDialog.setCancelable(false)
+                alertDialog.show()
+
+        }
+        else if (binding.name.text.toString() == "" && binding.phone.text.toString() == "") {
             Toast.makeText(
                 context,
                 "Empty Phone and Name",
@@ -375,23 +470,52 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
             val sqftStringArray = sqftArray.asString(false)
             val costStringArray = costArray.asString(false)
             val userDataAndTotalStringArray = userDataAndTotalArray.asString(false)
-            val estimation = Estimation(
-                0,
-                serviceStringArray,
-                ftStringArray1,
-                ftStringArray2,
-                sqftStringArray,
-                costStringArray,
-                userDataAndTotalStringArray
-            )
-            Log.d("Save", "${serviceStringArray} +${ftStringArray1} +${ftStringArray2} + ${sqftStringArray} + ${costStringArray} + ${userDataAndTotalStringArray} +")
-            estimationViewModel.insert(estimation)
+            if(update)
+            {
+                val estimation = Estimation(
+                    this.estimation!!.id,
+                    serviceStringArray,
+                    ftStringArray1,
+                    ftStringArray2,
+                    sqftStringArray,
+                    costStringArray,
+                    userDataAndTotalStringArray
+                )
+                estimationViewModel.update(estimation)
+                jsonConverterAndSave(estimation,true)
+                val alertDialog = AlertDialog.Builder(activity)
+                alertDialog.setTitle("Entry Edited")
+                alertDialog.setMessage("You entry has been sucessfully edited")
+                alertDialog.setNegativeButton("Exit"){dialog, which ->
+                    activity?.onBackPressed()
+                }
+                alertDialog.setCancelable(false)
+                alertDialog.show()
+            }
+            else
+            {
+                val id = prefs2.getInt("database_id",1)
+                val estimation = Estimation(
+                    id,
+                    serviceStringArray,
+                    ftStringArray1,
+                    ftStringArray2,
+                    sqftStringArray,
+                    costStringArray,
+                    userDataAndTotalStringArray
+                )
+                prefs2.edit().putInt("database_id",id+1).commit()
+                estimationViewModel.insert(estimation)
+                jsonConverterAndSave(estimation,false)
+            }
             Toast.makeText(
                 context,
                 "Saved",
                 Toast.LENGTH_LONG
             ).show()
-            clearAllData()
+            GlobalScope.launch {
+                uploadToFireStore()
+            }
         }
     }
 
@@ -436,6 +560,92 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
             }
         }
         return array
+    }
+
+    fun read():String
+    {
+        val file = context!!.openFileInput("estimation.json")
+        file.use{
+                stream -> val text = stream.bufferedReader().use{
+            it.readText()
+        }
+            return text
+        }
+    }
+
+    fun create(json: String):Boolean
+    {
+        val filename = "estimation.json"
+        return try {
+            context!!.openFileOutput(filename,Context.MODE_PRIVATE).use {
+                it.write(json.toByteArray())
+            }
+            true
+        } catch (fileNotFound: FileNotFoundException) {
+            false
+        } catch (ioException: IOException) {
+            false
+        }
+
+    }
+
+    fun isFilePresent() : Boolean
+    {
+        val path = context!!.filesDir.absolutePath + "/estimation.json"
+        val file = File(path)
+        return file.exists()
+    }
+
+    fun jsonConverterAndSave(estimation: Estimation,edit: Boolean)
+    {
+        if(isFilePresent())
+        {
+            val string = read()
+            val listType = object: TypeToken<MutableList<Estimation>>() {}.type
+            val estimationFromJson : MutableList<Estimation> = Gson().fromJson(string,listType)
+            Log.e("Json1","${string} + ${estimationFromJson} + ${estimation}")
+            if(edit)
+            {
+                for(i in 0 until estimationFromJson.count())
+                {
+                    if(estimationFromJson[i].id == estimation.id)
+                    {
+                        estimationFromJson[i] = estimation
+                    }
+                }
+            }
+            else
+            {
+                estimationFromJson.add(estimation)
+            }
+            val estimataionToJson = Gson().toJson(estimationFromJson,listType)
+            create(estimataionToJson)
+            Log.e("Json","${estimationFromJson}")
+        }
+        else
+        {
+            val estimationToAdd = listOf(estimation)
+            val listType = object: TypeToken<List<Estimation>>() {}.type
+            val estimataionToJson = Gson().toJson(estimationToAdd,listType)
+            Log.e("Json3","${estimationToAdd}")
+            create(estimataionToJson)
+        }
+    }
+
+    fun uploadToFireStore()
+    {
+        val storage = Firebase.storage
+        val user = FirebaseAuth.getInstance().currentUser
+        val jsonRef = storage.reference.child("users/${user!!.uid}/estimation.json")
+        val pathForFile = context!!.filesDir.absolutePath + "/estimation.json"
+        Log.e("User id",user!!.uid)
+        val file = Uri.fromFile(File(pathForFile))
+        val uploadTask = jsonRef.putFile(file)
+        uploadTask.addOnSuccessListener {
+            Log.e("Write Success","Sucess")
+        }.addOnFailureListener{
+            Log.e("Write wrong","${it}")
+        }
     }
 
     fun multipleOfFour(value: Double) : Double

@@ -22,22 +22,11 @@ import kotlinx.coroutines.InternalCoroutinesApi
 class DashboardFragment : ListFragment() {
 
     private lateinit var dashboardViewModel: DashboardViewModel
-    private var values:ArrayList<Estimation> = ArrayList(1)
+    private var values:ArrayList<Estimation> = ArrayList(0)
     private lateinit var adapter: EstimationArrayAdapter
     @InternalCoroutinesApi
     private lateinit var estimationViewModel : EstimationViewModel
    // private lateinit var analytics: FirebaseAnalytics
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-//        (activity as AppCompatActivity).supportActionBar!!.show()
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        //(activity as AppCompatActivity).supportActionBar!!.show()
-
-    }
 
 
     override fun onCreateView(
@@ -46,7 +35,6 @@ class DashboardFragment : ListFragment() {
             savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.fragment_dashboard, container, false)
-
         return root
     }
 
@@ -54,12 +42,6 @@ class DashboardFragment : ListFragment() {
     @InternalCoroutinesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(relativeLayout, savedInstanceState)
-
-        Log.d("Count","${values.count()}")
-            if(values.count() == 0)
-            {
-                Log.d("Empty","Empty")
-            }
              adapter = EstimationArrayAdapter(
                 activity!!.applicationContext,
                 android.R.layout.simple_list_item_1,
@@ -69,9 +51,22 @@ class DashboardFragment : ListFragment() {
             listView.adapter = adapter
             estimationViewModel = ViewModelProvider(this).get(EstimationViewModel::class.java)
             estimationViewModel.allEstimation.observe(viewLifecycleOwner, Observer { estimation ->
-                estimation.map { Log.d("Observe", "${estimation[0].userDataAndTotal[1]}");val adapterArray = ArrayList<Estimation>(estimation);adapter.setValue(adapterArray) }})
+                estimation.map {
+                    if (estimation.count() == 0) {
+                        adapter.setValue(arrayListOf())
+                    } else {
+                        estimation.map {
+                            Log.e("Observe", "${estimation}")
+                            val adapterArray = ArrayList<Estimation>(estimation);
+                            Log.e("Observe2", "${adapterArray}")
+                            adapter.setValue(adapterArray)
+                        }
+                    }
+                }
+            })
             val searchView = view.findViewById<SearchView>(R.id.searchView)
             setOnQueryListener(searchView)
+            adapter.notifyDataSetChanged()
 
     }
 
