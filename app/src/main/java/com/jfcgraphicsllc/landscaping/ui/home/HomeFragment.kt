@@ -175,8 +175,8 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         }
         binding.logout.setOnClickListener{
             val alertDialog = AlertDialog.Builder(activity)
-            alertDialog.setTitle("Please Sign In")
-            alertDialog.setMessage("You need to Sign In to save the data")
+            alertDialog.setTitle("Log Out")
+            alertDialog.setMessage("Do you want to log out?")
             alertDialog.setNegativeButton("No"){dialog, which ->
                 activity!!.onBackPressed()
             }
