@@ -173,6 +173,25 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 clearAllData()
             }
         }
+        binding.logout.setOnClickListener{
+            val alertDialog = AlertDialog.Builder(activity)
+            alertDialog.setTitle("Please Sign In")
+            alertDialog.setMessage("You need to Sign In to save the data")
+            alertDialog.setNegativeButton("No"){dialog, which ->
+                activity!!.onBackPressed()
+            }
+            alertDialog.setPositiveButton("Yes"){dialog, which ->
+                FirebaseAuth.getInstance().signOut()
+                val providers = arrayListOf(AuthUI.IdpConfig.EmailBuilder().setAllowNewAccounts(false).build())
+                startActivityForResult(
+                    AuthUI.getInstance()
+                        .createSignInIntentBuilder()
+                        .setAvailableProviders(providers)
+                        .build(),
+                    0)
+            }
+            alertDialog.show()
+        }
     }
 
 
@@ -317,11 +336,11 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
             if (array[index].count() != 0) {
 
                 for (i in 0..array[index].count() - 1) {
+
+                    field[index][i].setText(array[index][i].toString())
                     Log.e(
                         "processRetrievedPrefs3",
-                        "${index} + ${i} + ${field[index][i]} + ${array[index]} + ${array[index][i]}"
-                    )
-                    field[index][i].setText(array[index][i].toString())
+                        "${index} + ${i} + ${field[index][i]} + ${array[index]} + ${array[index][i]} + ${field[index][i].text}")
                 }
             }
         }
@@ -846,6 +865,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
             }
         }
     }
+
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
         TODO("Not yet implemented")

@@ -112,5 +112,14 @@ class MainActivity : AppCompatActivity() {
         bgapp2.animate().translationY(W).setDuration(2500).setStartDelay(400)
     }
 
+    override fun onBackPressed() {
+        val user = FirebaseAuth.getInstance().currentUser
+        if(user == null)
+        {
+            return
+        }
+       return super.onBackPressed()
+
+    }
 
 }
