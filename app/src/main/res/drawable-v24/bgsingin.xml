@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:drawable="@drawable/bg7"
+
+
+        />
+
+        />
+    <item android:drawable="@drawable/ic_asset_1"
+        android:top="230dp"
+        android:width="300dp"
+        android:height="55dp"
+        android:gravity="center"
+        />
+    <item android:drawable="@drawable/ic_estimator_white"
+        android:top="680dp"
+        android:width="120dp"
+        android:height="15dp"
+        android:gravity="center_horizontal"
+        />
+    <item android:drawable="@drawable/ic_welcome"
+        android:top="480dp"
+        android:width="80dp"
+        android:height="12dp"
+        android:gravity="center_horizontal"
+        />
+    <item android:drawable="@drawable/ic_copyright"
+        android:bottom="-600dp"
+        android:width="150dp"
+        android:height="20dp"
+        android:gravity="center"
+        />
+    <item android:drawable="@drawable/ic_estimator_logo_circle"
+        android:bottom="-450dp"
+        android:width="50dp"
+        android:height="50dp"
+        android:gravity="center"
+        />
+
+
+
+</layer-list>

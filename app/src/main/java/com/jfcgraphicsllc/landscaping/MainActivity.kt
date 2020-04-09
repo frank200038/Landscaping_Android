@@ -2,7 +2,10 @@ package com.jfcgraphicsllc.landscaping
 
 
 import android.os.Bundle
+import android.util.Log
 import android.view.WindowManager
+import android.view.animation.AnimationUtils
+import android.widget.FrameLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -33,7 +36,14 @@ class MainActivity : AppCompatActivity() {
 
 
     }
-
+//    fun anime()
+//    {
+//        Log.e("efff","fffffff")
+//        val bgapp: FrameLayout = findViewById(R.id.bgsplash)
+//        val bganim = AnimationUtils.loadAnimation(this,R.anim.bganim)
+//        val Y : Float = -2650.toFloat()
+//        bgapp.animate().translationY(Y).setDuration(1000).setStartDelay(300)
+//    }
 
 
 }
