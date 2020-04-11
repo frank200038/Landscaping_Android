@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="#72E6E6E6"
     tools:context=".ui.home.HomeFragment">
+
     <ImageButton
         android:id="@+id/logout"
         android:layout_width="20dp"
