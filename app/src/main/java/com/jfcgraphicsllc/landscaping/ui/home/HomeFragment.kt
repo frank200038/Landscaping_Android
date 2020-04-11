@@ -204,27 +204,27 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
     }
 
     fun addAllArrays() {
-        val serviceToAdd = listOf(
+        val serviceToAdd = arrayListOf(
             binding.service1,
             binding.service2,
             binding.service3,
             binding.service4,
             binding.service5
         )
-        serviceArray.addAll(serviceToAdd)
-        val ftToAdd1 = listOf(binding.ft1, binding.ft12, binding.ft13, binding.ft14, binding.ft15)
-        ftArray1.addAll(ftToAdd1)
-        val ftToAdd2 = listOf(binding.ft2, binding.ft22, binding.ft23, binding.ft24, binding.ft25)
-        ftArray2.addAll(ftToAdd2)
+        serviceArray = serviceToAdd
+        val ftToAdd1 = arrayListOf(binding.ft1, binding.ft12, binding.ft13, binding.ft14, binding.ft15)
+        ftArray1 = ftToAdd1
+        val ftToAdd2 = arrayListOf(binding.ft2, binding.ft22, binding.ft23, binding.ft24, binding.ft25)
+        ftArray2 = ftToAdd2
         val sqftToAdd =
-            listOf(binding.sqft1, binding.sqft2, binding.sqft3, binding.sqft4, binding.sqft5)
-        sqftArray.addAll(sqftToAdd)
+            arrayListOf(binding.sqft1, binding.sqft2, binding.sqft3, binding.sqft4, binding.sqft5)
+        sqftArray = sqftToAdd
         val costToAdd =
-            listOf(binding.cost1, binding.cost2, binding.cost3, binding.cost4, binding.cost5)
-        costArray.addAll(costToAdd)
+            arrayListOf(binding.cost1, binding.cost2, binding.cost3, binding.cost4, binding.cost5)
+        costArray = costToAdd
         val userDataAndTotalToAdd =
-            listOf(binding.name, binding.phone, binding.totalsqft, binding.totalcost)
-        userDataAndTotalArray.addAll(userDataAndTotalToAdd)
+            arrayListOf(binding.name, binding.phone, binding.totalsqft, binding.totalcost)
+        userDataAndTotalArray = userDataAndTotalToAdd
     }
 
     fun savePrefs(prefs: SharedPreferences, name: ArrayList<String>, vararg input: ArrayList<Any>) {
