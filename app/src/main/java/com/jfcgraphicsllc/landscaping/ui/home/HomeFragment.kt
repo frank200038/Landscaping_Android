@@ -497,6 +497,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 prefs2.edit().putInt("database_id",id+1).commit()
                 estimationViewModel.insert(estimation)
                 jsonConverterAndSave(estimation,false)
+                Log.e("Save","${estimation}")
             }
             Toast.makeText(
                 context,
