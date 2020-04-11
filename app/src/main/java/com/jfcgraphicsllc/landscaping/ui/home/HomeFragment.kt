@@ -594,7 +594,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
             val string = read()
             val listType = object: TypeToken<MutableList<Estimation>>() {}.type
             val estimationFromJson : MutableList<Estimation> = Gson().fromJson(string,listType)
-            Log.e("Json1","${string} + ${estimationFromJson} + ${estimation}")
+           // Log.e("Json1","${string} + ${estimationFromJson} + ${estimation}")
             if(edit)
             {
                 for(i in 0 until estimationFromJson.count())
@@ -611,14 +611,14 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
             }
             val estimataionToJson = Gson().toJson(estimationFromJson,listType)
             create(estimataionToJson)
-            Log.e("Json","${estimationFromJson}")
+           // Log.e("Json","${estimationFromJson}")
         }
         else
         {
             val estimationToAdd = listOf(estimation)
             val listType = object: TypeToken<List<Estimation>>() {}.type
             val estimataionToJson = Gson().toJson(estimationToAdd,listType)
-            Log.e("Json3","${estimationToAdd}")
+           // Log.e("Json3","${estimationToAdd}")
             create(estimataionToJson)
         }
     }
