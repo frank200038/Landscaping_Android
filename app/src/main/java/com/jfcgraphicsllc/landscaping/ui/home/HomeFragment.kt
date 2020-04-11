@@ -255,7 +255,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         for (index in 0..array.size - 1) {
             array[index].clear()
             val count = prefs.getInt("${name[index]}_size", 0)
-            if (count != 0) {
+            if(count == 5 || count == 4) {
                 if (index == 0) {
                     for (i in 0..count - 1) {
                         val position = prefs.getInt("${name[index]}_${i}", 0)
@@ -275,6 +275,11 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                         array[index].add(string.toString())
                     }
                 }
+            }
+            else if (count != 0)
+            {
+                prefs.edit().clear().commit()
+                break
             }
         }
     }
@@ -439,13 +444,16 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     @InternalCoroutinesApi
     fun processSave(update: Boolean) {
-        if (binding.name.text.toString() == "" && binding.phone.text.toString() == "") {
+        if (binding.name.text.toString() == "" || binding.phone.text.toString() == "")
+        {
             Toast.makeText(
                 context,
                 "Empty Phone and Name",
                 Toast.LENGTH_LONG
             ).show()
-        } else {
+        }
+        else
+        {
             val serviceStringArray = serviceArray.asString(true)
             val ftStringArray1 = ftArray1.asString(false)
             val ftStringArray2 = ftArray2.asString(false)
