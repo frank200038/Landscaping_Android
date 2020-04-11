@@ -16,22 +16,23 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="80dp"
             android:gravity="center"
-            android:layout_marginTop="570dp">
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/sqft"
-                android:textSize="18sp"
                 android:layout_marginEnd="6dp"
-                />
+                android:text="@string/sqft"
+                android:textSize="18sp" />
 
             <EditText
                 android:id="@+id/totalsqft_history"
                 android:layout_width="88dp"
                 android:layout_height="40dp"
+                android:layout_marginEnd="6dp"
                 android:background="@drawable/rounded_darkgray"
                 android:cursorVisible="false"
                 android:focusable="false"
@@ -42,20 +43,20 @@
                 android:textColor="#0E0E0E"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                android:windowSoftInputMode="stateVisible|adjustResize"
-                android:layout_marginEnd="6dp"
-                />
+                android:windowSoftInputMode="stateVisible|adjustResize" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/dollar"
-                android:textSize="18sp"
                 android:layout_marginEnd="6dp"
-                />
+                android:text="@string/dollar"
+                android:textSize="18sp" />
+
             <EditText
                 android:id="@+id/totalcost_history"
                 android:layout_width="79dp"
                 android:layout_height="39dp"
+                android:layout_marginEnd="6dp"
                 android:background="@drawable/rounded_darkgray"
                 android:cursorVisible="false"
                 android:focusable="false"
@@ -64,9 +65,7 @@
                 android:importantForAutofill="no"
                 android:inputType="numberDecimal"
                 android:textSize="14sp"
-                android:textStyle="bold"
-                android:layout_marginEnd="6dp"
-                />
+                android:textStyle="bold" />
         </LinearLayout>
 
         <RelativeLayout
@@ -128,8 +127,9 @@
 
             android:id="@+id/scrollView2"
             android:layout_width="wrap_content"
-            android:layout_height="400dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="165dp"
+            android:layout_marginBottom="130dp"
             android:background="@drawable/rounded_red_border"
             android:elevation="3dp"
             android:gravity="center_vertical|center_horizontal"
@@ -679,31 +679,30 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="20dp"
             android:orientation="horizontal"
             tools:layout_editor_absoluteX="145dp"
-            tools:layout_editor_absoluteY="629dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="@dimen/cardview_default_elevation"
-            android:layout_marginTop="650dp">
+            tools:layout_editor_absoluteY="629dp">
+
             <Button
                 android:id="@+id/edit"
                 android:layout_width="wrap_content"
-                android:elevation="3dp"
                 android:layout_height="wrap_content"
-                android:textColor="#FFFFFF"
                 android:layout_marginRight="100dp"
                 android:background="@drawable/rounded_red_border"
+                android:elevation="3dp"
                 android:text="Edit"
-                />
+                android:textColor="#FFFFFF" />
+
             <Button
                 android:id="@+id/delete_history"
-                android:elevation="3dp"
-                android:background="@drawable/rounded_red_border"
                 android:layout_width="wrap_content"
-                android:textColor="#FFFFFF"
                 android:layout_height="wrap_content"
+                android:background="@drawable/rounded_red_border"
+                android:elevation="3dp"
                 android:text="Delete"
-                />
+                android:textColor="#FFFFFF" />
 
         </LinearLayout>
 

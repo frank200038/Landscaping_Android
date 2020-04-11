@@ -5,7 +5,9 @@ import android.app.AlertDialog
 import android.content.DialogInterface
 import android.graphics.Color
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.util.Log
+import android.util.TypedValue
 import android.view.View
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
@@ -56,6 +58,8 @@ class DisplayHistoryActivity : AppCompatActivity() {
             costArray,
             userDataAndTotalArray
         )
+
+
         binding.edit.setOnClickListener {
             val fragment = HomeFragment()
             val fragmentManager = this.supportFragmentManager
@@ -193,6 +197,13 @@ class DisplayHistoryActivity : AppCompatActivity() {
             finish()
         }
         super.onBackPressed()
+    }
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+
+
+
     }
 }
 

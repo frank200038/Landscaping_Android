@@ -5,7 +5,113 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#72E6E6E6"
+    android:id="@+id/main"
     tools:context=".ui.home.HomeFragment">
+
+    <EditText
+        android:id="@+id/totalcost"
+        android:layout_width="77dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/rounded_darkgray"
+        android:cursorVisible="false"
+        android:elevation="3dp"
+        android:focusable="false"
+        android:gravity="center_horizontal|center_vertical"
+        android:hint="@string/cost"
+        android:importantForAutofill="no"
+        android:inputType="numberDecimal"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/scrollView2"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
+
+    <Button
+        android:id="@+id/calculate"
+        android:layout_width="83dp"
+        android:layout_height="83dp"
+        android:background="@drawable/rounded_white"
+        android:elevation="40dp"
+        android:foreground="@drawable/calculate_animated"
+
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/clear"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/clear"
+        tools:targetApi="m" />
+
+    <EditText
+
+        android:id="@+id/totalsqft"
+
+        android:layout_width="77dp"
+        android:layout_height="38dp"
+        android:layout_marginEnd="4dp"
+        android:background="@drawable/rounded_darkgray"
+        android:cursorVisible="false"
+        android:elevation="3dp"
+        android:focusable="false"
+        android:gravity="center_horizontal|center_vertical"
+        android:hint="@string/sqft"
+        android:importantForAutofill="no"
+        android:inputType="numberDecimal"
+        android:textColor="#0E0E0E"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:windowSoftInputMode="stateVisible|adjustResize"
+        app:layout_constraintBottom_toBottomOf="@+id/textView2"
+        app:layout_constraintEnd_toStartOf="@+id/textView2"
+        app:layout_constraintTop_toTopOf="@+id/textView2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="2dp"
+        android:text="@string/sqft"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/totalsqft"
+        app:layout_constraintEnd_toStartOf="@+id/totalsqft"
+        app:layout_constraintTop_toTopOf="@+id/totalsqft" />
+
+    <Button
+        android:id="@+id/save"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/rounded_white"
+        android:elevation="30dp"
+        android:foreground="@drawable/ic_save2"
+        app:layout_constraintBottom_toBottomOf="@+id/calculate"
+        app:layout_constraintStart_toEndOf="@+id/calculate"
+        app:layout_constraintTop_toTopOf="@+id/calculate" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="3dp"
+        android:text="@string/dollar"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/totalcost"
+        app:layout_constraintEnd_toStartOf="@+id/totalcost"
+        app:layout_constraintTop_toTopOf="@+id/totalcost" />
+
+    <Button
+        android:id="@+id/clear"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_below="@id/totalsqft"
+        android:layout_marginTop="74dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/rounded_white"
+        android:elevation="30dp"
+        android:foreground="@drawable/ic_delete2"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:windowSoftInputMode="adjustPan|adjustResize"
+        app:layout_constraintEnd_toStartOf="@+id/calculate"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
 
     <ImageButton
         android:id="@+id/logout"
@@ -33,111 +139,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         />
-
-    <EditText
-        android:id="@+id/totalcost"
-        android:layout_width="77dp"
-        android:layout_height="39dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/rounded_darkgray"
-        android:cursorVisible="false"
-        android:elevation="3dp"
-        android:focusable="false"
-        android:gravity="center_horizontal|center_vertical"
-        android:hint="@string/cost"
-        android:importantForAutofill="no"
-        android:inputType="numberDecimal"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/scrollView2"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="2dp"
-        android:text="@string/sqft"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/totalsqft"
-        app:layout_constraintEnd_toStartOf="@+id/totalsqft"
-        app:layout_constraintTop_toTopOf="@+id/totalsqft" />
-
-    <EditText
-
-        android:id="@+id/totalsqft"
-
-        android:layout_width="77dp"
-        android:layout_height="38dp"
-        android:layout_marginEnd="4dp"
-        android:background="@drawable/rounded_darkgray"
-        android:cursorVisible="false"
-        android:elevation="3dp"
-        android:focusable="false"
-        android:gravity="center_horizontal|center_vertical"
-        android:hint="@string/sqft"
-        android:importantForAutofill="no"
-        android:inputType="numberDecimal"
-        android:textColor="#0E0E0E"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        android:windowSoftInputMode="stateVisible|adjustResize"
-        app:layout_constraintBottom_toBottomOf="@+id/textView2"
-        app:layout_constraintEnd_toStartOf="@+id/textView2"
-        app:layout_constraintTop_toTopOf="@+id/textView2" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="3dp"
-        android:text="@string/dollar"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/totalcost"
-        app:layout_constraintEnd_toStartOf="@+id/totalcost"
-        app:layout_constraintTop_toTopOf="@+id/totalcost" />
-
-    <Button
-        android:id="@+id/calculate"
-        android:layout_width="83dp"
-        android:layout_height="83dp"
-        android:background="@drawable/rounded_white"
-        android:elevation="40dp"
-        android:foreground="@drawable/calculate_animated"
-
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/clear"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/clear"
-        tools:targetApi="m" />
-
-    <Button
-        android:id="@+id/save"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="20dp"
-        android:background="@drawable/rounded_white"
-        android:elevation="30dp"
-        android:foreground="@drawable/ic_save2"
-        app:layout_constraintBottom_toBottomOf="@+id/calculate"
-        app:layout_constraintStart_toEndOf="@+id/calculate"
-        app:layout_constraintTop_toTopOf="@+id/calculate" />
-
-    <Button
-        android:id="@+id/clear"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_below="@id/totalsqft"
-        android:layout_marginTop="74dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/rounded_white"
-        android:elevation="30dp"
-        android:foreground="@drawable/ic_delete2"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:windowSoftInputMode="adjustPan|adjustResize"
-        app:layout_constraintEnd_toStartOf="@+id/calculate"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
 
 
     <RelativeLayout
@@ -253,10 +254,10 @@
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:layout_marginBottom="5dp"
-                    android:longClickable="true"
                     android:background="#ffffff"
                     android:entries="@array/Services"
                     android:gravity="center"
+                    android:longClickable="true"
                     android:nextFocusDown="@+id/ft1"
                     android:nextFocusForward="@+id/ft1"
                     android:prompt="@string/prompt"
@@ -268,9 +269,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:gravity="center">
-
-
-
 
 
                     <EditText
@@ -303,7 +301,6 @@
                         android:nextFocusForward="@+id/service2"
                         android:textSize="14sp"
                         android:textStyle="bold" />
-
 
 
                     <EditText
@@ -369,10 +366,10 @@
                         android:layout_height="40dp"
                         android:layout_gravity="center"
                         android:layout_marginBottom="5dp"
-                        android:longClickable="true"
                         android:background="#ffffff"
                         android:entries="@array/Services"
                         android:gravity="center"
+                        android:longClickable="true"
                         android:nextFocusDown="@+id/ft12"
                         android:nextFocusForward="@+id/ft12"
                         android:prompt="@string/prompt"

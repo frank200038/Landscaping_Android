@@ -5,15 +5,19 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.util.Log
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.marginBottom
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.crashlytics.FirebaseCrashlytics
@@ -25,6 +29,7 @@ import com.jfcgraphicsllc.landscaping.Estimation
 import com.jfcgraphicsllc.landscaping.EstimationViewModel
 import com.jfcgraphicsllc.landscaping.R
 import com.jfcgraphicsllc.landscaping.databinding.FragmentHomeBinding
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.launch
@@ -133,6 +138,19 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         binding.service3.onItemSelectedListener = this
         binding.service4.onItemSelectedListener = this
         binding.service5.onItemSelectedListener = this
+        view.viewTreeObserver.addOnWindowFocusChangeListener { hasFocus ->
+            if(hasFocus)
+            {
+
+                val displayMetrics = DisplayMetrics()
+                activity!!.windowManager.defaultDisplay.getMetrics(displayMetrics)
+                val height = displayMetrics.heightPixels
+                val pixels = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,400f,resources.displayMetrics)
+                binding.scrollView2.layoutParams.height = height - pixels.toInt()
+
+                Log.d("View","${height} + ${pixels} + ${binding.scrollView2.height} + ${binding.scrollView2.layoutParams.height}")
+            }
+        }
         processRetrievedPrefsArray(
             serviceArrayToSave,
             ftArrayToSave1,
@@ -838,8 +856,15 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         }
     }
 
+//    fun heightChange(): Int
+//    {
+//
+//    }
+
+
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
         TODO("Not yet implemented")
+
     }
 }
