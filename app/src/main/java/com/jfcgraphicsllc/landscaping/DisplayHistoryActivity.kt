@@ -59,7 +59,6 @@ class DisplayHistoryActivity : AppCompatActivity() {
             userDataAndTotalArray
         )
 
-
         binding.edit.setOnClickListener {
             val fragment = HomeFragment()
             val fragmentManager = this.supportFragmentManager
@@ -199,11 +198,5 @@ class DisplayHistoryActivity : AppCompatActivity() {
         super.onBackPressed()
     }
 
-    override fun onWindowFocusChanged(hasFocus: Boolean) {
-        super.onWindowFocusChanged(hasFocus)
-
-
-
-    }
 }
 

@@ -128,6 +128,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         addAllArrays()
+        changeScrollViewHeight()
         estimationViewModel = ViewModelProvider(this).get(EstimationViewModel::class.java)
         Log.e(
             "OnViewCreated",
@@ -138,19 +139,6 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         binding.service3.onItemSelectedListener = this
         binding.service4.onItemSelectedListener = this
         binding.service5.onItemSelectedListener = this
-        view.viewTreeObserver.addOnWindowFocusChangeListener { hasFocus ->
-            if(hasFocus)
-            {
-
-                val displayMetrics = DisplayMetrics()
-                activity!!.windowManager.defaultDisplay.getMetrics(displayMetrics)
-                val height = displayMetrics.heightPixels
-                val pixels = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,400f,resources.displayMetrics)
-                binding.scrollView2.layoutParams.height = height - pixels.toInt()
-
-                Log.d("View","${height} + ${pixels} + ${binding.scrollView2.height} + ${binding.scrollView2.layoutParams.height}")
-            }
-        }
         processRetrievedPrefsArray(
             serviceArrayToSave,
             ftArrayToSave1,
@@ -856,10 +844,16 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         }
     }
 
-//    fun heightChange(): Int
-//    {
-//
-//    }
+    fun changeScrollViewHeight()
+    {
+        val displayMetrics = DisplayMetrics()
+        activity!!.windowManager.defaultDisplay.getMetrics(displayMetrics)
+        val height = displayMetrics.heightPixels
+        val pixels = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,400f,resources.displayMetrics)
+        binding.scrollView2.layoutParams.height = height - pixels.toInt()
+
+        Log.d("View","${height} + ${pixels} + ${binding.scrollView2.height} + ${binding.scrollView2.layoutParams.height}")
+    }
 
 
 
