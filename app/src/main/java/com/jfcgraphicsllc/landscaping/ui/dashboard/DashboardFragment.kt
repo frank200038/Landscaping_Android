@@ -55,12 +55,10 @@ class DashboardFragment : ListFragment() {
                     if (estimation.count() == 0) {
                         adapter.setValue(arrayListOf())
                     } else {
-                        estimation.map {
                             Log.e("Observe", "${estimation}")
                             val adapterArray = ArrayList<Estimation>(estimation);
                             Log.e("Observe2", "${adapterArray}")
                             adapter.setValue(adapterArray)
-                        }
                     }
                 }
             })

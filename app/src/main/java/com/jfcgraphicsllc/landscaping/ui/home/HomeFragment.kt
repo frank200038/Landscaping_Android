@@ -368,18 +368,18 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         var sqftTotalVal = 0.0
         var costTotalVal = 0.0
         val decimal = DecimalFormat("#")
+        val worksWithEmpty = arrayListOf(4, 5, 6, 7, 8, 9, 10, 11, 16)
         for (i in 0..serviceArray.count() - 1)
         {
-            val worksWithEmpty = arrayListOf(4, 5, 6, 7, 8, 9, 10, 11, 16)
             val position = serviceArray[i].selectedItemPosition
-            var sqft = 0.0
+            var sqft: Double
             if (position != 0) {
                 Log.d("Contains","${worksWithEmpty.contains(position)}")
                 if (worksWithEmpty.contains(position))  // These are serives that don't need to have both ft1 and ft2 entered
                 {
-                    val ft1 = if (ftArray1[i].text.toString() != "") ftArray1[i].text.toString()
+                    val ft1 = if (ftArray1[i].text.toString() != "") ftArray1[i].text.toString() //Assign automatically 0.0 to ft1 is not entered
                         .toDouble() else 0.0
-                    val ft2 = if (ftArray2[i].text.toString() != "") ftArray2[i].text.toString()
+                    val ft2 = if (ftArray2[i].text.toString() != "") ftArray2[i].text.toString() //Assign automatically 0.0 to ft2 is not entered
                         .toDouble() else 0.0
                     sqft = ft1 + ft2
                     Log.d("Empty","${ft1} + ${ft2} + ${sqft}")
@@ -402,7 +402,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                     costArray[i].setText(decimal.format(cost))
                     costTotalVal += cost
                 }
-                else
+                else //Services that needs to have a value of ft1 and ft2
                 {
                     if (ftArray1[i].text.toString() != "" && ftArray2[i].text.toString() != "")
                     {
@@ -429,8 +429,8 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                     }
                     else
                     {
-                        sqftArray[i].setText("")
-                        costArray[i].setText("")
+                        sqftArray[i].setText("") //If either ft1 or ft2 is empty, set the sqftText to ""
+                        costArray[i].setText("") //If either ft1 or ft2 is empty, set the costText to ""
                     }
                 }
             }
@@ -458,7 +458,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
             val sqftStringArray = sqftArray.asString(false)
             val costStringArray = costArray.asString(false)
             val userDataAndTotalStringArray = userDataAndTotalArray.asString(false)
-            if(update)
+            if(update) //If the user is trying to save an edited estimation
             {
                 val estimation = Estimation(
                     this.estimation!!.id,
@@ -470,7 +470,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                     userDataAndTotalStringArray
                 )
                 estimationViewModel.update(estimation)
-                jsonConverterAndSave(estimation,true)
+                jsonConverterAndSave(estimation,true) //Convert saved estimation to JSON. Prepare to save to FireStore
                 val alertDialog = AlertDialog.Builder(activity)
                 alertDialog.setTitle("Entry Edited")
                 alertDialog.setMessage("You entry has been sucessfully edited")
@@ -481,7 +481,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 alertDialog.show()
             }
             else
-            {
+            { //Save estimation as a new one
                 val id = prefs2.getInt("database_id",1)
                 val estimation = Estimation(
                     id,
@@ -494,7 +494,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 )
                 prefs2.edit().putInt("database_id",id+1).commit()
                 estimationViewModel.insert(estimation)
-                jsonConverterAndSave(estimation,false)
+                jsonConverterAndSave(estimation,false) //Convert data to JSON, prepare for upload to firestore
                 Log.e("Save","${estimation}")
             }
             Toast.makeText(
@@ -503,7 +503,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 Toast.LENGTH_LONG
             ).show()
             GlobalScope.launch {
-                uploadToFireStore()
+                uploadToFireStore() //Upload to firestore
             }
         }
     }
@@ -528,10 +528,11 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         return firstPart+secondPart+thirdPart
     }
 
+    //Extension of ArrayList function, convert directly an array to ArrayList String with contents
     fun <T> ArrayList<T>.asString(Spinner: Boolean) : ArrayList<String>
     {
         val array = arrayListOf<String>()
-        if(Spinner)
+        if(Spinner) //Convert Serivce positon to string and save in Array
         {
             val arrayToProcess = this as ArrayList<Spinner>
             arrayToProcess.map {
@@ -540,7 +541,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
             }
 
         }
-        else
+        else //Saved text to array
         {
             val arrayToProcess = this as ArrayList<EditText>
             arrayToProcess.map {
@@ -551,7 +552,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         return array
     }
 
-    fun read():String
+    fun read():String //Read the json file
     {
         val file = context!!.openFileInput("estimation.json")
         file.use{
@@ -562,7 +563,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         }
     }
 
-    fun create(json: String):Boolean
+    fun create(json: String):Boolean //If file doesn't create, create a new one
     {
         val filename = "estimation.json"
         return try {
@@ -578,7 +579,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     }
 
-    fun isFilePresent() : Boolean
+    fun isFilePresent() : Boolean //Check if file is present
     {
         val path = context!!.filesDir.absolutePath + "/estimation.json"
         val file = File(path)
@@ -587,37 +588,37 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     fun jsonConverterAndSave(estimation: Estimation,edit: Boolean)
     {
-        if(isFilePresent())
+        if(isFilePresent()) //If file is present
         {
-            val string = read()
+            val string = read() //Read from the existint file
             val listType = object: TypeToken<MutableList<Estimation>>() {}.type
-            val estimationFromJson : MutableList<Estimation> = Gson().fromJson(string,listType)
+            val estimationFromJson : MutableList<Estimation> = Gson().fromJson(string,listType) //use Gson to convert JSON to <Estimation>
            // Log.e("Json1","${string} + ${estimationFromJson} + ${estimation}")
-            if(edit)
+            if(edit) //If it is an edition of existing entry
             {
                 for(i in 0 until estimationFromJson.count())
                 {
-                    if(estimationFromJson[i].id == estimation.id)
+                    if(estimationFromJson[i].id == estimation.id) //Find the estimation in the json file
                     {
-                        estimationFromJson[i] = estimation
+                        estimationFromJson[i] = estimation //Replace the old one with the current one
                     }
                 }
             }
             else
             {
-                estimationFromJson.add(estimation)
+                estimationFromJson.add(estimation) // It is a new estimation, add directly
             }
-            val estimataionToJson = Gson().toJson(estimationFromJson,listType)
-            create(estimataionToJson)
+            val estimataionToJson = Gson().toJson(estimationFromJson,listType) //Convert Estimation back to Json format
+            create(estimataionToJson)  // Create a new version of the Json file
            // Log.e("Json","${estimationFromJson}")
         }
-        else
+        else //If file doesn't exist
         {
-            val estimationToAdd = listOf(estimation)
+            val estimationToAdd = listOf(estimation) //Add this estimation as the start of the new json file
             val listType = object: TypeToken<List<Estimation>>() {}.type
-            val estimataionToJson = Gson().toJson(estimationToAdd,listType)
+            val estimataionToJson = Gson().toJson(estimationToAdd,listType) //Convert to json file
            // Log.e("Json3","${estimationToAdd}")
-            create(estimataionToJson)
+            create(estimataionToJson) //Create this json file
         }
     }
 
