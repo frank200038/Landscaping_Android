@@ -92,6 +92,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         }
         if(arguments?.getSerializable("data") != null) {
             estimation = arguments?.getSerializable("data") as Estimation
+            //Retrieve Estimation Data when user edits the entry
             retrieveDataFromHistory(
                 estimation!!,
                 serviceArrayToSave,
@@ -102,6 +103,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 userDataAndTotalToSave)
         }
         else {
+            //Normal situation, retrieves data from SharedPrefereneces (Fragment destroy, or app closed)
             retrievePrefs(
                 prefs,
                 name,
@@ -147,6 +149,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
             costArrayToSave,
             userDataAndTotalToSave
         )
+        //Auto format of phone number into US Phone Format (xxx)xxx-xxxx if applicable
         binding.phone.setOnFocusChangeListener { _v, hasFocus ->
             if (!hasFocus) {
                 if (binding.phone.text.toString().count() == 10) {
@@ -188,6 +191,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     override fun onPause() {
         super.onPause()
+        //Save the preferences when Fragment is on Pause and only if the fragment is not created from editing
         if(estimation == null) {
             savePrefs(
                 prefs,
@@ -233,19 +237,20 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         userDataAndTotalArray = userDataAndTotalToAdd
     }
 
+    //Save Preferences
     fun savePrefs(prefs: SharedPreferences, name: ArrayList<String>, vararg input: ArrayList<Any>) {
         val editor = prefs.edit()
         for (index in input.indices) {
-            editor.putInt("${name[index]}_size", input[index].count())
-            if (input[index][0] is Spinner) {
+            editor.putInt("${name[index]}_size", input[index].count()) //Register the count of the array using the name of the array
+            if (input[index][0] is Spinner) { // If the first item is Spinner, then array is Spinner
                 val arrayToSaveSpinner = input[index] as ArrayList<Spinner>
                 for (i in arrayToSaveSpinner.indices) {
-                    editor.putInt("${name[index]}_${i}", arrayToSaveSpinner[i].selectedItemPosition)
+                    editor.putInt("${name[index]}_${i}", arrayToSaveSpinner[i].selectedItemPosition) // Save the Item Position of the Spinner to SharedPreferences
                 }
-            } else {
+            } else { //If array is EditText
                 val arrayToSaveEditText = input[index] as ArrayList<EditText>
                 for (i in arrayToSaveEditText.indices) {
-                    editor.putString("${name[index]}_${i}", arrayToSaveEditText[i].text.toString())
+                    editor.putString("${name[index]}_${i}", arrayToSaveEditText[i].text.toString()) //Save text to SharedPreferences
                 }
             }
         }
@@ -259,21 +264,21 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
     ) {
 
         for (index in 0..array.size - 1) {
-            array[index].clear()
-            val count = prefs.getInt("${name[index]}_size", 0)
-            if(count == 5 || count == 4) {
-                if (index == 0) {
+            array[index].clear() //Clear array that is used to store the data
+            val count = prefs.getInt("${name[index]}_size", 0) // Retrieve the size of the array by searching the name
+            if(count == 5 || count == 4) { // If the array size is either 5 or 4 (Means normal situation)
+                if (index == 0) { // The first is always Service Array (Spinner)
                     for (i in 0..count - 1) {
-                        val position = prefs.getInt("${name[index]}_${i}", 0)
+                        val position = prefs.getInt("${name[index]}_${i}", 0) //Get the position that suppose to be assigned to Spinner
                         Log.d(
                             "RetrievePrefs",
                             "${index} + ${array[index]} + ${name[index]} + ${count} + ${position}"
                         )
                         array[index].add(position)
                     }
-                } else {
+                } else { //The rest is always EditText array
                     for (i in 0..count - 1) {
-                        val string = prefs.getString("${name[index]}_${i}", "")
+                        val string = prefs.getString("${name[index]}_${i}", "") // Retrieve the text
                         Log.d(
                             "RetrievePrefs2",
                             "${index} + ${array[index]} + ${name[index]} + ${count} + ${string}"
@@ -282,7 +287,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                     }
                 }
             }
-            else if (count != 0)
+            else if (count != 0) //If the array size is not 5 or 4 means there is problem in saving. Handle Exception by clearning the sharedPreferences (No need to operate if array is empty)
             {
                 prefs.edit().clear().commit()
                 break
@@ -290,6 +295,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         }
     }
 
+    //Process Estimation data if user tries to edit it
     fun retrieveDataFromHistory(estimation:Estimation,vararg array: ArrayList<Any>)
     {
         val count = arrayListOf(estimation.service.count(),estimation.ft1.count(),estimation.ft2.count(),estimation.sqft.count(),estimation.cost.count(),estimation.userDataAndTotal.count())
@@ -299,12 +305,12 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
             array[index].clear()
             if(count[index] != 0)
             {
-                if (index == 0)
+                if (index == 0) //First index is always Service array
                 {
                     for(i in 0 until count[index])
                     {
                         val service = data[index][i]
-                        array[index].add(service.toInt())
+                        array[index].add(service.toInt()) //Add Int type of Serivce position to the array
                         Log.d("RetrieveData","${index} + ${array[index]} + ${count}+${service}")
 
                     }
@@ -315,19 +321,22 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                     {
                         val dataToSave = data[index][i]
                         Log.d("RetrieveData2","${index} + ${array[index]} + ${count} + ${dataToSave}")
-                        array[index].add(dataToSave)
+                        array[index].add(dataToSave) //Add text to the array
                     }
                 }
             }
         }
     }
 
+    //Apply text and selected position on theirs correspondent EditText and Spinners
     fun processRetrievedPrefsArray(spinner: ArrayList<Any>, vararg array: ArrayList<Any>) {
 
         val field = arrayListOf(ftArray1, ftArray2, sqftArray, costArray, userDataAndTotalArray)
+        //Process Spinner data, has to be seperated
         for (i in 0..spinner.count() - 1) {
             serviceArray[i].setSelection(spinner[i].toString().toInt())
         }
+        //Process String to apply on EditText
         for (index in 0..array.count() - 1) {
             if (array[index].count() != 0) {
 
@@ -366,22 +375,13 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
             var sqft = 0.0
             if (position != 0) {
                 Log.d("Contains","${worksWithEmpty.contains(position)}")
-                if (worksWithEmpty.contains(position)) {
+                if (worksWithEmpty.contains(position))  // These are serives that don't need to have both ft1 and ft2 entered
+                {
                     val ft1 = if (ftArray1[i].text.toString() != "") ftArray1[i].text.toString()
                         .toDouble() else 0.0
                     val ft2 = if (ftArray2[i].text.toString() != "") ftArray2[i].text.toString()
                         .toDouble() else 0.0
-                    when (position) {
-                        4 -> sqft = (ft1 + ft2)
-                        5 -> sqft = (ft1 + ft2)
-                        6 -> sqft = (ft1 + ft2)
-                        7 -> sqft = (ft1 + ft2)
-                        8 -> sqft = (ft1 + ft2)
-                        9 -> sqft = (ft1 + ft2)
-                        10 -> sqft = (ft1 + ft2)
-                        11 -> sqft = (ft1 + ft2)
-                        16 -> sqft = (ft1 + ft2)
-                    }
+                    sqft = ft1 + ft2
                     Log.d("Empty","${ft1} + ${ft2} + ${sqft}")
                     Log.d("Sqft", "${sqft}")
                     sqftArray[i].setText(decimal.format(sqft))
@@ -408,15 +408,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                     {
                         val ft1 = ftArray1[i].text.toString().toDouble()
                         val ft2 = ftArray2[i].text.toString().toDouble()
-                        when (position) {
-                            1 -> sqft = (ft1 * ft2)
-                            2 -> sqft = (ft1 * ft2)
-                            3 -> sqft = (ft1 * ft2)
-                            12 -> sqft = (ft1 * ft2)
-                            13 -> sqft = (ft1 * ft2)
-                            14 -> sqft = (ft1 * ft2)
-                            15 -> sqft = (ft1 * ft2)
-                        }
+                        sqft = ft1 * ft2
                         Log.d("NoEmpty","${ft1} + ${ft2} + ${sqft}")
                         Log.d("Sqft", "${sqft}")
                         sqftArray[i].setText(decimal.format(sqft))
