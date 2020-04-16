@@ -427,8 +427,8 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                             1 -> cost = round((sqft) * (12))
                             2 -> cost = round((sqft) * (7))
                             3 -> cost = round((sqft) * (4.5))
-                            12 -> cost = multipleOfThree(sqft) * 30
-                            13 -> cost = multipleOfThree(sqft) * 26.6
+                            12 -> cost = mulchPrice(sqft)
+                            13 -> cost = mulchPriceNatural(sqft)
                             14 -> cost = round((sqft) * (300))
                             15 -> cost = round((sqft) * (300))
                         }
@@ -664,16 +664,6 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         return valueToReturn.toDouble()
     }
 
-    fun multipleOfThree(value: Double) : Double
-    {
-        var valueToReturn = value.roundToInt()
-        if(valueToReturn < 3)
-        {
-            return 3.0
-        }
-        return valueToReturn.toDouble()
-    }
-
     fun multipleOfSix(value: Double) : Double
     {
         var valueToReturn = value.roundToInt()
@@ -692,6 +682,32 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
             }
         }
         return valueToReturn.toDouble()
+    }
+
+    fun mulchPrice(sqft: Double) : Double
+    {
+        if (sqft <= 3)
+        {
+            return 450.00
+        }
+        else
+        {
+            return sqft * 90
+        }
+        return 0.0
+    }
+
+    fun mulchPriceNatural(sqft: Double) : Double
+    {
+        if (sqft <= 5)
+        {
+            return 700.00
+        }
+        else
+        {
+            return sqft * 80
+        }
+        return 0.0
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
