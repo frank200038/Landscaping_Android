@@ -333,15 +333,13 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
         val field = arrayListOf(ftArray1, ftArray2, sqftArray, costArray, userDataAndTotalArray)
         //Process Spinner data, has to be seperated
-        for (i in 0..spinner.count() - 1) {
+        for (i in spinner.indices) {
             serviceArray[i].setSelection(spinner[i].toString().toInt())
         }
         //Process String to apply on EditText
-        for (index in 0..array.count() - 1) {
+        for (index in array.indices) {
             if (array[index].count() != 0) {
-
-                for (i in 0..array[index].count() - 1) {
-
+                for (i in array[index].indices) {
                     field[index][i].setText(array[index][i].toString())
                     Log.e(
                         "processRetrievedPrefs3",

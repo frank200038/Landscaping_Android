@@ -38,7 +38,7 @@ class EstimationArrayAdapter(context: Context, @LayoutRes private var layoutRes:
 
     fun setValue(value:ArrayList<Estimation>)
     {
-        this.value = value
+        //this.value = value
         this.filtered = value
         notifyDataSetChanged()
     }
