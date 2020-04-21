@@ -209,7 +209,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     fun View.hideKeyboard() {
         val inputMethodManager =
-            context!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(this.windowToken, 0)
     }
 
@@ -552,7 +552,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     fun read():String //Read the json file
     {
-        val file = context!!.openFileInput("estimation.json")
+        val file = requireContext().openFileInput("estimation.json")
         file.use{
                 stream -> val text = stream.bufferedReader().use{
             it.readText()
@@ -565,7 +565,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
     {
         val filename = "estimation.json"
         return try {
-            context!!.openFileOutput(filename,Context.MODE_PRIVATE).use {
+            requireContext().openFileOutput(filename,Context.MODE_PRIVATE).use {
                 it.write(json.toByteArray())
             }
             true
@@ -579,7 +579,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     fun isFilePresent() : Boolean //Check if file is present
     {
-        val path = context!!.filesDir.absolutePath + "/estimation.json"
+        val path = requireContext().filesDir.absolutePath + "/estimation.json"
         val file = File(path)
         return file.exists()
     }
@@ -625,8 +625,8 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         val storage = Firebase.storage
         val user = FirebaseAuth.getInstance().currentUser
         val jsonRef = storage.reference.child("users/${user!!.uid}/estimation.json")
-        val pathForFile = context!!.filesDir.absolutePath + "/estimation.json"
-        Log.e("User id",user!!.uid)
+        val pathForFile = requireContext().filesDir.absolutePath + "/estimation.json"
+        Log.e("User id",user.uid)
         val file = Uri.fromFile(File(pathForFile))
         val uploadTask = jsonRef.putFile(file)
         uploadTask.addOnSuccessListener {

@@ -43,7 +43,7 @@ class DashboardFragment : ListFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(relativeLayout, savedInstanceState)
              adapter = EstimationArrayAdapter(
-                activity!!.applicationContext,
+                requireActivity().applicationContext,
                 android.R.layout.simple_list_item_1,
                 values
             )
@@ -76,7 +76,7 @@ class DashboardFragment : ListFragment() {
         var item = adapter.getValueAtIndex(position)
         val intent = Intent(activity,DisplayHistoryActivity::class.java)
         intent.putExtra("historyData",item)
-        view!!.context!!.startActivity(intent)
+        requireView().context!!.startActivity(intent)
         Log.d("Selected","Select ${item}")
     }
 
@@ -99,7 +99,7 @@ class DashboardFragment : ListFragment() {
 
     fun View.hideKeyboard()
     {
-        val inputMethodManager = context!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val inputMethodManager = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(this.windowToken,0)
     }
 
