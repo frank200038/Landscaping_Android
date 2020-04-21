@@ -685,7 +685,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         {
             return sqft * 90
         }
-        return 0.0
+
     }
 
     fun mulchPriceNatural(sqft: Double) : Double
@@ -698,7 +698,6 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         {
             return sqft * 80
         }
-        return 0.0
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
@@ -854,7 +853,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
     fun changeScrollViewHeight()
     {
         val displayMetrics = DisplayMetrics()
-        activity!!.windowManager.defaultDisplay.getMetrics(displayMetrics)
+        requireActivity().windowManager.defaultDisplay.getMetrics(displayMetrics)
         val height = displayMetrics.heightPixels
         val pixels = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,400f,resources.displayMetrics)
         binding.scrollView2.layoutParams.height = height - pixels.toInt()
