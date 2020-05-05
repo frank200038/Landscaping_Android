@@ -26,6 +26,7 @@ piece of paper to record estimation when they are with customers
   <li> Add possibility for user to add more services (currently it can only be changed by changing the program)</li>
   <li> Add possibility for user to add more serivec items for each estimation (Currenly only 6 is possible per estimation)</li>
   <li> Add possibility for user to define their own formula of calculating the cost for each service (Only possible to change in the program for now)</li>
+  <li> Create a version for iOS programmed in Swift for iPhones or iPads users </li>
  </ul>
 
 <b><i>Created by Yan Zhuang in April, 2020.</b></i>
