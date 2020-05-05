@@ -21,4 +21,11 @@ piece of paper to record estimation when they are with customers
   <li> Gson --> Use Gson to convert customized data class to JSON file in order to upload them to Firebase Storage (Also serves to convert JSON back to data class in order to manipulate in the app) </li>
 </ul>
 
+<h2> Future improvement </h2>
+<ul>
+  <li> Add possibility for user to add more services (currently it can only be changed by changing the program)</li>
+  <li> Add possibility for user to add more serivec items for each estimation (Currenly only 6 is possible per estimation)</li>
+  <li> Add possibility for user to define their own formula of calculating the cost for each service (Only possible to change in the program for now)</li>
+ </ul>
+
 <b><i>Created by Yan Zhuang in April, 2020.</b></i>
