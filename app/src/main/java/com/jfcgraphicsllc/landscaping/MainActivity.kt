@@ -104,25 +104,31 @@ class MainActivity : AppCompatActivity() {
                     val user = FirebaseAuth.getInstance().currentUser
                     Log.e("User","${user}")
                     Log.e("Animation Finish","Finish")
-                    if(user == null)
-                    {
-                        val alertDialog = AlertDialog.Builder(this@MainActivity)
-                        alertDialog.setTitle("Not Logged In")
-                        alertDialog.setMessage("You Need to Sign In")
-                        alertDialog.setNegativeButton("Cancel"){dialog, which ->
-                            finish()
+                    if(user == null) {
+                        if (!this@MainActivity.isFinishing) {
+                            val alertDialog = AlertDialog.Builder(this@MainActivity)
+                            alertDialog.setTitle("Not Logged In")
+                            alertDialog.setMessage("You Need to Sign In")
+                            alertDialog.setNegativeButton("Cancel") { dialog, which ->
+                                finish()
+                            }
+                            alertDialog.setPositiveButton("Sign In") { dialog, which ->
+                                val providers = arrayListOf(
+                                    AuthUI.IdpConfig.EmailBuilder().setAllowNewAccounts(false)
+                                        .build()
+                                )
+                                startActivityForResult(
+                                    AuthUI.getInstance()
+                                        .createSignInIntentBuilder()
+                                        .setTheme(R.style.bg)
+                                        .setAvailableProviders(providers)
+                                        .build(),
+                                    0
+                                )
+                            }
+                            alertDialog.setCancelable(false)
+                            alertDialog.show()
                         }
-                        alertDialog.setPositiveButton("Sign In"){dialog, which ->
-                            val providers = arrayListOf(AuthUI.IdpConfig.EmailBuilder().setAllowNewAccounts(false).build())
-                            startActivityForResult(AuthUI.getInstance()
-                                .createSignInIntentBuilder()
-                                .setTheme(R.style.bg)
-                                .setAvailableProviders(providers)
-                                .build(),
-                                0)
-                        }
-                        alertDialog.setCancelable(false)
-                        alertDialog.show()
                     }
                 }
             }

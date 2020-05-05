@@ -135,6 +135,7 @@
         android:layout_marginTop="35dp"
         android:foregroundGravity="right"
         android:text="Logout"
+        android:id = "@+id/logouttext"
         android:textColor="@color/lightgray"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

@@ -183,8 +183,15 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 clearAllData()
             }
         }
-        binding.logout.setOnClickListener{
-            FirebaseAuth.getInstance().signOut()
+        if(estimation == null) {
+            binding.logout.setOnClickListener {
+                FirebaseAuth.getInstance().signOut()
+            }
+        }
+        else
+        {
+            binding.logout.visibility = View.INVISIBLE
+            binding.logouttext.visibility = View.INVISIBLE
         }
     }
 
