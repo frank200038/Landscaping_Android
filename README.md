@@ -1,6 +1,6 @@
 # Estimator created for Landscaping Industry
 
-<h2> What does this app do </h2>
+<h2> Function of The App </h2>
 
 The app facilitates workers in landsacping industry by offering them a user-friendly interface where they can create easily an estimation for each customer. <br>
 
@@ -10,7 +10,7 @@ correspondent dimensions. The app will calculate automatically the size and the 
 In summary, the app saves a lot of time for people who work in Landscaping Industry because they don't need to use a pen and a 
 piece of paper to record estimation when they are with customers 
 
-<h2> What key components does this app contain </h2>
+<h2> Key Components </h2>
 <ul>
   <li> Firebase Authentification --> Handle Authentification of Users </li>
   <li> Firebase Storage --> In corporating with Firebase Authentification to save estimation data seperated by User UID.</li>
