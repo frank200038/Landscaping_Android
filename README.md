@@ -1,6 +1,6 @@
-# Landscaping_Android
+# An Estimator created for Landscaping Industry.
 
-<h1><i>An Estimator created for Landscaping Industry.</i></h1>
+<i>An Estimator created for Landscaping Industry.</i></h1>
 
 <h2> What does this app do </h2>
 
