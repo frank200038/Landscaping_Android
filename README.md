@@ -1,7 +1,7 @@
 # Estimator created for Landscaping Industry
 <h2> Language Used </h2>
 
-<p> The entire app is programmed with <b>Kotlin</b> except for <i>TypeConverter</i> where Java is being used</p>
+<p> The entire app is programmed with <b>Kotlin</b> except for <i>TypeConverter</i> where <b>Java</b> is being used</p>
 
 <h2> Function of The App </h2>
 
