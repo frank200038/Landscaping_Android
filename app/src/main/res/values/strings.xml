@@ -16,9 +16,38 @@
     <string name="calculate">CALCULATE</string>
     <string name="save">SAVE</string>
     <string name="Clear">Clear</string>
+    <string name="contact">contact</string>
+    <string name="history">HISTORY</string>
+    <string name="search">Search</string>
+
+
+
+
+
+
 
     <string-array name="Services">
-        <item>Trimming</item>
-        <item>Planting</item>
+        <item>Choose a Service</item>
+        <item>	Pavers patios walkway jobs 	</item>
+        <item>	Concrete patios walkway jobs 	</item>
+        <item>	Black top driveway	</item>
+        <item>	Solid white pvc fence	</item>
+        <item>	4 Foot solid pcv gate 	</item>
+        <item>	Designed top pvc 6x8 pvc w fence	</item>
+        <item>	Designed 4 foot gate	</item>
+        <item>	Stockade wood fence 	</item>
+        <item>	4 Foot stockade wood gate 	</item>
+        <item>	Aluminum decorative fence 	</item>
+        <item>	Aluminum decorative 4 foot gate 	</item>
+        <item>	Black, brown and red  mulch 	</item>
+        <item>	Natural brown mulch 	</item>
+        <item>	Spring clean ups 	</item>
+        <item>	Fall clean ups 	</item>
+        <item>	Trimming 	</item>
     </string-array>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="dollar">$</string>
+    <string name="Units">Units</string>
 </resources>

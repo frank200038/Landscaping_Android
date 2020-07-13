@@ -1,0 +1,69 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="88.16dp"
+    android:height="88.16dp"
+    android:viewportWidth="88.16"
+    android:viewportHeight="88.16">
+  <path
+      android:pathData="M44.08,0L44.08,0A44.08,44.08 0,0 1,88.16 44.08L88.16,44.08A44.08,44.08 0,0 1,44.08 88.16L44.08,88.16A44.08,44.08 0,0 1,0 44.08L0,44.08A44.08,44.08 0,0 1,44.08 0z"
+      android:fillColor="#fff"/>
+  <path
+      android:pathData="M20.34,63.47v2.89a9.76,9.76 0,0 0,9.76 9.76L56.48,76.12A11.35,11.35 0,0 0,67.82 64.77v-1.3ZM20.34,21.38L20.34,57.73L33.89,57.73v-33L67.82,24.73v-4.4A8.32,8.32 0,0 0,59.51 12L29.68,12A9.34,9.34 0,0 0,20.34 21.38ZM48.4,37.69L48.4,50.2L59.6,50.2L59.6,37.69Z"
+      android:fillColor="#c40f00"/>
+  <path
+      android:pathData="M39.48,37.69h8.92v12.51h-8.92z"
+      android:fillColor="#c40f00"/>
+  <path
+      android:pathData="M59.6,37.69h8.23v12.51h-8.23z"
+      android:fillColor="#c40f00"/>
+  <path
+      android:pathData="M48.4,29.46h11.2v28.27h-11.2z"
+      android:fillColor="#c40f00"/>
+  <path
+      android:pathData="M33.89,37.69h2.08v12.51h-2.08z"
+      android:fillColor="#c40f00"/>
+  <path
+      android:pathData="M20.34,37.69l0,-12.91l13.55,-0l0,12.91z"
+      android:strokeAlpha="0.48"
+      android:fillAlpha="0.48">
+    <aapt:attr name="android:fillColor">
+      <gradient 
+          android:startY="37.7"
+          android:startX="27.12"
+          android:endY="24.789999"
+          android:endX="27.12"
+          android:type="linear">
+        <item android:offset="0" android:color="#FF000000"/>
+        <item android:offset="0.14" android:color="#77000000"/>
+        <item android:offset="1" android:color="#00000000"/>
+      </gradient>
+    </aapt:attr>
+  </path>
+  <path
+      android:pathData="M33.88,50.2l-0,12.91l-13.55,0l-0,-12.91z"
+      android:strokeAlpha="0.48"
+      android:fillAlpha="0.48">
+  </path>
+  <path
+      android:pathData="M39.48,37.69h8.92v12.51h-8.92z"
+      android:strokeAlpha="0.48"
+      android:fillAlpha="0.48">
+    <aapt:attr name="android:fillColor">
+      <gradient 
+          android:startY="43.94"
+          android:startX="39.48"
+          android:endY="43.94"
+          android:endX="48.4"
+          android:type="linear">
+        <item android:offset="0" android:color="#00000000"/>
+        <item android:offset="0.86" android:color="#77000000"/>
+        <item android:offset="1" android:color="#FF000000"/>
+      </gradient>
+    </aapt:attr>
+  </path>
+  <path
+      android:pathData="M59.6,37.69h8.23v12.51h-8.23z"
+      android:strokeAlpha="0.48"
+      android:fillAlpha="0.48">
+  </path>
+</vector>

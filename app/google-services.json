@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "282856860793",
+    "firebase_url": "https://landscaping-25767.firebaseio.com",
+    "project_id": "landscaping-25767",
+    "storage_bucket": "landscaping-25767.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:282856860793:android:8f52d9cc924757925df8a8",
+        "android_client_info": {
+          "package_name": "com.jfcgraphicsllc.landscaping"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "282856860793-ucokocd3piclmmoaanglrk2jlr7jebqj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCki7Uk1o8zlpaSQTbUrFNojaTTVrPxjTs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "282856860793-ucokocd3piclmmoaanglrk2jlr7jebqj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
